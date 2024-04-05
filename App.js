@@ -206,3 +206,100 @@ root.render(parent3);
 //*Show other frameworks are not like this if you use a framework then you have to create a full fledged application using that framework but in case of react this is not the case when we use react it gives us so many helpful javascript functions or basically methods using which we can easily develop our website and even we can use react in existing application in just a small portion we don't even need to create the whole application using this. So basically when we use a framework then we have to create a full app or website using that framework but in case of react we can use react in a already existing application which way using some other framework or normal javascript but we can inject react inside that website using some cdn links and then use react in a small portion of that website or app and that's why it's a library and not a framework.
 //*So when we are using react then we have to keep always in mind that the Order of script tags does matter because the normal script files should be always placed after the cdn links of react.
 //*And the next important thing is which element is the root element that will always matter so if we set the header element to the root element of react then the react will only work inside the header element so whatever we set equals to root element of react only inside that element react will work and that is why the root element is so much important.
+
+//*
+//! Lesson 2  (Igniting the app)
+//* subtitle
+
+////////////////////////////////////////////////////////!
+////////////////////////////////////////?
+//////////////////*
+/////////
+//*Separator
+/////////
+//////////////////*
+////////////////////////////////////////?
+//////////////////////////////////////////////////////!
+//*My comments
+//* So in this lesson we are going to ignite our app so first of all we know that react is gonna make our app faster but to a extent so beside react we need more things to make our app production ready to push a app to production we need many more things to do like bundling and dead code elimination, Transpiling poly filling and many more things and we have to instal many more packages to do these things.
+//* And to instal any kind of package first of all we need to initialize npm In our project now one more cool thing about npm is that many people Think that NP M represents node package manager but it's not its full form and we can also see that in its official website that nowhere is written that it has the full form of node package manager . Obviously it manages all of the packages so basically all of the packages are hosted inside npm but what I want to say is that its full form is not node package manager.
+
+//* So as we know that we Initialize npm using the command npm in it we will do it in our terminal and then we know the rest process but only one thing will be different so when it will ask us for test case then in that place we have to mention jest so in future we will learn about how to use just so jest is basically used to write test cases for reap applications or we can say javascript applications because behind the scenes react is also javascript and then after initializing the npm we will get the package.json file. This file is basically the configuration of Npm inside this file we will get all of the information about Npm, Like what's our project name what's the endpoint of our project and the main information we get from this file is that what packages we are using in our project so basically Which Dependencies, And DevDependencies we're using inside our project.
+//*So the first package we're gonna instal is a bundler, And we already know What is the bundler so it basically bundles all of the modules and all of the files at one place and while bundling it optimizes the code it does the date code elimination And transpiling which basically makes our code understandable for old browsers and also polyfill which basically converts the modern functionalities like async await of javascript into old code.So then all of the old browsers can easily understand our code.Now in the market there are so many bundles.
+//*So there is another way of using react which is create react app Which by default uses webpack as its bundle and there are so many bundles in the market like webpack parcel and vite, All of these bundlers are very famous and there are more bundlers but eventually these packages help us to bundle optimize and compress our code which is very important to push our code to production, This different bundler may use different kind of algorithms to bundle our files but eventually they compromise optimize and transpile our code so we can push our code to production so in this course we are going to use parcel bundler and that is why we are going to instal it.
+//* And before installing it we have to keep that in mind that there are basically two kind of packages we can instal first one is normal dependency and second one is dev dependency , So the dev dependency is basically used for development purpose but normal dependence is are gonna use also in production code and basically what I want to say is that.
+//*⁡⁣⁣⁢difference between dev dependency and normal dependency⁡
+//*⁡⁣⁢⁣Dependencies are the packages that are required for your application to run properly.
+//*DevDependencies are the packages that are required for development and testing purposes only. These packages are not required for the application to run properly, but they are needed for tasks such as building, testing, and linting the code.⁡
+
+//* ⁡⁣⁢⁣Now as parcel is a dev dependency that's why the command to install this package is npm i -D parcel, here -D is parameter which is used because we are installing a dev dependency. so let's install this package.⁡
+
+//* ⁡⁢⁣⁡⁢⁣⁢what is  caret `^` and tilde `~` notation ?⁡⁡
+//* ⁡⁢⁣⁣So inside the package json file when we look inside the dependency properties they are like a nested object and inside them all of the dependencies name and versions are saved but if we notice the version, there is ^ sign, "parcel": "^2.12.0", like this , this ^ sign is called caret notation and there is another ~ and this one is called tilde notation.⁡
+
+/*⁡⁣⁢⁣Difference between tilde ( ~ ) and caret ( ^ ) in package.json
+When we open our package.json file and search for the dependency property and in there we find the packages that are listed as a nested object of the dependency property like - "parcel": "^2.12.0" (package-name:package-version). Now look at the package version, we find some numbers separated by three dots. 
+
+NPM versions follow a three-number format, separated by dots. The leftmost number signifies the major release, the second one represents the minor release, and the third number denotes the patch release of the package.
+
+Syntax: The syntax of the npm version looks like the following.
+
+Major.Minor.Patch ( in this version ^2.12.0")
+
+
+Tilde (~) notation
+Caret (^) notation
+Difference between tilde (~) and caret (^) in package.json
+Tilde (~) notation:
+The tilde (~) notation is used to automatically update the package version to the latest patch version while freezing the major and minor versions updates. This notation is useful for automatically accepting bug fixes, considering that patch updates primarily address bugs.
+
+Example: The ~1.2.0 will update all the future patch updates. We have to write just ~1.2.0 and all the next patch update dependencies. For example, 1.2.1, 1.2.2, 1.2.5……………1.2.x. but it will not update the package if some minor update like 1.3.0 or above version come and also not update when any ,major update comes like 2.0.0 or above. It will only update the patch versions. 
+Note: Patch updates are very small security changes in a package that is why the patch update ~version is approximately equivalent to the  current version.
+
+Caret (^) notation:
+It automatically updates both minor and patch updates.
+
+Example: The ^1.2.4 will update all the future Minor and patch updates, for example, ^1.2.4 will automatically change the dependency to any patch update like 1.2.5 ore more and also update when any minor update comes like 1.3.2 ore 1.5.8 or above if any update occurs, but if any major update comes like 2.0.0 or above version come. 
+while Using caret notation it is important to look at our code regularly if it is compatible with the newest version or not.Because sometimes when some minor update occurs that can also break our code because of the new changes they implemented in the minor version so we have to cheque the code constantly if we use ^ notation.
+
+//* ⁡⁢⁢⁡⁣⁣⁢so usually it is more safe when we are using tilde notation`~` because it will only update for patch updates.⁡⁡
+*/
+
+//* ⁡⁢⁣⁢there is another file which is package-lock.json. but what is it? and what's the difference package.json and package-lock.json file? why this package-lock.json file is so important to solve the very common problem which is "why my code is running on my local system but not running on the production"?⁡⁡
+/*
+⁡⁣⁢⁣The Role of package.json:
+1. Project Configuration:
+
+package.json serves as a manifest file for Node projects, containing metadata about the project and its dependencies.
+It includes information such as the project name, version, entry point, scripts, and dependencies.
+2. Dependency Management:
+
+Dependencies are listed in the “dependencies” section, specifying the packages required for the project to run.
+Developers can use the npm install command to install dependencies listed in the package.json.
+3. Version Management:
+
+Versions of dependencies may be specified with semantic versioning (SemVer) rules in the package.json.
+This file is typically committed to version control systems (e.g., Git) to share project configurations.
+As we can see above, a package.json file contains metadata about the project and also the functional dependencies that is required by the application.
+
+The Role of package-lock.json:
+1. Dependency Locking:
+
+package-lock.json is an auto-generated file that provides a detailed, deterministic record of the dependency tree.
+It locks down the specific versions of every installed package, preventing unintended updates.
+2. Version Consistency:
+
+This file ensures that every developer working on the project, as well as the CI/CD system, uses the exact same versions of dependencies.
+Guarantees consistent builds across different environments, avoiding “it works on my machine” issues.
+3. Improved Installation Speed:
+
+package-lock.json optimizes dependency installation by storing a flat node_modules structure, reducing the need for deep dependency resolution during installation.
+This results in faster and more reliable installations.
+`package-lock.json` is crucial for locking dependencies to specific versions, ensuring consistent installations across different environments. Without it, variations in installed versions may occur. This file guarantees reproducibility by specifying exact versions, preventing discrepancies. Including both `package.json` and `package-lock.json` in source control ensures that collaborators install the exact dependencies, maintaining uniformity.⁡
+*/
+//! what is node_module folder?
+//*⁡⁣⁢⁣So besides the package Json file we have another folder which is created after we instal the first dependency which is person so the folder which is created is node modules and this folder is very important because all of the data for the packages is inside this folder so basically it is a database for all of the packages which we will instal using npm and package dot json file is a configuration file for all of the packages which we instal from npm so we can see that what are the packages we are using inside our project inside the package json file but the packages we installed using npm that packages data is actually saved inside this node modules folders so it is like a database for all of the dependencies or packages
+
+//*⁡⁢⁣⁢transitive dependencies⁡:-⁡⁢⁣⁣Now if we look at the node modules folder then inside that there are so many other folders and one of that is also parcel but we only installed parcel package not all of these folders so from where we got this so the answer is that as a project parcel has its own dependencies and those dependencies may have their own dependencies so basically one dependency is dependent on other dependencies so to use a dependency we have to instal the other dependencies on which our required dependency is dependent.And when a dependency dependent on other dependencies then other dependencies are  called transitive dependencies.⁡
+//! Do a project contains only only package.json file?
+//* No, So if we open the node modules folder then click any of the folder of any package then inside every packages folder there is a package json file for each package and that is because inside these package dot Json file the package itself keeps track What are its own dependencies so as a example if we open the parcel folder then inside that there is a package.Json file and if we open it then we will see that there are many dependencies or we can say parcel package has its own dependencies and the configuration for all of the packages on which parcel is dependent is recorded in its own package json file so that's why the answer is a project can have so many package.Json files
