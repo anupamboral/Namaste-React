@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
 //! Lesson 1  (Inception)
 //* subtitle
 //* start from 5.25 minutes
@@ -301,5 +303,46 @@ This results in faster and more reliable installations.
 //*⁡⁣⁢⁣So besides the package Json file we have another folder which is created after we instal the first dependency which is person so the folder which is created is node modules and this folder is very important because all of the data for the packages is inside this folder so basically it is a database for all of the packages which we will instal using npm and package dot json file is a configuration file for all of the packages which we instal from npm so we can see that what are the packages we are using inside our project inside the package json file but the packages we installed using npm that packages data is actually saved inside this node modules folders so it is like a database for all of the dependencies or packages
 
 //*⁡⁢⁣⁢transitive dependencies⁡:-⁡⁢⁣⁣Now if we look at the node modules folder then inside that there are so many other folders and one of that is also parcel but we only installed parcel package not all of these folders so from where we got this so the answer is that as a project parcel has its own dependencies and those dependencies may have their own dependencies so basically one dependency is dependent on other dependencies so to use a dependency we have to instal the other dependencies on which our required dependency is dependent.And when a dependency dependent on other dependencies then other dependencies are  called transitive dependencies.⁡
-//! Do a project contains only only package.json file?
+//! Do a project contains only  package.json file?
 //* No, So if we open the node modules folder then click any of the folder of any package then inside every packages folder there is a package json file for each package and that is because inside these package dot Json file the package itself keeps track What are its own dependencies so as a example if we open the parcel folder then inside that there is a package.Json file and if we open it then we will see that there are many dependencies or we can say parcel package has its own dependencies and the configuration for all of the packages on which parcel is dependent is recorded in its own package json file so that's why the answer is a project can have so many package.Json files
+
+//* ⁡⁢⁣⁢should we put node_modules folder into github?
+//* no, there is no need⁡, ⁡⁢⁣⁣because if we upload package.json and package-lock.json file then we can re-generate all of the node_modules files using package.json file and package-lock.json file.⁡
+
+//* ⁡⁢⁣⁢Should we put package.json and package-lock.json into github and why integrity property inside the package-lock.json file is so important?⁡
+//* ⁡⁣⁢⁣yes always, becuase package.json is the configuration file for npm , so using it we cam can know waht packages we are using, and package-lock.json is also important because it locks the exact version of each and every dependencies, even it has saved the exact version's of every transitive dependencies, so it will help to ensure that the version we are using on system that same version gets deployed on the production and we don't face any issue like the code is running on the sydtem but it is not running on the production.and to ensure that , inside the parcel depoendency object there is property called integrity and it;s value is called hash , and this hash ensures that what ever is in our local exactly same version gets deployed on production.⁡
+
+//* when we install a package from npm , we use npm command line to install any package, so npm is software and using it's command line we can install any package which are hosted on npm, so it is also place here all of the packages are hosted, and using it's command line we can install any package from it .
+
+//! But what is npx?
+//*⁡⁣⁢⁣NPX stands for Node Package eXecute. It is simply an NPM package runner. It allows developers to execute any Javascript Package available on the NPM registry without even installing it.but here we already installed the package so we can run that using npx⁡
+//* now let's create our build using parcel, so it will create a development server with a live connection on localhost running on port 1234. and the create the development build the command is - npx parcel index.html.
+
+//!Best way to get react in our project - ( not using cdn link )
+//* ⁡⁣⁢⁣So right now we're getting the react code return javascript files from cdn links and it is  not the best way to getting react in our project when we get react using cdn links we fetch the react files from the cdn links and it is a costly operation because we are fetching the data of react from some other server So I it is not the best way to getting react in our project and the best way of getting the react code Is as a javascript package from npm, Because at the end of the day reap is just javascript code and we can also get that react code as a package which we can download using npm because react is also a javascript package so basically we are installing react as a package from npm and it is the best way because if we instal react using npm then after downloading the react package the package data will be saved inside the node modules folder and from there we can easily get the react code we don't need to then do a network request every time to get react from another server because it will be already present inside our node modules folder so that's why using N PM and downloading react as a package is more efficient way than using cdn links to download it because every time downloading it using cdn links will be a more costly operation.
+
+//* ⁡⁣⁢⁣And the another important point is that whenever a new update comes from react then we have to change the link every time whenever our update comes but in case of installing react as a package from npm we don't need to do it manually every time instead the caret^ which is present in front of the version number will automatically update the minor and patch updates⁡
+
+//* so let's install react and react-dom using npm and it's is a normal dependency so the command to install react and react-dom is :- npm i react and npm i react-dom
+
+//* And as the react code is Already present as a package inside the node modules folder that's why we can now remove the cdn links we put inside the index html file previously because we don't need them as we already have the react files and react-dom also as npm packages which are inside the node modules folder.
+
+//* So now inside the node modulus folder we have the react files but our project does not know that where the react files are and to use react now we have to tell our javascript file that where the react and react-dom code is present , And to do that we have to import react and react dome using import keyword and it is basically telling our project that from where it has to get the react code so inside our project where the react and react dom code is present.So let's import react and react Dom at the top of our these javascript file.
+
+//!converting the script file a module.
+//* But then if we open the live server and see our page then it will give us a error so basically if we start a development server using parcel then it will show a error on the browser that scripts cannot use import or export and that is because till now our script file is a normal javascript file and inside normal javascript files we cannot use import and export keyword to use import or export we have to first convert this normal javascript file into a module and inside a module we can use imports and exports and to convert our normal skip file into a module we have to go back to the index .html file and inside the script file link we have to mention the type attribute and its value will be module and this will basically tell the browser that it is not a normal javascript file and it is a javascript module and that's why if after saving it we go to the browser then we will see that now our code will work and now we are basically using react from the npm package we installed.
+
+//!Power of parcel
+//* ⁡⁣⁢⁣1. dev build - it will create a build and development server for us and host it on the localhost on the port 1234
+//* 2. HMR(hot module replacement) :- As you make changes to your code, Parcel automatically rebuilds the changed files and updates your app in the browser. By default, Parcel fully reloads the page, but in some cases it may perform Hot Module Replacement (HMR). HMR improves the development experience by updating modules in the browser at runtime without needing a whole page refresh. This means that application state can be retained as you change small things in your code.
+//* 3. hot activate HMR we need to write this
+if (module.hot) {
+  module.hot.accept();
+} //* it will maintain the state of our app and then when ever it creaes a new build it will not refresh the whole page , it will only change the portion of the page where any change happened , so it will keep the state where nothing has changes and not refresh the whole page.
+
+//* 4. file watching algorithm - To support an optimal caching and development experience Parcel utilizes a very fast watcher written in C++ that integrates with low-level file watching functionality of each operating system. Using this watcher Parcel watches every file in your project root (including all node_modules). Based on events and metadata from these files, Parcel determines which files need to be rebuilt. So whenever you save the files this file watch will watch all of the files very fast Detect the changes and then rebuild the app and also keep the changes in the cache files so then in the next build using the cache file it can create the build more faster.
+//*caching:-Parcel caches everything it builds to disk. If you restart the dev server, Parcel will only rebuild files that have changed since the last time it ran. Parcel automatically tracks all of the files, configuration, plugins, and dev dependencies that are involved in your build, and granularly invalidates the cache when something changes. For example, if you change a configuration file, all of the source files that rely on that configuration will be rebuilt.
+
+//*By default, the cache is stored in the .parcel-cache folder inside your project. You should add this folder to your .gitignore (or equivalent) so that it is not committed in your repo. You can also override the location of the cache using the --cache-dir CLI option.
+
+//*Caching can also be disabled using the --no-cache flag. Note that this only disables reading from the cache – a .parcel-cache folder will still be created.⁡
