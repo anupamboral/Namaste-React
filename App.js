@@ -346,3 +346,57 @@ if (module.hot) {
 //*By default, the cache is stored in the .parcel-cache folder inside your project. You should add this folder to your .gitignore (or equivalent) so that it is not committed in your repo. You can also override the location of the cache using the --cache-dir CLI option.
 
 //*Caching can also be disabled using the --no-cache flag. Note that this only disables reading from the cache – a .parcel-cache folder will still be created.⁡
+
+//* ⁡⁣⁣⁢5.Image optimization :- So loading images is one of the most costly operations for a browser and parcel also does image optimization for us.
+//*minification:-Parcel includes minifiers for JavaScript, CSS, HTML, and SVG out of the box. Minification reduces the file size of your output bundles by removing whitespace, renaming variables to shorter names, and many other optimizations.
+
+//*By default, minification is enabled when using the parcel build command. You can use the --no-optimize CLI flag to disable minification and other optimizations if needed.
+
+//*Parcel uses SWC to minify JavaScript, lightningcss for CSS, htmlnano for HTML, and svgo for SVG. If needed, you can configure these tools using a .terserrc, .htmlnanorc, or svgo.config.json config file. More details in documentation.⁡
+
+//*⁡⁢⁣⁣6.bundling:- So if we have multiple javascript modules in our project then the parcel will bundle all of the modules and create 1 javascript file after merging all of those modules.⁡
+
+//*⁡⁣⁢⁣7.Compressing:- Parcel supports compressing bundles using Gzip and Brotli. While many servers compress data on the fly, others require you to upload pre-compressed payloads ahead of time. This may also allow for better compression, which would be too slow to do on every network request.
+
+//*Because not everyone needs it, compression is not enabled by default. To enable it, add @parcel/compressor-gzip and/or @parcel/compressor-brotli to your .parcelrc.
+//* in this project we have not created that file.
+
+//*⁡⁣⁣⁢8.Content hashing:-Parcel automatically includes content hashes in the names of all output files, which enables long-term browser caching. Whenever the contents of a bundle changes, the hash included in the filename will be updated, triggering invalidation of CDN and browser caches.
+
+//*By default, all bundles include a content hash except entries and certain dependency types that require names to be stable. For example, service workers require a stable file name to work properly, and <a> tags in HTML reference user readable URLs.
+
+//*You can also disable content hashing using the --no - content - hash CLI flag.Note that the name will still include a hash, but it will not change on each build.You can customize bundle naming completely using Namer plugins.⁡
+
+//*⁡⁢⁣⁣9.Code Splitting:-Parcel supports zero configuration code splitting out of the box. This allows you to split your application code into separate bundles which can be loaded on demand, resulting in smaller initial bundle sizes and faster load times.
+
+//*Code splitting is controlled by use of the dynamic import() syntax, which works like the normal import statement, but returns a Promise. This means that the module can be loaded asynchronously⁡.
+
+//*⁡⁣⁢⁣10.“Differential bundling” is the idea of shipping multiple versions of your code for different targets, and allowing the browser to choose the most optimal one to download. When you use a <script type="module"> element in an HTML file, and some of the browsers specified by the environment do not support ES modules natively, Parcel will automatically generate a <script nomodule> fallback as well.
+/*
+<script type="module" src="app.js"></script>
+is compiled to:
+
+<script type="module" src="app.c9a6fe.js"></script>
+<script nomodule src="app.f7d631.js"></script>
+*/
+//*This allows modern browsers that support ES modules to download a much smaller bundle, while legacy browsers are still supported using a fallback. This can significantly reduce bundle sizes and improve load times by avoiding transpilation of modern JavaScript syntax like classes, arrow functions, async/await, and more.
+
+//*This happens automatically based on your browser targets, as declared in the "browserslist" field in your package.json. If no browserslist is declared, or all browser targets support ES modules natively, then a nomodule fallback will not be generated.⁡
+
+//*⁡⁢⁣⁣11.Error handling using Diagnostics:- Parcel includes support for rich diagnostics that are used to describe errors and warnings in a format-agnostic way. It also includes a built in logging system that allows Reporter plugins to handle all logs and errors and present them to the user.
+//*A Diagnostic is a JavaScript object with a set of properties that are required to create a useful log message. This can be anything from a verbose message to a warning or error. Diagnostics can include a message, information about the file being processed, a code frame, error information, hints on how to potentially resolve the issue, and a link to documentation to learn more.⁡
+
+//*⁡⁣⁢⁣12.tree shaking:- it will automatically remove any unused code like any function or any other unused data which is not necessary to build the code.⁡
+
+/*⁡⁢⁣⁣13.HTTPS
+Sometimes, you may need to use HTTPS during development. For example, you may need to use a certain hostname for authentication cookies, or debug mixed content issues. Parcel’s dev server supports HTTPS out of the box. You can either use an automatically generated certificate, or provide your own.
+
+To use an automatically generated self-signed certificate, use the --https CLI flag. The first time you load the page, you may need to manually trust this certificate in your browser.
+
+parcel src/index.html --https
+To use a custom certificate, you’ll need to use the --cert and --key CLI options to specify the certificate file and private key respectively.
+
+parcel src/index.html --cert certificate.cert --key private.key⁡
+*/
+//*⁡⁣⁢⁣And parcel gives us the functionality to create the development build and also the production build and both are different because production build needs more optimisations to be created then development build and whenever we create a development build or a production build then after building the build parcel puts that build inside a folder named dist And basically it's a short form of distribution and inside this dist folder the build is located and then using this folder parcel host it on the local host⁡
+//*So after knowing this lot of specifications of parcel bundler we can clearly understand that it is not only the react which is making our app faster obviously react has a good amo;unt of role to make it faster but there are also other things which helps to make a big production ready app faster and bundlers are one of the very important piece of that parcel like bundlers do these all of the things to make the code optimized compressed and a lot more which also eventually helps to make the app faster.
