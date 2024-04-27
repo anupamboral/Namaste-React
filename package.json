@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "namaste react by akshay saini",
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
+  "type": "module",
   "author": "Anupam Boral",
   "license": "ISC",
   "repository": {

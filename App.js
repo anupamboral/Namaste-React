@@ -87,11 +87,12 @@ const heading = React.createElement(
 //* So now as we have the H1 element so basically we have the heading but we want to insert it inside The root element so basically the div with the id of root But to insert anything using react first we have to create the root inside react because inside this root react will perform all of the operations and we create a root on react using create root method but an important thing is that creating root is a part of react dom It is not a part of core react .
 //* ⁡⁣⁣⁢So when we created the H1 element we called the create element method on React , Because creating elements is a core functionality but this time we are creating a root And we will be inserting elements inside this root So basically we will insert some elements inside the dom Which is clearly a part of ReactDOM.
 //*So that is why we will call this create root method on reactdom not on react and inside this method we will pass the Deep element with the id of root Because on this root element we want to create the react root.⁡
-
+/*
 const root = ReactDOM.createRoot(document.getElementById("root"));
 //* Now our root is created on the selected element which has the id of root. And now it's time to insert the heading inside the root, So basically we want to render the heading inside the root, And to render the heading inside the route it is very easy so when we are using react the method names are very much simple and easy to understand and to render the heading inside the root we just need to call a method named render on the root, And the argument we will pass inside it , Is the heading we created.
 
 root.render(heading);
+*/
 //* And now if we open the live server then we will see that our first hello world programme is ready so we inserted the heading using the react. And that's really amazing.
 //* So basically we created this root on react where all of our code will run inside this room and we created this root on the D which has the id of root.
 
@@ -127,6 +128,7 @@ console.log(heading); //* an object,Because this heading is a react element and 
     </div>
     */
 //* Show to create this kind of nested react elements our create element method and its third parameter which is called the children will help us because the third parameter is basically the child element of the main element so it can be any text or it can be another element and that's why at the place of third parameter we can create another element in the same way and then again this Methods 3rd parameter expects our children so there we will pass another element which will be the H1 element and that how we can create nested react element so let us do that in practice.
+/*
 const parent = React.createElement(
   `div`,
   { id: "parent" },
@@ -139,7 +141,7 @@ const parent = React.createElement(
 root.render(parent); //*Now if we go to our inspect tool and even we look at the ui on our browser then we will see that this same nested element will be created as we wanted But the previous heading which we rendered will be removed and this new parent element is only present inside the root.
 //*And remember that these parent element is a react element when it is created and not a html element and React element is just a javascript object and it is the render method which converts it to html element and then insert it inside the root.
 console.log(parent);
-
+*/
 //*⁡⁢⁣⁣Now we know that how to create a nested array but what if inside the nested element we want two sibling elements⁡,So to do that we have to again play with the third parameter so 3rd parameter represents children so in that place we can either pass a single child element which we already did above But if we want 2 nested sibling elements then in the place of the third parameter we have to write an array of children so let us first visualize what kind of structure we want to build then we will try to do that using our code
 /* <div id="parent">
       <div id="child">
@@ -149,6 +151,7 @@ console.log(parent);
     </div>
     */
 //*Showing inside the child div two sibling heading elements so lets write this nested structure with some sibling elements using react and remember when we want two sibling elements as child of any element then in the place of 3rd parameter we have to pass an array of children elements.
+/*
 const parent2 = React.createElement(
   `div`,
   { id: "parent" },
@@ -162,6 +165,7 @@ const parent2 = React.createElement(
   ])
 );
 root.render(parent2);
+*/
 //*another example
 /* <div id="parent">
       <div id="child">
@@ -174,6 +178,8 @@ root.render(parent2);
       </div>
     </div>
     */
+
+/*
 const parent3 = React.createElement(`div`, { id: "parent" }, [
   React.createElement(`div`, { id: "child" }, [
     React.createElement(`h1`, { id: "heading" }, `nested heading using react`),
@@ -193,7 +199,7 @@ const parent3 = React.createElement(`div`, { id: "parent" }, [
   ]),
 ]); //*It will work fine and create our desired html structure but there will be a warning in the console:- Warning: Each child in a list should have a unique "key" prop. So we will solve this problem in the upcoming course but this is only to demonstrate how we can create sibling elements easily and the warning is about unique key prop , But we will learn about it in the upcoming lessons.
 root.render(parent3);
-
+*/
 //! But if we actually think about the readability of this code then we can clearly see that the html version is much more understandable we can easily understand that how the code is nested if we look at the html version but if we see this react version we just written then it is more complex to understand that which element is inside which element and which one is the sibling of another one and that is why when we need to create html element in react then we can use jsx it is very helpful when we need to create html tags in react we will learn about jsx in the latter less but jsx will help us to solve this readability problem and many developers think that only jsx can be used to develop react website but it is not the truth and we can also use react without Jsx It only helps when we need to create html elements .
 
 //! One more important thing is that we have to always put our CDN link before our script file link because how in our script file we will use react so that's why to use react the react files should be downloaded first only then we can use react inside our script files so that's why the cdn links should be always above our normal script file.
@@ -404,3 +410,42 @@ parcel src/index.html --cert certificate.cert --key private.key⁡
 
 //*So after knowing this lot of specifications of parcel bundler we can clearly understand that it is not only the react which is making our app faster obviously react has a good amo;unt of role to make it faster but there are also other things which helps to make a big production ready app faster and bundlers are one of the very important piece of that parcel like bundlers do these all of the things to make the code optimized compressed and a lot more which also eventually helps to make the app faster.
 //*Browserlist package:- Now when we installed parcel at that time parcel installed another transitive dependency which is so much useful and its name is browser list and it basically helps us to Ensure that our website will be working on most of the existing browsers and to use this package we basically need to do some configuration in our package .Json file so first of all we have to create a property named browser list and its value will be a array and inside this array we can write any configuration we need and this configuration is nothing but the information about the browsers on which we want to make our website work so if we mention last two browsers of chrome then this configuration will definitely ensure that our website will definitely work in the last two versions of chrome and we can also mention other browser names like Firefox or even we can just write last two versionInIn that case it will support the last two versions of all of the browsers available and if we mention some browser name inside the array like if we mention two last versions of chrome it just means that it will definitely support the last two versions of chrome but it does not mean that it will not work on any other browsers so it may or may not work on other browsers but it will definitely support the last two versions of chrome and using, we can pass as many configurations as we want but we should keep that in mind that if we write so much configuration then for each of the versions our app bundler will create different bundles and eventually that makes our files size heavy so we should always try that we mention a kind of configuration that covers most of the part of browsers which the users are using like if we just covered the 90 or 95% of users then it will be enough because that will mean that our website will be accessible for 95% of the people of the world and that's really a good accessibility score but remember that if we are creating a website for government then we should always keep that in mind that our website should be accessible for every user so in that case the browsers support should be 100 percent but if we are just building a normal website then 90% user support is enough and that is because if we try to make our website work on every old browser then it will eventually add more and more food inside the bundles to support the old browsers and that eventually makes the code so much bigger and we do not want to make the file size so much bigger so that's why we should always write the configuration very carefully to make the bundle size  compact,And make the website accessible As much possible. So if we just write last 10 versions then it will be enough to support above 90% of the total user and if we go to browserlist.dev then we can also cheque that if we mention a configuration value last two versions for any other configuration then we can see that how many percent of users will be able to access our website in the world so that's why these browser list is very important website to make our website accessible for the users who are using very old versions., So let's add this browser list property in our package json file and as the value we will just write last two versions and if we go to the browser list website and write this configuration value then it is showing that it will make our website accessible for 80% of the users worldwide and right now it's enough because we want to make our website compact not so much heavy so that's why we are gonna go ahead with these configuration.⁡
+
+//!Lesson 3 - Laying the foundation
+
+//*⁡⁣⁢⁣Using npm scripts:- So until now to starting parcel development server we have used npx in the terminal but it is not the standard way of starting a development build or starting a production build and the standard way of starting a development server or a production build is basically using npm scripts So its a convention in developers to use npm scripts for starting development server and it is basically a smarter and smaller way of starting a development server so basically it is just running the same command but we will actually give it a name a smaller name which will be basically a shorter form of that whole command so to write in NPM scripts We have to go to our package dot Jason file and already there is a property written named script and its value is basically a object and as we can guess the scripts will be the key value pairs So basically we will first write the development script and its name will be start so the key name will be start and its value will be the command We return to start the development server except the npx keyword so basically its value will be parcel index.html . And whenever in the future we want to run this script so basically we want to start our development server then we just need to write the key name after npm run so the whole command will be npm run start To start the development build and the next script we will add is for production build so in this case the key name will be build and its value will be parcel build index .html and again to run this script in the terminal we have to write npm run build and in case of the development build we can skip the run keyword and Just write npm start, but in case of production build we have to write npm run build.⁡
+//* ⁡⁢⁣⁢jsx⁡ - we created elements using createElement method in react till now but it is not the easiest way to create  elements inside react because when we create nested elements using this createElement method then it becomes very hard to read them but we have another easier way of creating elements in react and that is using JSX.Example:-
+const jsxHeading = <h1 className="heading">Namaste react using JSX 🚀🚀</h1>; //!many people think that this is html inside javascript but it is not html inside javascript .
+//*it is html like syntax and not html inside javascript.and using this jsx syntax we created a react element.and it is way more simpler to create react elements using jsx.
+//* many developers think that jsx is part of react but no if we want to use core react to create elements then we have to use methods which are aprt of core react like createElement method. But as it is very difficult to create nested elements using core react , that's why we use jsx syntax to create react elements because it is easier and readable. but remember jsx is not part of core react and it is different syntax which very similar to html but not html inside javascript.
+//* and the rendering process is same . so first we have to create the root using reactDom and then using the render method we can render this react element in the browser and remember this react element is a object and when it will enter inside the browser then it will be converted into html.
+const root = ReactDOM.createRoot(document.getElementById(`root`));
+
+root.render(jsxHeading);
+
+//*⁡⁢⁣⁢ ⁡⁢⁣⁢now we may ask a simple question which is really a very very important, that, is JSX a valid syntax inside javascript which the javascript engine inside the browser can understand ?⁡
+
+//*No, javascript engine can't understand jsx, but then how it is working? so the answer is because of parcel. because before the code enters into the browser before that the code has to be transpiled, transpiling means converting the code which the browser can understand, and because first the code will be transpiled by parcel then only it will enter inside the browser that's why the browser can understand jsx. now one more interesting thing is that parcel is not itself doing the transpiling, parcel has it's own dependencies, and parcel is like a manager of all this different dependencies, and of them is babel, so while we installed parcel at that time parcel itself installed babel and many other transitive dependencies which are needed.and Babel does the transpiling for us. and then the converted understandable code enters into browser which javascript engine can understand.
+
+//* ⁡⁢⁣⁢but what happen when babel transpile jsx?⁡
+
+//* after transpile jsx becomes=> React.createElement() then => javascript object => htmlElement(while rendered) and that's why browser can understand jsx.
+
+// * while we write react elements using jsx, then when we write attributes for elements then we have to use camelCase, example we write html attribute tabindex using snakecase but when we write this attribute using jsx then we have to use camelCase like - tabIndex only then it will work. and in html we write class but jsx we have to write className.
+
+//*⁡⁢⁣⁢ writing multiple lines of jsx⁡:- to write multiple lines of jsx we have use( parenthesis) and inside it we have to write all the jsx, but if we are writing just one line then it is not required.
+
+//* ⁡⁣⁢⁣Everything is a component inside react ⁡:- we heard this statement mkany times that everything is a component inside react. and that's a a true statement. So if it is a header , footer or search whatever iut is , it will be a component, if it is created with react.now there a two kind of components inside react.1Class based components and 2. functional components. Now in the present time nobody uses class bases components because it is older way of creating components and it is more hectic , class based components were craeted using javascript classes. in the other hand the modern way and easier way to create components is functional components and as we can guess that using javascript functions functional components are created .
+//* ⁡⁣⁣⁢Functional components⁡:-Functional components are just normal javascript functions which return some jsx/react element or more than one element. because at the end of the day jsx will be transpiled into react element so we can use either jsx or react element. remember the convention that we should always start the functional component name with capital letter like Heading neither it will through an error.
+//* example (using arrow functions)(remember if we want to return multiple lines of jsx of multiple react elements then we have to use (parenthesis))
+
+const FunctionalComponent = () => (
+  <div className="container">
+    <h1>Namaste React functional component</h1>
+  </div>
+);
+//*remember because of implicit return of arrow functions we can  remove the {} and return keyword.and if we want multiple line of jsx then we can put that all jsx inside ().like above.
+
+//* ⁡⁢⁣⁢rendering a functional component⁡:- to render this functional component again we will use render method on root but inside the render method we will not directly write the component name instead we have to write it inside < compo />.
+
+root.render(<FunctionalComponent />);
