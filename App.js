@@ -435,12 +435,21 @@ root.render(jsxHeading);
 
 //*⁡⁢⁣⁢ writing multiple lines of jsx⁡:- to write multiple lines of jsx we have use( parenthesis) and inside it we have to write all the jsx, but if we are writing just one line then it is not required.
 
-//* ⁡⁣⁢⁣Everything is a component inside react ⁡:- we heard this statement mkany times that everything is a component inside react. and that's a a true statement. So if it is a header , footer or search whatever iut is , it will be a component, if it is created with react.now there a two kind of components inside react.1Class based components and 2. functional components. Now in the present time nobody uses class bases components because it is older way of creating components and it is more hectic , class based components were craeted using javascript classes. in the other hand the modern way and easier way to create components is functional components and as we can guess that using javascript functions functional components are created .
+//* ⁡⁣⁢⁣Everything is a component inside react ⁡:- we heard this statement many times that everything is a component inside react. and that's a a true statement. So if it is a header , footer or search whatever iut is , it will be a component, if it is created with react.now there a two kind of components inside react.1Class based components and 2. functional components. Now in the present time nobody uses class bases components because it is older way of creating components and it is more hectic , class based components were craeted using javascript classes. in the other hand the modern way and easier way to create components is functional components and as we can guess that using javascript functions functional components are created .
 //* ⁡⁣⁣⁢Functional components⁡:-Functional components are just normal javascript functions which return some jsx/react element or more than one element. because at the end of the day jsx will be transpiled into react element so we can use either jsx or react element. remember the convention that we should always start the functional component name with capital letter like Heading neither it will through an error.
 //* example (using arrow functions)(remember if we want to return multiple lines of jsx of multiple react elements then we have to use (parenthesis))
 
-const FunctionalComponent = () => (
+const Title = () => (
+  <h1 className="title" tabIndex="5">
+    Namaste React{" "}
+  </h1>
+); //*now this also a functional component but if we want to render it inside the below heading functional component then inside the below component we need to write it like <title/> .let's do that
+
+const HeadingFunctionalComponent = () => (
   <div className="container">
+    <Title /> {/* //*component composition(described below) */}
+    {console.log(2 + 4)}
+    {/*//*way of writing javascript inside jsx*/}
     <h1>Namaste React functional component</h1>
   </div>
 );
@@ -448,4 +457,7 @@ const FunctionalComponent = () => (
 
 //* ⁡⁢⁣⁢rendering a functional component⁡:- to render this functional component again we will use render method on root but inside the render method we will not directly write the component name instead we have to write it inside < compo />.
 
-root.render(<FunctionalComponent />);
+root.render(<HeadingFunctionalComponent />);
+//* ⁡⁢⁣⁢Component composition :-like above when example when we render a component inside another component that is called component composition because we are composing a component inside another component
+
+//* writing javascript inside jsx:- when we write a functional component using jsx ,then to write multiple lines of jsx we use () and inside it we write all the jsx we want but inside it if want to write any javascript expression we can also write that we just need to that inside {curly brackets}.
