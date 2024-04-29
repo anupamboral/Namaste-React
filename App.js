@@ -445,11 +445,20 @@ const Title = () => (
   </h1>
 ); //*now this also a functional component but if we want to render it inside the below heading functional component then inside the below component we need to write it like <title/> .let's do that
 
+const elm = <span>hello</span>; //*this is a normal react element not a functional component and now we will render this inside the below component,
+
 const HeadingFunctionalComponent = () => (
   <div className="container">
-    <Title /> {/* //*component composition(described below) */}
+    <Title />{" "}
+    {/* //*3 ways of inserting a functional component inside another functional component which is also called component composition(described below) */}
+    <Title></Title>
+    {/**the above line and this line will produce the same result */}
+    {Title()}
+    {/**at the end of the day every functional component a normal javascript function so this is the third way of inserting a functional component inside other functional component */}
     {console.log(2 + 4)}
     {/*//*way of writing javascript inside jsx*/}
+    {elm}
+    {/*this is how we insert a react elm inside a functional component*/}
     <h1>Namaste React functional component</h1>
   </div>
 );
@@ -458,6 +467,8 @@ const HeadingFunctionalComponent = () => (
 //* ⁡⁢⁣⁢rendering a functional component⁡:- to render this functional component again we will use render method on root but inside the render method we will not directly write the component name instead we have to write it inside < compo />.
 
 root.render(<HeadingFunctionalComponent />);
-//* ⁡⁢⁣⁢Component composition :-like above when example when we render a component inside another component that is called component composition because we are composing a component inside another component
+//* ⁡⁢⁣⁢Component ⁡⁢⁣⁢composition⁡⁡ :-like above when example when we render a component inside another component that is called component composition because we are composing a component inside another component
 
-//* writing javascript inside jsx:- when we write a functional component using jsx ,then to write multiple lines of jsx we use () and inside it we write all the jsx we want but inside it if want to write any javascript expression we can also write that we just need to that inside {curly brackets}.
+//* ⁡⁢⁣⁢writing javascript inside jsx⁡:- when we write a functional component using jsx ,then to write multiple lines of jsx we use () and inside it we write all the jsx we want but inside it if want to write any javascript expression we can also write that we just need to that inside {curly brackets}.
+
+//* ⁡⁢⁣⁢cross site scripting(XSS) attack prevention by jsx⁡:- we know that if we want to run any piece javascript code inside jsx then inside {} we can do that but let's say we are receiving some data from some api and we put that inside jsx using {data}, but what if the api is sending some malicious code or bad data which can run inside user's browser and hack user information, but because of jsx we can get rid of this problem because whenever we write some javascript inside jsx using {} then before execution that jsx will perform data sanitization which prevent these kind of attacks so we need to think about these kind of attacks.
