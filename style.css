@@ -9,15 +9,19 @@ body {
 } */
 
 /*for lesson 4*/
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+  padding: 0.5rem;
   border: 2px solid burlywood;
 }
 .logo {
-  height: 6rem;
+  height: 4rem;
 }
 .nav-items ul {
   display: flex;
@@ -27,4 +31,44 @@ body {
   margin: 0.5rem;
   padding: 0.5rem;
   list-style-type: none;
+}
+.search {
+  margin: 1rem;
+  padding: 0.5rem;
+  font-size: 1.6rem;
+  border: 2px solid black;
+  max-width: 15rem;
+}
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.res-card {
+  height: 18rem;
+  border: 1px solid black;
+  width: 14rem;
+
+  text-align: center;
+}
+.res-logo {
+  width: 13rem;
+  padding: 0.5rem;
+  height: 9rem;
+}
+.res-name {
+  font-size: 1.6rem;
+}
+.cuisine-details {
+  font-size: 1rem;
+}
+.res-rating {
+  margin: 0.5rem;
+  font-size: 1rem;
+}
+.delivery-time {
+  margin: 0.5rem;
+  font-size: 1rem;
 }
