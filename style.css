@@ -50,8 +50,12 @@ body {
   height: 18rem;
   border: 1px solid black;
   width: 14rem;
-
+  transition: all 0.5s;
   text-align: center;
+}
+.res-card:hover {
+  box-shadow: 10px 10px 2px 1px rgba(0, 30, 255, 0.244);
+  height: 19rem;
 }
 .res-logo {
   width: 13rem;
