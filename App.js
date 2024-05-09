@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//!Lesson 4 (Talk is cheap ,show me the code)16.9
+//!Lesson 4 (Talk is cheap ,show me the code)
 
 /** ⁡⁣⁢⁣Decided component (see the PLanning img;- " Planning of Food Ordering App(lesson4).png")
  *
@@ -52,17 +52,733 @@ const cardStyles = {
   backgroundColor: "cyan",
 };
 const RestaurantCard = (prop) => {
-  console.log(prop);
+  //*to use the data coming from the prop , we need to destructure it first and while destructuring we have to use the same name we used while passing the prop , in this case resData.
+  const { resData } = prop;
+
+  const { name, cuisines, avgRating, cloudinaryImageId } = resData?.info; //* ? mark is used is called optional chaining, so if the property exist it will read property and if does not exist then it will return undefined.
+  const { deliveryTime } = resData?.info.sla;
+
+  console.log(resData);
   return (
     <div className="res-card" style={cardStyles}>
-      <img className="res-logo" alt="restaurant-logo" src={prop.imgsrc} />
-      <h3 className="res-name">{prop.resName}</h3>
-      <h4 className="cuisine-details">{prop.cuisine}</h4>
-      <h5 className="res-rating">⭐4.4 Rating</h5>
-      <h5 className="delivery-time"> 38 minutes delivery</h5>
+      <img
+        className="res-logo"
+        alt="restaurant-logo"
+        src={
+          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+          cloudinaryImageId
+        }
+      />
+      <h3 className="res-name">{name}</h3>
+      <h4 className="cuisine-details">{cuisines.join(", ")}</h4>
+      <h5 className="res-rating">⭐{avgRating} Rating</h5>
+      <h5 className="delivery-time"> {deliveryTime} minutes delivery</h5>
     </div>
   );
 };
+
+//*using real api data from swiggy to make the card components dynamic. reslist is an array of objects and every object is for one restaurant
+const resList = [
+  {
+    info: {
+      id: "27112",
+      name: "Domino's Pizza",
+      cloudinaryImageId: "d0450ce1a6ba19ea60cd724471ed54a8",
+      locality: "Near Honda Showroom",
+      areaName: "Shibpur",
+      costForTwo: "₹400 for two",
+      cuisines: ["Pizzas", "Italian", "Pastas", "Desserts"],
+      avgRating: 4.3,
+      parentId: "2456",
+      avgRatingString: "4.3",
+      totalRatingsString: "5K+",
+      sla: {
+        deliveryTime: 30,
+        lastMileTravel: 1.1,
+        serviceability: "SERVICEABLE",
+        slaString: "30 mins",
+        lastMileTravelString: "1.1 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextCloseTime: "2024-05-10 00:55:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "Rxawards/_CATEGORY-Pizza.png",
+            description: "Delivery!",
+          },
+        ],
+      },
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "Delivery!",
+                  imageId: "Rxawards/_CATEGORY-Pizza.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹150 OFF",
+        subHeader: "ABOVE ₹299",
+        discountTag: "FLAT DEAL",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/dominos-pizza-near-honda-showroom-shibpur-kolkata-27112",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "651011",
+      name: "Pizza Hut",
+      cloudinaryImageId: "2b4f62d606d1b2bfba9ba9e5386fabb7",
+      locality: "New Market",
+      areaName: "Esplanade Kolkata",
+      costForTwo: "₹350 for two",
+      cuisines: ["Pizzas"],
+      avgRating: 4.3,
+      parentId: "721",
+      avgRatingString: "4.3",
+      totalRatingsString: "500+",
+      sla: {
+        deliveryTime: 49,
+        lastMileTravel: 7.3,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "45-50 mins",
+        lastMileTravelString: "7.3 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 04:00:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "Rxawards/_CATEGORY-Pizza.png",
+            description: "Delivery!",
+          },
+        ],
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV2: {},
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "Delivery!",
+                  imageId: "Rxawards/_CATEGORY-Pizza.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/pizza-hut-new-market-esplanade-kolkata-kolkata-651011",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "392663",
+      name: "Burger King",
+      cloudinaryImageId: "e33e1d3ba7d6b2bb0d45e1001b731fcf",
+      locality: "Avni Mall",
+      areaName: "Howrah",
+      costForTwo: "₹350 for two",
+      cuisines: ["Burgers", "American"],
+      avgRating: 4.2,
+      parentId: "166",
+      avgRatingString: "4.2",
+      totalRatingsString: "5K+",
+      sla: {
+        deliveryTime: 48,
+        lastMileTravel: 2.1,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "45-50 mins",
+        lastMileTravelString: "2.1 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 01:00:00",
+        opened: true,
+      },
+      badges: {
+        imageBadges: [
+          {
+            imageId: "Rxawards/_CATEGORY-Burger.png",
+            description: "Delivery!",
+          },
+        ],
+      },
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "Delivery!",
+                  imageId: "Rxawards/_CATEGORY-Burger.png",
+                },
+              },
+            ],
+          },
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "60% OFF",
+        subHeader: "UPTO ₹120",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/burger-king-avni-mall-howrah-kolkata-392663",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "3078",
+      name: "Balwant Singh's Eating House",
+      cloudinaryImageId: "oshzewpdqvmphedhkxgt",
+      locality: "Bhawanipur",
+      areaName: "Bhawanipur",
+      costForTwo: "₹600 for two",
+      cuisines: [
+        "North Indian",
+        "Beverages",
+        "Snacks",
+        "Chinese",
+        "Continental",
+      ],
+      avgRating: 4.3,
+      veg: true,
+      parentId: "6143",
+      avgRatingString: "4.3",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 45,
+        lastMileTravel: 7.3,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "45-50 mins",
+        lastMileTravelString: "7.3 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 04:59:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+        subHeader: "UPTO ₹50",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/balwant-singhs-eating-house-bhawanipur-kolkata-3078",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "192815",
+      name: "A1 Ajooba Biryani center",
+      cloudinaryImageId: "sg319veq0rjbsytlqdib",
+      locality: "Jadavpur",
+      areaName: "Regent Park",
+      costForTwo: "₹150 for two",
+      cuisines: ["Biryani"],
+      avgRating: 3.5,
+      parentId: "25013",
+      avgRatingString: "3.5",
+      totalRatingsString: "5K+",
+      sla: {
+        deliveryTime: 73,
+        lastMileTravel: 13.5,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "70-75 mins",
+        lastMileTravelString: "13.5 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-16 00:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "30% OFF",
+        subHeader: "UPTO ₹75",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/a1-ajooba-biryani-center-jadavpur-regent-park-kolkata-192815",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "252048",
+      name: "Food Peddler Sandwiches",
+      cloudinaryImageId: "otxx7vyajludhn1nhkol",
+      locality: "Kalighat (Hazra)",
+      areaName: "Kalighat",
+      costForTwo: "₹150 for two",
+      cuisines: [
+        "Continental",
+        "Beverages",
+        "Snacks",
+        "Salads",
+        "Healthy Food",
+      ],
+      avgRating: 4.6,
+      parentId: "81834",
+      avgRatingString: "4.6",
+      totalRatingsString: "5K+",
+      sla: {
+        deliveryTime: 62,
+        lastMileTravel: 9.5,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "60-65 mins",
+        lastMileTravelString: "9.5 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 03:30:00",
+        opened: true,
+      },
+      badges: {
+        textExtendedBadges: [
+          {
+            iconId: "guiltfree/GF_Logo_android_3x",
+            shortDescription: "brand",
+            fontColor: "#7E808C",
+          },
+        ],
+      },
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {
+            badgeObject: [
+              {
+                attributes: {
+                  description: "",
+                  fontColor: "#7E808C",
+                  iconId: "guiltfree/GF_Logo_android_3x",
+                  shortDescription: "brand",
+                },
+              },
+            ],
+          },
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "₹100 OFF",
+        subHeader: "ABOVE ₹249",
+        discountTag: "FLAT DEAL",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/food-peddler-sandwiches-hazra-kalighat-kolkata-252048",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "691558",
+      name: "ELAHI LUXURY DINING",
+      cloudinaryImageId: "4a25600fed5ae7a75ee70a91e0a885cd",
+      locality: "Ripon Street",
+      areaName: "Central Kolkata",
+      costForTwo: "₹1000 for two",
+      cuisines: [
+        "North Indian",
+        "Chinese",
+        "Biryani",
+        "Kebabs",
+        "Seafood",
+        "Desserts",
+        "Beverages",
+      ],
+      avgRating: 4.4,
+      parentId: "76982",
+      avgRatingString: "4.4",
+      totalRatingsString: "100+",
+      sla: {
+        deliveryTime: 54,
+        lastMileTravel: 8.5,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "50-55 mins",
+        lastMileTravelString: "8.5 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 04:01:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+        subHeader: "UPTO ₹50",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/elahi-luxury-dining-ripon-street-central-kolkata-kolkata-691558",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "13571",
+      name: "Haji Saheb Park Circus",
+      cloudinaryImageId: "bedbbaa7543c3d70d7a01b02046ee86e",
+      locality: "Ballygunge",
+      areaName: "Ballygunge",
+      costForTwo: "₹800 for two",
+      cuisines: ["Mughlai", "North Indian", "Chinese"],
+      avgRating: 4.3,
+      parentId: "18627",
+      avgRatingString: "4.3",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 55,
+        lastMileTravel: 8.9,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "55-60 mins",
+        lastMileTravelString: "8.9 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 06:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "10% OFF",
+        subHeader: "UPTO ₹40",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/haji-saheb-park-circus-ballygunge-kolkata-13571",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+  {
+    info: {
+      id: "19515",
+      name: "Mezban Ripon Street",
+      cloudinaryImageId: "jaj2dspo6b2pfvflxiap",
+      locality: "Wellesley",
+      areaName: "Wellesley",
+      costForTwo: "₹300 for two",
+      cuisines: ["Indian", "Biryani", "Chinese", "Tandoor"],
+      avgRating: 4.3,
+      parentId: "135608",
+      avgRatingString: "4.3",
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 60,
+        lastMileTravel: 8.9,
+        serviceability: "SERVICEABLE_WITH_BANNER",
+        slaString: "55-60 mins",
+        lastMileTravelString: "8.9 km",
+        iconType: "ICON_TYPE_EMPTY",
+      },
+      availability: {
+        nextOpenTimeMessage: "Currently not taking orders for this location",
+        nextCloseTime: "2024-05-10 02:00:00",
+        opened: true,
+      },
+      badges: {},
+      isOpen: true,
+      type: "F",
+      badgesV2: {
+        entityBadges: {
+          imageBased: {},
+          textBased: {},
+          textExtendedBadges: {},
+        },
+      },
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+        subHeader: "ABOVE ₹1000",
+        discountTag: "FLAT DEAL",
+      },
+      orderabilityCommunication: {
+        title: {},
+        subTitle: {},
+        message: {},
+        customIcon: {},
+      },
+      differentiatedUi: {
+        displayType: "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+        differentiatedUiMediaDetails: {
+          mediaType: "ADS_MEDIA_ENUM_IMAGE",
+          lottie: {},
+          video: {},
+        },
+      },
+      reviewsSummary: {},
+      displayType: "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+      restaurantOfferPresentationInfo: {},
+    },
+    analytics: {
+      context: "seo-data-65716741-6953-447a-8bd8-b799435720b4",
+    },
+    cta: {
+      link: "https://www.swiggy.com/restaurants/mezban-ripon-street-wellesley-kolkata-19515",
+      text: "RESTAURANT_MENU",
+      type: "WEBLINK",
+    },
+    widgetId: "collectionV5RestaurantListWidget_SimRestoRelevance_food_seo",
+  },
+];
 const Body = () => {
   return (
     <div className="body">
@@ -70,56 +786,10 @@ const Body = () => {
       <div className="cards-container">
         {/* //* restaurant cards */}
         {/*//* Example of passing props to a functional component */}
-        <RestaurantCard
-          resName="Foody Bites"
-          cuisine="cakes"
-          imgsrc="https://b.zmtcdn.com/data/pictures/chains/0/59680/552e5c72c80fc7a70b0c416be77aa08c_featured_v2.jpg"
-        />
-        <RestaurantCard
-          resName="KFC"
-          cuisine="Burger"
-          imgsrc="https://orderserv-kfc-assets.yum.com/15895bb59f7b4bb588ee933f8cd5344a/images/categories/CAT233.jpg?ver=42.9"
-        />
-        <RestaurantCard
-          resName="Cherry Restaurant"
-          cuisine="North Indian, Kebab, Mughlai,  Seafood, Chinese, Desserts"
-          imgsrc="https://b.zmtcdn.com/data/reviews_photos/2dc/9b48954bfd86c61f0e4e006dfcadf2dc_1690441012.jpg?fit=around|300:273&crop=300:273;*,*"
-        />
-        <RestaurantCard
-          resName="Honey World"
-          cuisine="Asian, North Indian, Fast Food, Pizza, Biryani, Chinese, Desserts, Beverages"
-          imgsrc="https://b.zmtcdn.com/data/pictures/7/20590317/d8d4fc60d288d7940b583d92d9c57a53.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"
-        />
-        <RestaurantCard
-          resName="Cafe Coffee Day"
-          cuisine="Cafe, Coffee, Tea, Fast Food, Desserts, Beverages, Sandwich, Shake"
-          imgsrc="https://b.zmtcdn.com/data/pictures/chains/7/19053977/672c09efa508694844ff80e2ec20b6c8.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
-        />
-        <RestaurantCard
-          resName="Amazora - The Trippy Jungle"
-          cuisine="Continental, Chinese"
-          imgsrc="https://b.zmtcdn.com/data/pictures/7/20893787/865e320350914147a0e03ae398964260.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
-        />
-        <RestaurantCard
-          resName="Madam G"
-          cuisine="Modern Indian, North Indian, South Indian, Goan, Mangalorean"
-          imgsrc="https://b.zmtcdn.com/data/pictures/4/20872874/b8092f865c8091adb7a00f653d57d141.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
-        />
-        <RestaurantCard
-          resName="Five & Dime"
-          cuisine="North Indian, Pasta, Continental, Oriental, Chinese, Kebab, Beverages"
-          imgsrc="https://b.zmtcdn.com/data/pictures/5/20622955/9c5500f18e9498014ff5d6d3b1c9f9bd.png?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
-        />
-        <RestaurantCard
-          resName="Park Street Social"
-          cuisine="North Indian, Fast Food, Biryani, Pasta, Burger, Kebab, Momos, Beverages"
-          imgsrc="https://b.zmtcdn.com/data/pictures/6/20886726/a8e0fd88502cec1fe5ef8d11e41b010f.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
-        />
-        <RestaurantCard
-          resName="Friday Release"
-          cuisine="North Indian, Chinese, Mughlai, Kebab, Pizza, Fast Food, Sichuan, Desserts"
-          imgsrc="https://b.zmtcdn.com/data/pictures/8/18751498/cb1b70e1c510ed9f95e14502f98d7d21.jpg?fit=around|771.75:416.25&crop=771.75:416.25;*,*"
-        />
+        {resList.map((restaurant) => (
+          <RestaurantCard resData={restaurant} />
+        ))}
+        {/*  // *above reslist is an array of objects and every object is for one restaurant, and as we using reslist array inside jsx that's why we are putting that inside {} because to write javascript inside jsx we have to use {}. */}
       </div>
     </div>
   );
