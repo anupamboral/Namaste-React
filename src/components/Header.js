@@ -1,11 +1,9 @@
-const Header = () => {
+import { LOGO_URL } from "../utils/config";
+ const Header = () => {
   return (
     <div className="header">
       <div className="logo-container">
-        <img
-          className="logo"
-          src="https://th.bing.com/th/id/OIG4._yMW4TQkfDwvxq0ZdxId?pid=ImgGn"
-        />
+        <img className="logo" src={LOGO_URL} />
       </div>
       <nav className="nav-items">
         <ul>
