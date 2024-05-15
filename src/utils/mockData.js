@@ -1,4 +1,4 @@
-export const resList = [
+export let resList = [
   {
     info: {
       id: "19935",
@@ -8,7 +8,7 @@ export const resList = [
       areaName: "Park Street Area",
       costForTwo: "₹150 for two",
       cuisines: ["Beverages", "Snacks", "Desserts"],
-      avgRating: 4.3,
+      avgRating: 3.6,
       parentId: "4311",
       avgRatingString: "4.3",
       totalRatingsString: "1K+",
@@ -65,7 +65,7 @@ export const resList = [
       areaName: "Sarat Bose Road",
       costForTwo: "₹200 for two",
       cuisines: ["Beverages", "Ice Cream", "Desserts", "Healthy Food"],
-      avgRating: 4.4,
+      avgRating: 3.9,
       veg: true,
       parentId: "268997",
       avgRatingString: "4.4",
@@ -188,7 +188,7 @@ export const resList = [
         "Desserts",
         "Beverages",
       ],
-      avgRating: 4.1,
+      avgRating: 4,
       parentId: "226836",
       avgRatingString: "4.1",
       totalRatingsString: "500+",
@@ -303,7 +303,7 @@ export const resList = [
       areaName: "Park Street",
       costForTwo: "₹350 for two",
       cuisines: ["Healthy Food", "Salads", "Snacks", "Desserts", "Beverages"],
-      avgRating: 4.2,
+      avgRating: 4,
       parentId: "2",
       avgRatingString: "4.2",
       totalRatingsString: "10K+",

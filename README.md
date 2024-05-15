@@ -41,3 +41,12 @@
 - Links
 - Address
 - Contact⁡
+
+## React Hooks
+
+- normal js utility function written by react developers
+- important hook names
+- useState() (super important react hook)
+- useEffect()
+- to use a hook we need to import it from the react file as named import (remember when we imported React itself from the react file it was a default import but in case of hooks we have to import them as named import using {})
+- useState hooks is used to create state variables
