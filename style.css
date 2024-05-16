@@ -48,6 +48,7 @@ body {
 }
 .nav-items ul li:hover {
   box-shadow: 10px 10px 2px 1px rgba(0, 30, 255, 0.244);
+  background-color: rgba(0, 30, 255, 0.244);
 }
 .search-container {
   display: flex;
@@ -68,12 +69,14 @@ body {
   max-width: 15rem;
   cursor: pointer;
   transition: all 500ms;
-  background-color: rgb(9, 229, 200);
+  background-color: transparent;
+
   color: rgb(0, 0, 0);
 }
 .btn-top-rated-restaurant:hover {
   box-shadow: 10px 10px 2px 1px rgba(0, 30, 255, 0.244);
   transform: scale(1.05);
+  background-color: rgba(0, 30, 255, 0.244);
 }
 .cards-container {
   display: flex;
