@@ -19,7 +19,7 @@ import { useState } from "react";
 //* so if want to explain it using react language we can say :- whenever a state variable updates react re-renders the component. if we were using javascript then we had to manually re-render the Ui when something updates.but as here using react state variable to store the data so when something gets updated in the data , react also re-render the component which is using that state variable's data.
 
 const Body = () => {
-  //* React local state variable.
+  //* React local state variable.useState returns an Array and from the array using destructuring we get the state variable, and the second variable which we destructured starts with "set" word , because it is used to set or change the value of the state variable, and this setListOfRestaurants which is second parameter is actually a function and we call it and pass the new value of the state variable, after calling this function it immediately creates a virtual DOM and using Reconciliation algorithm it updates the UI so much faster.
   let [listOfRestaurants, setListOfRestaurants] = useState(resList); //* any default value will be written inside (), here reslist is default value .
 
   //* normal js variable.
