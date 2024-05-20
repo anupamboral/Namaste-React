@@ -15,8 +15,23 @@ import Body from "./components/Body";
 
 //* Separation of concerns(SoC):- so while using microservices achitecture all of services (like api, database, sms, mail, ui) are divided into small services , for every service we create a separate small project, like for data base there will separate project or for the sms feature we will have a separate project, then we combine all of these microservices together and this services talk to each other depending on the use case and this design principle is know as separation of concerns. and this follows single responsibility principle where each and every service has its own job. This principle aims to improve the system's modularity, reducing the complexity and increasing the maintainability of the system. It's a key concept in both monolithic and microservice architectures, but it's more strictly enforced in microservices where each service handles a single concern or functionality.
 
-//*⁡⁢⁣⁢but how these services are connected?⁡
-//*
+//*⁡⁢⁣⁢but how these services are connected with each other?⁡
+//* right now our website is running on localhost:1234 port(here 1234 is the port), similarly all of the services runs on their own specific port for example:-
+//* on port :1234 - UI service is running
+//* on port :1000 - Backend service is running
+//* on port :3000 - SMS service is running
+//* so on different ports we can deploy different services , and then all of this ports can be mapped  to one domain name.like :- www.anupam.com, then
+//* port :1234 is mapped to just / (only slash because it will directly open when the user opens the website) then when the url is www.anupam.com/ then this 1234 port will run.
+//* port :1000 is mapped to /api subdirectory then when the url is www.anupam.com/api then this 1000 port will run.
+//* port :3000 is mapped to /sms subdirectory then when the url is www.anupam.com/sms then this 3000 port will run.
+//* but then how this services interact ?
+//* to interact with each other , the services make call to different urls like if the UI is hosted on "/" subdirectory and the Ui want to interact with the backend service then it call the url with /api subdirectory to reach :1000 port.
+//* so basically all of the ports are mapped to the main url using different subdirectories like /api or /sms and when the service need to interact with another one then they make call to the port related to the service using this subdirectory names by placing after the main url like www.anupam.com/api or www.anupam.com/sms .
+
+//* now let's make our web app more dynamic,till now we were copy pasted the api data from swiggy's api but it is not good practice , so now we will try to fetch the data directly from the api , now in react there mainly two ways of fetching data to render it on the ui.
+//*1. loads => api call(500ms) => Render , in this when the user loads the page then browser immediately makes an api call and that api call takes 500 ms to retrieve the data , then immediately the bal;cnk Ui will be filled using the data, so the have to wait for 500ms with the blank page and then the data arrives and suddenly all the data will be displayed.
+//*2. Loads => Render(just skeleton) => api call(500ms) => Rerender. in this approach when the user open the website immediately some skeleton data will be shown to the user not a a blank page, then immediately the browser makes an api call and then after 500ms when the arrives then it rerenders the Ui with the arrived data.
+//* this second process may look complicated but this is actually better , user experience friendly approach, because in the first approach the user had to wait for 500ms to see the ui before that he was seeing the blank page but then suddenly the data arrives and the user sees the Ui and it is very bad for user experience, but in the second approach , as soon as the user opens the website, a Ui skeleton at least will be shown to him then the browser makes the api call and then when the data comes the rerenders the ui and display the data which very good for user Experience. because in this approach , the user doesn't sees the blank page when he open the website first time, so will try use use this second approach.
 const AppLayout = () => {
   return (
     <div className="app">
