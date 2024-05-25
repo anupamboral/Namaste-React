@@ -31,7 +31,7 @@ import { useEffect, useState } from "react";
 //*we can also go to sources tab of the developer tools and inside Body.js we can add debugger(breakpoints) one front of useEffect and another front of return keyword where the component returns, we will see that useEffect hook will only call the callback function when the component rendering has been rendered.
 //* but why are we learning useEffect() hook? because using it we can easily implement the second way of fetching data when the user opens the page, so first we will render the body component with skeleton data and then make the api call inside the useEffect hook, so the call will happen only when the component is rendered.and to do fetching let's go to swiggy's website and get the url they use for their api. and then using the fetch method(a browser api not part of javascript) we will try to fetch the same object from the api...
 //*but after trying to fetch we will get an error in the console.The error is because of cors policy. so according to the this cors policy we can't make a api call to this api url because the origin is different, so we are making the call is localhost origin, but the api is from swiggy's origin, and to deal with this problem we can install an extension named "CORS: Access-Control-Allow-Origin" from chrome web store . then after activating this extension from extension tab, we will see that the error will be gone and we are able to fetch data from the swiggy's api url.
-
+//* so till we were rendering from the mockData which we saved as the value of the state variable named `listOfRestaurants`. and then we were iterating this array of objects using map method. then rendering the cards from the mockData, but now we are gonna make it really dynamic, so to do that first we will render the the fake data from mockData and then after rendering it then we will make the api call to get the real data from api inside useEffect() hook so all of this can happen when the component is already rendered. then after the real data comes we will again change the value of the state variable, and this time the state variable's value will be the real data we just received from the api, and as the state variable's value changes so it will automatically re-render the UI. we can't pass directly json inside the setLisTOfRestaurants() beacuse we to pass the same format of array of objects as mockData. so to that inside the useEffect hook after fetching the data, we will pass this:-setListOfRestaurants(json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants); so to  keep the format same,  .
 const Body = () => {
   //*useState Hook
   //* ℝ𝕖𝕒𝕔𝕥 𝕝𝕠𝕔𝕒𝕝 𝕤𝕥𝕒𝕥𝕖 𝕧𝕒𝕣𝕚𝕒𝕓𝕝𝕖.(using useState() hook)
@@ -45,18 +45,22 @@ const Body = () => {
   //*takes two arguments, first one is a callback function and second one is a dependency array.so the first argument is a callback function , and this callback function will be called be useEffect hook when the component is rendered on the Ui and then it calls the callback function
 
   useEffect(() => {
-    console.log(`useEffect called`), [];
-  });
-  console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
+    //* making the aoi call when the cards components are already rendereed with some fake data, to make a better user experience.
+    console.log(`useEffect called`);
+    const fetchData = async () => {
+      const data = await fetch(
+        `https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.57400&lng=88.31910&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
+      );
+      const json = await data.json();
+      console.log(json);
 
-  const fetchData = async () => {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.57400&lng=88.31910&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
-    );
-    const json = JSON.stringify(data);
-    console.log(json);
-  };
-  fetchData();
+      setListOfRestaurants(
+        json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+      );
+    };
+    fetchData();
+  }, []);
+  console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
 
   return (
     <div className="body">
