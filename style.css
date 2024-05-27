@@ -78,6 +78,30 @@ body {
   transform: scale(1.05);
   background-color: rgba(0, 30, 255, 0.244);
 }
+.shimmer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+.shimmer-card {
+  border: 1px solid black;
+  width: 14rem;
+  height: 20rem;
+  padding: 1rem 1.5rem;
+  transition: all 0.5s;
+  text-align: center;
+  background-color: #ffffff57;
+  display: flex;
+  justify-content: center;
+}
+.shimmer-logo {
+  width: 13rem;
+  height: 8rem;
+  padding: 0.5rem;
+  height: 9rem;
+  background-color: #53484841;
+}
 .cards-container {
   display: flex;
   flex-wrap: wrap;
