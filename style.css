@@ -50,6 +50,23 @@ body {
   box-shadow: 10px 10px 2px 1px rgba(0, 30, 255, 0.244);
   background-color: rgba(0, 30, 255, 0.244);
 }
+.login-btn {
+  font-size: 1.6rem;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  list-style-type: none;
+  cursor: pointer;
+  background-color: transparent;
+
+  border: 1px solid rgb(9, 63, 201);
+  max-width: 15rem;
+  cursor: pointer;
+  transition: all 500ms;
+}
+.login-btn:hover {
+  box-shadow: 10px 10px 2px 1px rgba(0, 30, 255, 0.457);
+  background-color: rgba(0, 30, 255, 0.457);
+}
 .search-container {
   display: flex;
   padding: 1rem;
