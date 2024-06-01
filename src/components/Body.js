@@ -40,6 +40,12 @@ import Shimmer from "./Shimmer";
 //*⁡⁣⁢⁣Shimmer Ui⁡:-but using a loading spinner is not a modern practise in today's world and in the current world scenario most of the popular websites use something called shimmer ui and to create a shimmer ui for our web app first we need to understand that what is it so previously before loading the data we were showing fake cards using mog data but when we use shimmer ui then we basically display some skeleton cards that means cards Which looks very similar to the actual cards but these skeleton cards does not contain any data inside them and usually developers use a grey color for this skeleton cards and all of this is created because when the data arrives and we render the actual cards with real data then it makes the user feel that the blank skeleton cards are getting filled with real data so some colorful cards so the user was not seeing any drunk page or some fake cards with some fake data or even not a loading spinner instead now he is gonna see some skeleton card which are gonna be filled up when the actual data arrives and it makes the user experience so much better and the user feels that the web app is loading so much faster.So let's create a shimmer Ui for our component.we will create a another file named Shimmer.js and then create a function component which resembles to our present component but with no data and greyish color. and we will render that when the listOfRestaurants is empty so basically before loading the page.
 //*Conditional Rendering:- So conditional rendering just a fancy name of we just did right now so basically rendering on the basis of conditions so in the above example when our state variable was empty in that condition we rendered the shimmer ui so basically our skeleton ui which prevents the user to see a blank page and then whenever the real data response comes from the api then we save that inside the state variable and then instantly state variable will render the component and then these first condition becomes false Because now the state variable is not an empty array and now it is filled with the real data so now the real card components will be rendered so as a conclusion we can say that when we render components depending on different conditions that is then called a conditional rendering and as an example we can say that when a user loads a page at that time We display some fake components which are basically some skeleton components(shimmer ui) And then whenever the data comes as the response of the api then in that condition immediately we display the real data on the ui so depending on the condition we are rendering different things on the ui and this is called conditional rendering.
 //*And to do this conditional rendering, it is not even necessary to use an if statement instead we can also use ternary operator which is more easier and clean way so let us also do that.
+
+//* ⁡⁣⁣⁢⁡⁣⁢⁣𝗕𝘂𝗶𝗹𝗱𝗶𝗻𝗴 𝗮 𝘀𝗲𝗮𝗿𝗰𝗵 𝗯𝗮𝗿 𝘁𝗼 𝘀𝗲𝗮𝗿𝗰𝗵 𝗿𝗲𝘀𝘁𝗮𝘂𝗿𝗮𝗻𝘁𝘀⁡
+
+//* so now beside the top restaurants btn , we will create a restaurant searching btn, so let's go our body component and build the btn first.
+
+//* so inside a div we created a text input element(for search box) and a search btn, now we want that when the user will click on the search btn , then on that click event , we get the inputted value from the input element, and then using that value we want to filter the restaurant cards and update the Ui after filtering, and a very important step is that we have to bind this input element with a local state variable to track what user is typing in the input box. now inside the body component we will first make a local stat variable named searchText. and no to bind this variable with the input element , we need to use an attribute inside the input element named "value" and this attributes value will be the state variable we created. and the state variable's default value will be empty string as at first the search input's value should be empty. and after this now our input element is connected with state variable "searchText". but now if we try to tyoe anything on the search box then we are gonna see that nothing is happening in the search box and the search box is not taking any input and we can't write anything inside the search box. and the reason behind this is that, as we previously set the value  ={setText} so the default value of the state variable which is empty string , is basically preventing the Ui to input any data , because value={setSearchText} so we have to do something which allows us to change the state variable's value when the user types something in the search box(input elm) and to do that we know we have to use the the function which we get as the 1st index of the state variable's array. so "setSearchText()" function. but how to use it? , so want that when the user inputs something in the input element then the state variable's value should change so to do that we have to use a event listener inside the input elm named onChange listener , it basically gets triggered when user inputs something . and inside this event listeners callback function first we will receive the event as parameter and then use this event to get the value from the input elm and then call the setSearchText function with this value . so this will also change the value of the state variable. and now user can input any value and when the user click on the search btn then we can access that value and let's print that in the console first.
 const Body = () => {
   //*useState Hook
   //* ℝ𝕖𝕒𝕔𝕥 𝕝𝕠𝕔𝕒𝕝 𝕤𝕥𝕒𝕥𝕖 𝕧𝕒𝕣𝕚𝕒𝕓𝕝𝕖.(using useState() hook)
@@ -48,6 +54,9 @@ const Body = () => {
 
   //* 𝕟𝕠𝕣𝕞𝕒𝕝 𝕛𝕤 𝕧𝕒𝕣𝕚𝕒𝕓𝕝𝕖.
   // let listOfRestaurants=[];//*[] is default value.
+
+  //* local state variable for restaurant search (to keep track what the user is inputting)
+  const [searchText, setSearchText] = useState("");
 
   //* ⁡⁣⁢⁣UseEffect(hook)⁡(import as named import from core REact file.)
   //*takes two arguments, first one is a callback function and second one is a dependency array.so the first argument is a callback function , and this callback function will be called be useEffect hook when the component is rendered on the Ui and then it calls the callback function
@@ -78,15 +87,20 @@ const Body = () => {
   ) : (
     <div className="body">
       <div className="search-container">
-        <div
-          className="search"
-          onClick={() => {
-            {
-              document.querySelector(`.search`).textContent = ``;
-            }
-          }}
-        >
-          Search
+        <div className="search">
+          <input
+            type="text"
+            className="search-box"
+            placeholder="cafe.."
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              console.log(searchText);
+            }}
+          ></input>
+          <button type="submit" className="search-btn">
+            Search
+          </button>
         </div>
         {/*// ** below button is for testing only */}
         <button
