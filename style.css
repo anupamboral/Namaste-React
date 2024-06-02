@@ -36,17 +36,18 @@ body {
   display: flex;
 }
 .nav-items ul li {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
+  font-weight: bold;
   margin: 0.5rem;
   padding: 0.5rem;
   list-style-type: none;
 
-  border: 1px solid rgb(9, 63, 201);
   max-width: 15rem;
   cursor: pointer;
-  transition: all 500ms;
+  transition: all 900ms;
 }
 .nav-items ul li:hover {
+  border: 1px solid rgb(9, 63, 201);
   box-shadow: 10px 10px 2px 1px rgba(0, 30, 255, 0.244);
   background-color: rgba(0, 30, 255, 0.244);
 }
@@ -192,7 +193,8 @@ body {
 }
 
 /* Media Queries */
-@media (max-width: 32em) {
+
+@media (max-width: 44em) {
   :root {
     font-size: 14px;
   }
@@ -202,12 +204,13 @@ body {
   }
   .nav-items ul {
     align-items: baseline;
+    font-size: 1.6rem;
   }
   .nav-items ul li {
     max-width: 4rem;
     margin-right: 0.3rem;
     padding: 0.2rem;
-    font-size: 1.6rem;
+
     border: 0px;
   }
 
