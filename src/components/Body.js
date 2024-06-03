@@ -50,12 +50,15 @@ import Shimmer from "./Shimmer";
 //* and now we will be surprised to see that when ever we adding even a single letter the console.log() we did is gonna print so if we write pizza that will print 5 times in the console, many developer may think that when we writing something in the input field then only the input field is changing but the answer is no, because when a state variable's value change every time it triggers the re render process or react reconciliation process. and that means every time it re render the whole body component, so when have written pizza in that time the the whole body component re rendered 5 times.and this react reconciliation process  makes react dom manipulation so much faster.
 
 //* so we want that whenever we click on search btn after we type something on the input box,then our restaurant cards name should filtered on the basis of what the user inputted. so now we are add onclick event listener in the search btn, and inside it's callback function we will write the logic to update the cards.to do that we are gonna use filter method to filter the restaurant name using the user input. so while filtering we will check if the listOfRestaurants.name includes the the user input or not, so let's the restaurant name is laddu coffee so even the user inputs only coffee in that case also laddu coffee will filtered because we are gonna use includes() method. but still we will face a problem which is our filtration process is still not Case insensitive so that means if the user inputs COFFEE or CoFFEe then the filtration  will not work and the solution is to use .toLowerCase() method on both user input and in the name property in our ListOfRestaurants. so that will make our filtration process case insensitive.so even the user inputs COFFEE or CoFFEe , still the laddu coffee restaurant will be shown.so after filtration we are gonna save this filtered array into a variable named filteredRestaurant and then we are now gonna call setListOfRestaurants(filteredRestaurant) with filteredRestaurant and as the value of the state variable changes , it will immediately re render the whole cody component with new filtered restaurants according to user input.
+
+//* a bug we introduced:- But do our searching functionality is working right now but still we have introduced a new bug So the bug is that if we search second time some other restaurant From all of the restaurants list we received from the api Then we'll see that it is not working and we're not getting our assumed result and it is happening because while doing our first search we updated the list of restaurants State variable and now second time when we are searching then we are using the filtered Restaurant list We filtered some time ago and not the real data we got from the api so we can clearly see the problem that while doing the search updating the original listOfRestaurants State variable caused the problem and the solution of this problem is basically creating another state variable which we are gonna name filteredRestaurants These state variables value will be an empty array as default value and then when the user search something by clicking on the search button then we will update this filtered restaurant state variable and now we will use this state variable to basically display the restaurant  cards Inside the cards container so basically we will use this filteredRestaurants instead of listOfRestaurants State variable To display all of the cards inside the cards container so now one problem is solved because we are not directly updating the list of restaurant state variable and that eventually will help us to keep all of the restaurant data inside our state variable so now the user will search then we can use this list of restaurants state variable as it has all of the required restaurants which we received from the api But doing this will cause another bug And the work is as we're using the filtered restaurants state variable to display all of the cards So now when the user opens our website for the first time he will not be able to see any of the cards when we are receiving the data from the api then we are saving the that data inside list of restaurants state variable but while rendering we are using filtered restaurants state variable but at the beginning it is just an empty array So the solution is that inside the use effect when we are receiving the data from the api at the beginning then We have to update both of the state variables listOfRestaurants and filteredRestaurants And that will eventually help us to solve this problem now at the beginning the real data is also gonna be saved inside the filtered restaurant's state variable and as our component uses this state variable to display all of the cards so it will be able to display all of the cards at the beginning when we receive the data from the api and another state variable which is list of restaurants we will keep it unchanged because All data which we received from the api is saved inside this list of restaurants state variable so whenever the user will search something then we will use this list of restaurants state variable So he can search from all of the restaurants we received at the first place from the api.
+//* and every thing will work as we wanted, and the search feature is finally implemented properly.
 const Body = () => {
   //*useState Hook
   //* ℝ𝕖𝕒𝕔𝕥 𝕝𝕠𝕔𝕒𝕝 𝕤𝕥𝕒𝕥𝕖 𝕧𝕒𝕣𝕚𝕒𝕓𝕝𝕖.(using useState() hook)
   //*useState returns an Array and from the array using destructuring we get the state variable, and the second variable which we destructured starts with "set" word, because it is used to set or change the value of the state variable, and this setListOfRestaurants which is second parameter is actually a function and we call it and pass the new value of the state variable, after calling this function it immediately creates a virtual DOM and using Reconciliation algorithm it updates the UI so much faster.
   let [listOfRestaurants, setListOfRestaurants] = useState([]); //* any default value will be written inside (), here reslist was default value but after making the component dynamic we are now setting this default value to an empty array, so first the the Ui will render but without the card then the data comes from api then we display the cards.
-
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]); //* this state variable is to solve the filtration bug.Explained here :- "a bug we introduced" find it above.
   //* 𝕟𝕠𝕣𝕞𝕒𝕝 𝕛𝕤 𝕧𝕒𝕣𝕚𝕒𝕓𝕝𝕖.
   // let listOfRestaurants=[];//*[] is default value.
 
@@ -72,19 +75,23 @@ const Body = () => {
       const data = await fetch(
         `https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`
       );
+
       const json = await data.json();
-      console.log(json);
 
       setListOfRestaurants(
-        json?.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
+      setFilteredRestaurants(
+        json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      ); //*because we are using filteredRestaurants state variable to display the data in the cards container so when we get the data it is also necessary to update this so we can also use it display the data when we receive the data first time.
       console.log(listOfRestaurants);
     };
     fetchData();
   }, []);
   console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
-
+  console.log(searchText);
   //*Conditional Rendering (for rendering shimmer Ui when browser is loading data from api but when api data has arrived then render the real component) ⁡⁣⁢⁣using ternary operator⁡
 
   return listOfRestaurants.length === 0 ? (
@@ -100,19 +107,18 @@ const Body = () => {
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
-              console.log(searchText);
             }}
           ></input>
           <button
             className="search-btn"
             onClick={() => {
-              const filteredRestaurants = listOfRestaurants.filter((res) =>
+              const filtered = listOfRestaurants.filter((res) =>
                 res.info.name
                   .toLowerCase()
                   .includes(searchText.toLocaleLowerCase())
               ); //*converting both side to lowercase and using includes method important to mke this filtration case insensitive and in between searchable from restaurant names.
               //* changing the state variable
-              setListOfRestaurants(filteredRestaurants);
+              setFilteredRestaurants(filtered);
             }}
           >
             Search
@@ -127,7 +133,7 @@ const Body = () => {
             );
             // using the setListOfRestaurants method tyo change the state and this will triggered when the user will click on this button.
             //*updating the state
-            setListOfRestaurants(filteredList);
+            setFilteredRestaurants(filteredList);
             // console.log(filteredList);
             // console.log(listOfRestaurants);
           }}
@@ -142,7 +148,7 @@ const Body = () => {
             );
             // using the setListOfRestaurants method tyo change the state and this will triggered when the user will click on this button.
             //*updating the state
-            setListOfRestaurants(filteredList);
+            setFilteredRestaurants(filteredList);
             console.log(filteredList);
             console.log(listOfRestaurants);
           }}
@@ -152,8 +158,8 @@ const Body = () => {
       </div>
       <div className="cards-container">
         {/* //* restaurant cards */}
-        {/*//* Example of passing props to a functional component */}
-        {listOfRestaurants.map((restaurant) => (
+        {/*//* Example of passing props to a functional component(instead of listOfRestaurants state variable we are using filteredRestaurants state variable to display the restaurant cards but tyo know find this paragraph above :- "a bug we introduced") */}
+        {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.info.id} resData={restaurant} />
         ))}
       </div>
