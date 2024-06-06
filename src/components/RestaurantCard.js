@@ -2,6 +2,7 @@ import { CDN_URL } from "../utils/config";
 const cardStyles = {
   // backgroundColor: "cyan",
 };
+
 const RestaurantCard = (prop) => {
   //*to use the data coming from the prop , we need to destructure it first and while destructuring we have to use the same name we used while passing the prop , in this case resData.
   const { resData } = prop;
