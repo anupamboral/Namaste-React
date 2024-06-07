@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import axios from "axios";
 //* the restaurant data(object), logo img url, is some hardcoded data which we copied from the swiggy's api. but as it some hard coded data that's why we should never put these kind of data inside a component file like this snd best practice is create a separate file , for these kind of hard coded data , we usually name that kind of file config file or utils(utilities ) file or constants file. so here in this project we will create a separate folder inside the src folder and it's name will utils and inside utils folder we will create a config file. and inside config file we will put all of these data , because these kind of important data in gonna be used for many components like the logo can be used in the home page , in the header also the in the footer , so to keep these kinds of important data we make a separate file . and when ever some change happens then we don't need to go everywhere and change it we just need change it on the config file and it will be reflected in everywhere. so it also helps to make the data reusable.
 //*so all the the constant dat will be inside config file like logo url. and the restaurant data will be inside a file called mockdata.js file in the same hierarchy level with config file.so let's create the mockdta file, and it also fine we would save the reslist data in the same config file..
 
@@ -76,10 +77,29 @@ const Body = () => {
     console.log(`useEffect called`);
     const fetchData = async () => {
       const data = await fetch(
-        `https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`
+        `https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin":
+              "https://www.swiggy.com/apiseo/getListing?lat=22.599975775748607&lng=88.38302497384348",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
       );
-
+      console.log(data);
       const json = await data.json();
+      // const json = await axios.get(
+      //   `https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`,
+      //   {
+      //     //
+      //     "Access-Control-Allow-Credentials": "true",
+      //     "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT",
+      //     "Access-Control-Allow-Headers":
+      //       "Origin, X-Requested-With, Content-Type, Accept, Authorization",
+      //   }
+      // ); //* when we were using fetch method to retrieve data from the api , then after getting the data we had to use .json() method to access the data. but because of the cors issue , we finally found a solution , which is use to axios package , and to use it we need install this package first :- using this command:-npm install axios, and then instead of fetch method we can use axios.get() method to retrieve data from the api without facing any cors issue. and as we are using axios , it  automatically transforms for JSON data, so we don't event need to use .json() method.
+
+      console.log(json);
 
       setListOfRestaurants(
         json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
@@ -89,7 +109,6 @@ const Body = () => {
         json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       ); //*because we are using filteredRestaurants state variable to display the data in the cards container so when we get the data it is also necessary to update this so we can also use it display the data when we receive the data first time.
-      console.log(listOfRestaurants);
     };
     fetchData();
   }, []);
