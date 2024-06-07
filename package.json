@@ -28,6 +28,5 @@
   },
   "browserslist": [
     "last 2 versions"
-  ],
-  "proxy": "https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348"
+  ]
 }
