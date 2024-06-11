@@ -56,6 +56,9 @@ import axios from "axios";
 //* and every thing will work as we wanted, and the search feature is finally implemented properly.
 
 //* CORS plug in issue:- Right now we're using a chrome extension for the Cross origin resource sharing (Cors) Problem and the problem was happening because we are trying to fetch data between two different origins It means basically from between two different domains like one is local host and another one is Swiggy's api so the domain of both of the websites are different because of that the browser basically prevents to fetch the data from different origin/ domain. And to tackle this problem we were using home extension named allow Cors, But that is not enough because if we host our website on some hosting service like Netlify or some other place which will help us to show our proj to to different persons using the url then when they will open our website then there is no guarantee that they will have the same extension already downloaded in their sys so so then because of the cors ,that user's browser Will be unable to fetch data from swiggy's api ,so to tackle this problem We can use a website named https://cors-anywhere.herokuapp.com/(or we can also search cors proxy sites) Why you just need to go to their website and then we will find a link in their website which is just need to copy that link (like:-https://cors-anywhere.herokuapp.com/)and then paste that link before our own link of Swiggy and and that is all now anybody can use our website and they will not paste any cors issue This website does not directly fetch the data from the Swiggy's api instead our browser will make the api call to this website and this website behind the scenes take the data from the api and then give it to us that's why we are not gonna face any issue of the cors. I remembered that there is a limit which is we can only make potpourri requests per minute which is enough for our development use so we cannot use this to build a real user app because if the app is used by so many users then because of the limit the website is giving us it will through some error to the user .
+//*if we paste this link before the swiggy api link then it will also by pass the cors issue but it has a limit till 5 dollars so till 5 dollars usage it's free:-https://web-production-910a.up.railway.app( see the youtube video to see how we did it :-https://youtu.be/eO-ya4I1LzQ?si=PySWFug3QR3KMyvE)
+//* the next remaining option was to copy all the files from github of corsanywhere.com and then build a clone of it on heroku , but after logging in heroku they aksed for credit card so we quit the option to use heroku.
+//* there is an alternative of heroku which is glitch.com, so can clone coranywhere.com here ,but if we don't want spend so much time then inside this glitch website , we have a search bar, there we need to search cors, and we will see some developer already built corsanywhere.com clone to tackle the proxy issue, so we can just use one of them . so we copied the link from of them , we just need to paste it before the swiggy api link. the link is :- https://richie-cors-proxy.glitch.me/  .
 
 const Body = () => {
   //*useState Hook
@@ -77,7 +80,7 @@ const Body = () => {
     console.log(`useEffect called`);
     const fetchData = async () => {
       const data = await fetch(
-        `https://cors-anywhere.herokuapp.com/https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`
+        `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`
       );
       console.log(data);
       const json = await data.json();
