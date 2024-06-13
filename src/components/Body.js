@@ -78,12 +78,12 @@ const Body = () => {
 
   useEffect(() => {
     //* making the aoi call when the cards components are already rendereed with some fake data, to make a better user experience.
-    console.log(`useEffect called`);
+    // console.log(`useEffect called`);
     const fetchData = async () => {
       const data = await fetch(
         `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`
       );
-      console.log(data);
+      // console.log(data);
       const json = await data.json();
       // const json = await axios.get(
       //   `https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`,
@@ -96,7 +96,7 @@ const Body = () => {
       //   }
       // ); //* when we were using fetch method to retrieve data from the api , then after getting the data we had to use .json() method to access the data. but because of the cors issue , we finally found a solution , which is use to axios package , and to use it we need install this package first :- using this command:-npm install axios, and then instead of fetch method we can use axios.get() method to retrieve data from the api without facing any cors issue. and as we are using axios , it  automatically transforms for JSON data, so we don't event need to use .json() method.
 
-      console.log(json);
+      // console.log(json);
 
       setListOfRestaurants(
         json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
@@ -109,8 +109,8 @@ const Body = () => {
     };
     fetchData();
   }, []);
-  console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
-  console.log(searchText);
+  // console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
+  // console.log(searchText);
   //*Conditional Rendering (for rendering shimmer Ui when browser is loading data from api but when api data has arrived then render the real component) ⁡⁣⁢⁣using ternary operator⁡
 
   return listOfRestaurants.length === 0 ? (
