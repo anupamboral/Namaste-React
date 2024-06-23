@@ -164,7 +164,7 @@ body {
   width: 14rem;
   transition: all 0.5s;
   text-align: center;
-
+  border-radius: 1rem;
   background-color: rgb(41, 178, 178);
   color: rgb(26, 42, 42);
 }
@@ -176,6 +176,7 @@ body {
   width: 13rem;
   padding: 0.5rem;
   height: 10rem;
+  border-radius: 1rem;
 }
 .res-name {
   font-size: 1.6rem;
