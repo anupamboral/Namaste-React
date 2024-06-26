@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import { createBrowserRouter } from "react-router-dom";
+import About from "./components/About";
 
 //! Lesson - 7 - Finding the path
 
@@ -26,11 +27,12 @@ import { createBrowserRouter } from "react-router-dom";
 //*⁡⁣⁢⁣REACT ROUTER⁡
 //* Now we are gonna learn how we can learn different routes inside our react application : and  for that we are gonna use a npm javascript library named "React Router" . let's install it as a npm package and the command is :- npm i react-router-dom .
 //* and after installing it we can go to our package.json file and see it is added as dependency and it's version is 6.23.1. and it's the latest version for now.
-//* adn now let's create a route or basically a about us page so when we will go to localhost:1234/aboutUs then we will see the About Us page.
+//* and now let's create a route or basically a about us page so when we will go to localhost:1234/aboutUs then we will see the About Us page.
 
-//* now  first we have to create a routing configuration, basically when ever we want to develop routes , we have create routing configuration. and so to create that routing configuration we have to import something named createBrowserRouter as a named import from react-router-dom.so let's import it first at the top of this file.
-//*and now we will create the routing configuration inside a variable named as appRouter. Configuration basically means information  that will define what will happen on a specific route.A information that will tell the browser router what will happen on a specific route/path.  like we are calling  localhost:1234/aboutUs then it should go to AboutUs page. so the configuration we are gonna pass as argument is createBrowserRouter().
-//* so createBrowserRouter() is actually a method which we imported, and this method takes a list of paths(configuration) or array od objects  as argument. paths are just some objects, and inside those objects we write on which path which page should be displayed like on /aboutus path the About Us page should be displayed or on / path the home page should be displayed which we named AppLayout.and we already know a page just a composition of multiple small components.so let's create our composition.
+//* now to create route first we have to create a routing configuration, basically when ever we want to develop routes , we have to create routing configuration. and so to create that routing configuration we have to import something named createBrowserRouter as a named import from react-router-dom.so let's import it first at the top of this file.
+//*and now we will create the routing configuration inside a variable named as  appRouter and should be positioned below the AppLayout component because while writing the routing configuration we have to mention the the element name and that's why if we want to to use the AppLayout component inside the routing configuration then we have to write the AppRouter variable after the AppLayout variable.Configuration basically means information  that will define what will happen on a specific route.A information that will tell the browser router what will happen on a specific route/path.  like we are calling  localhost:1234/aboutUs then it should go to AboutUs page or on `/` route it should display the AppLayout component basically the home page that't why it necessary to create the AppRouter variable after the AppLayout component  . so the configuration we are gonna pass is as argument inside createBrowserRouter() method.
+//* so createBrowserRouter() is actually a method which we imported react-router-dom package, and this method takes a list of paths(configuration) or array of objects  as argument. Each path is an object, and inside those objects we write on which path which page should be displayed like on /aboutus path the About Us page should be displayed or on / path the home page should be displayed which we named AppLayout.and we already know a page is just a composition of multiple small components.so let's create our router configuration inside appRouter but before that let's first create a normal About us page and to do that let's create a new js file named About.js file inside components folder and and just create a normal About functional component and export it so we can import that here in this file so we can use that to write the configuration.
+//* and now inside the configuration we will write that if our path is /about then load our about component which we imported. and the path object will look like :- { path: `/about`,element: <About />,} . and now our AppRouter configuration is ready. but just creating the configuration is not enough , we have to provide this information
 
 const AppLayout = () => {
   return (
@@ -46,8 +48,8 @@ const appRouter = createBrowserRouter([
     element: <AppLayout />,
   },
   {
-    // path: `/aboutus`,
-    // element: <AboutUs />,
+    path: `/about`,
+    element: <About />,
   },
 ]);
 const root = ReactDOM.createRoot(document.querySelector("#root"));
