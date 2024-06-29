@@ -193,6 +193,17 @@ body {
   font-size: 1rem;
 }
 
+/*Error page*/
+
+.error-page {
+  display: flex;
+  margin-top: 10rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 /* Media Queries */
 
 @media (max-width: 44em) {
