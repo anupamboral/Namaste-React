@@ -2,11 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useRouteError,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
@@ -60,16 +56,12 @@ import Error from "./components/Error";
 //*use of "useRouterError" hook:- using this hook we can get more information about error. so right now we are just displaying a simple message when error happens which is `oops something went wrong` but we can display a more information about the error which can improve the user experience.so depending on what kind of error has happened we can display detailed error message like if it is a network error,route fail error(entering some wrong path http://localhost:1234/djrfefe ) , server error.
 //* so to use this hook , inside our Error component before returning anything at first we have to call this hook and save it's value inside a variable, because remember every hook is a function/method with a specific purpose.
 //*now let's name this variable err. and now print it using a console.log(), then let's go to our app and enter some wrong path like localhost:1234/essfd , so the error can be displayed, and then if we go to our inspect tool , then in the console we will be able to see a object printed by the console.log(err) we just did. and inside the object this object there is a lot of information which we can use to display a better error message. so let's use this object's properties like err.status and err.statusTest to display a good error message so that we gonna add another heading element and inside that using template literal we will display some good error message.
-const AppLayout = () => {
-  return (
-    <div className="app">
-      <Header />
-      <Body />
-    </div>
-  );
-};
-const appRouter = createBrowserRouter([
-  {
+
+//*⁡⁣⁢⁡⁣⁢⁣Developing children routes⁡
+//* so right now except the home page, on other pages(about, contact) one functionality is missing and that is the header , so usually when we visit a website and go to their aboutUs page or contact us page then we see that the navigation header always stay on all of the pages so the user can navigate trough the all of the pages, and the same we want for all of our pages that the header remains available on all of the pages and the below part should get changes for different pages located on different paths/routes.
+//* and to bring this functionality we have to create child routes for our AppLayout component.Becuse AppLayout will be same for but just below the Header , instead of Body component, the other components like About ,Contact will appear.
+//* so right now inside our router configuration, we have multiple routes for different path Like:-
+/*  [⁡⁢⁣⁣{
     path: `/`,
     element: <AppLayout />,
     errorElement: <Error />,
@@ -81,6 +73,55 @@ const appRouter = createBrowserRouter([
   {
     path: `contact`,
     element: <Contact />,
+}],⁡
+  */
+//* but now to create child routes , first inside the homePage("/" ) route object we are now adding new property named children, and it's value will be again a list of paths or array of objects . and now inside this children property's array , we will put the other different route objects we created for about and contact.so now all of the other routes are the children routes of the main route (`/` route). and we want that inside the AppLayout component , depending on different paths different children Elements(About, Contact) should be displayed and header will present for every route / path, like :-
+/*const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      //*on / Route(for homePage) - Body component should be displayed
+      <Body />
+      //*on /about Route(for AboutUs) - About component should be displayed
+      <About />
+      //*on /Contact Route(for Contact) - Contact component should be displayed
+      <Contact />
+    </div>
+  );
+};
+*/
+//*though we added the other child routes but as children but we have to remember that on "/" route the body should be displayed but on other route it should not be displayed, so first we have to remove the Body Component from the AppLayout Component, and then to display the body component on / route , we have to add another child route object for this / (homePage) route , which will display the Body component on / route below the header component. so let's remove the Body component and then add a child route for displaying the body.
+//*so now creating all of the child routes is complete , but we want a way to display this different child routes below the Header component depending on the path. like on / route the Body element should Appear below the Header component.and to do that React Router Dom gives us another solution which is basically a another component which we have to import as named import form react-router-dom and the component's name is <Outlet/>. so let's import is first.
+//* now inside our AppLayout component, below the header we have place this OutLet component.And this OutLet component is just like an empty box which will be filled with a element depending on the path, so when path will be / this Outlet component will be filled with <Body/> component , when the path will be /about then it will be filled with the <About/> component.and that'show we can implement this functionality.
+
+const AppLayout = () => {
+  return (
+    <div className="app">
+      <Header />
+      <Outlet />
+      {/* <Body /> */}
+    </div>
+  );
+};
+const appRouter = createBrowserRouter([
+  {
+    path: `/`,
+    element: <AppLayout />,
+    children: [
+      {
+        path: `/`,
+        element: <Body />,
+      },
+      {
+        path: `/about`,
+        element: <About />,
+      },
+      {
+        path: `contact`,
+        element: <Contact />,
+      },
+    ],
+    errorElement: <Error />,
   },
 ]);
 const root = ReactDOM.createRoot(document.querySelector("#root"));
