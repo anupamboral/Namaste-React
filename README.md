@@ -50,3 +50,8 @@
 - useEffect()
 - to use a hook we need to import it from the react file as named import (remember when we imported React itself from the react file it was a default import but in case of hooks we have to import them as named import using {})
 - useState hooks is used to create state variables
+
+## 2types of Routing on web apps
+
+- Client side routing
+- Server side routing
