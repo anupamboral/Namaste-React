@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 //! Lesson - 7 - Finding the path
 
@@ -110,6 +111,9 @@ import Error from "./components/Error";
 //* 1.server side routing:- it means we have different file like index.html, about.html , contact.html , and when we click on one anchor tag  then the browser makes network call to server and and fetch that html file from the server then render it on the webpage.and that's  how the old websites use to work.So basically while using server side routing you make a network call to server and request the page and then it comes to the browser and then browser renders it.
 //*2.client side routing:- we just use this client side routing , so while using this routing, when the user first time loads the page at time the browser downloads all of the components for About page , contact page, etc, and then whenever the user goes to another page then it immediately displays that component because all of components are already downloaded and the browser is just changing the components according to the path.the only network call will be happening when the user fetch something from the api, but it will not reload the page because all of the components are already present.and that is why client side routing is so popular and fast.
 
+//*Now let's build a new feature for webApp which will us to learn dynamic routing(till now we only learned basic routing), so when we visit a food ordering website and then click on one of the restaurants option then a restaurant page opens where we can see all of the foods that the restaurant is selling and also details about that restaurant.... so now are gonna try to build this feature.
+//*Dynamic Route:- dynamic route means that the path will change according to data (like:- id or name), till now we were using static routes which we were hard coded by us and doesn't change with the data example:- like :- localhost:1234/about , /contact . but incase of dynamic routes , the route/path  will not be hardcoded,instead it will change according to the data for example :- localhost:1234/restaurants/meghna-foods , is this example, meghna-foods is dynamic , basically the part after restaurants/ , so for different restaurants is will be different , and we will not hard code it , instead it will change depending on the data for different restaurants. This dynamic portion of the path can be any unique data which is different for every restaurant , it can be id or the unique name that restaurant .So to create a dynamic path we have use this `:` colon , and the part after this colon will be dynamic so this part of the path will change for every different restaurant. a dynamic path look like this localhost:1234/restaurants/:id and this id will change for every restaurant . So let's first create a basic restaurant menu page and import that here so we can work with that. because ultimately we are gonna display a restaurant menu page for every restaurant . and then using dynamic routing we will display the restaurant menu page , so whenever the dynamic path changes then this restaurant menu component can be loaded, and this restaurant menu page will be also dynamic, so this component will be also dynamic, so it will able to display menus for different restaurants using the same component like we did for restaurant cards , so this whole restaurant menu component will be also dynamic. lets's create a basic restaurant menu page first then we will try make it dynamic. and now we imported the RestaurantMenu component (at the top of this file). so let's go inside our router configuration and create a dynamic route , so the id will be dynamic here because we know every restaurant object will have a different and unique id.and this will also a child route inside the main route.So right now our dynamic route looks like :-{path:`/restaurants/:resId`} , here the portion after the : is dynamic , so the resId will for change for every restaurant. and now let's add the element property inside our dynamic route object, and it's value will be <RestaurantMenu /> because on /restaurants/:resId path we want to display this component.Now let's go to our webpage and test the path with some fake id so the id can be any number so let's use some fake number in place of id , so the url will look like :-{localhost:1234/restaurants/6789} and as soon as we type this path on the search bar then immediately we can see that the <RestaurantMenu /> page is appearing, till now the page is not dynamic but our goal is whenever the id changes depending on that id ,our <RestaurantMenu /> component dynamically display the restaurants menu which will be different for every restaurant, So whenever the dynamic path will change then we will fetch data from the api related to the restaurant using the id and then display that.
+
 const AppLayout = () => {
   return (
     <div className="app">
@@ -135,6 +139,10 @@ const appRouter = createBrowserRouter([
       {
         path: `contact`,
         element: <Contact />,
+      },
+      {
+        path: `/restaurants/:resId`,
+        element: <RestaurantMenu />,
       },
     ],
     errorElement: <Error />,
