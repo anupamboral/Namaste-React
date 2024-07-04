@@ -192,8 +192,27 @@ body {
   margin: 0.5rem;
   font-size: 1rem;
 }
+/** Restaurant Menu */
+.res-menu {
+  padding-left: 2rem;
+}
+.res-menu h1 {
+  text-decoration: wavy;
+  border-bottom: 1px solid black;
+}
+.res-menu p {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.res-menu p span {
+  margin-left: 1rem;
+}
+.res-menu ul h3 {
+  margin: 1rem 0.5rem;
+  font-size: 1.8rem;
+}
 
-/*Error page*/
+/**Error page*/
 
 .error-page {
   display: flex;

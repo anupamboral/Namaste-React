@@ -26,11 +26,11 @@ const Header = () => {
   //*state variable to toggle login and log out on click (using onClick event listener )
   const [loginBtnName, setLoginBtnName] = useState("Log In"); //*Default value is log in.
   useEffect(() => {
-    console.log(`useEffect called`);
+    // console.log(`useEffect called`);
   }, [loginBtnName]); //*inside the dependency array we have only one dependency which is basically the loginBtnName state variable. which means after calling the useEffect hook first time after loading the page, this useEffect Hook will be onlu called when ever this loginBtnName state variables value changes. to know more about useEffect hook behavious please look at the notes above:-`⁡⁣⁢⁣Behavior of UseEffect() hook.⁡`
 
   //
-  console.log(`header rendered`);
+  // console.log(`header rendered`);
   return (
     <div className="header">
       <div className="logo-container">
