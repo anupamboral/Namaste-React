@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -119,7 +119,15 @@ import RestaurantMenu from "./components/RestaurantMenu";
 
 //*Placing the destructuring code  below the if Statement(for Shimmer UI) is important because as we are gonna destructure the needed properties from the data , if we would place it above the if statement then at the first render when the resInfo value is null then our variables will try to get the data from null, and that will throw an error so when the value is null then it should render the Shimmer Ui and that's why we placed the if statement above so the after the return the below lines would not execute, but when the data will arrive after the useEffect hook call then it's value will be filled with the data so then the if statement will not execute and the return will happen at that line, and the below lines execution will continue . and here we have not used ternary operator also because of this reason because we need to do some destructing here. and  this destructuring should only happen after the data arrives, and also because we can't do this destructuring inside the fetchMenu function because as it is inside the useEffect hook, and we mention the second parameter in the UseEffect hook that's why it will execute once in the first render.
 
+//*⁡⁣⁢⁣making the restaurant menu dynamic⁡
+//* now one more important thing is that our api url is :-https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.5743545&lng=88.3628734&restaurantId=407669&catalog_qa=undefined&submitAction=ENTER ; and from this we are getting the restaurant menu data in restaurantMenu.js. and this url contains the restaurant id - 407669 ; and the amazing thing is that if we just change this restaurant id and put some other restaurant's id then then this url will load that other restaurant's menu data. So using it we can make our restaurant menu dynamic, so it can load any restaurants menu data.
+
+//* So to get restaurant id dynamically, we have to send it through the route , so when the user clicks on any restaurantCard, any he will be redirected to restaurantMenu , and beside that the route url will send the resId , as we are using dynamic route for restaurant menu , So the dynamic part of the url (example:- /restaurants/:resId -this resId) will help to send the restaurant id through the route url, So that means for every restaurant it will send that restaurant's unique restaurant's id ,which we can use to load any  restaurant's menu. But even we send the id dynamically through route url, but still we need a way to get that id in restaurantMenu.js from the route url. So basically we need a way to read this id from the url in restaurantMenu.js.
+
+//*and to solve this problem we react router dom gives us another function named useParams.
+//*useParams:- this hook helps us to get the parameters from the url/route. So sent the resId as a parameter when the user clicked the restaurant component , and now we are receiving the param(the dynamic part of the route/url) through this useParams hook. so when we call this hook then in return it gives us a object which contains the parameters as properties. and we can directly use destructuring to take the param(here resId) and use it. so let's go to restaurantMenu.js and import this hook as named import from react router dom. then inside the RestaurantMenu component we will call this and destructure the `resId` param, and then in the api url we will use this resId to dynamically load any restaurant's menu.and also put the api url in the config file, because we should always this ind of important hard coded data in the config file.and then after importing the MENU_API_URL from the config file in restaurantMenu.js we will concat the MENU_API_URL with resId inside the fetch function, and now we can load any restaurants's menu just by changing the resId param in the url/path.
 const AppLayout = () => {
+  console.log(a);
   return (
     <div className="app">
       <Header />
