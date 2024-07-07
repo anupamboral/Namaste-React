@@ -6,3 +6,4 @@ export const CDN_URL =
 const LOGO_URL =
   "https://th.bing.com/th/id/OIG4._yMW4TQkfDwvxq0ZdxId?pid=ImgGn";
 export { LOGO_URL };
+export const MENU_API_URL = `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.5743545&lng=88.3628734&restaurantId=`;
