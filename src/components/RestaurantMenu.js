@@ -39,24 +39,13 @@ const RestaurantMenu = () => {
   const { avgRatingString, name, id, cuisines, costForTwoMessage } =
     resInfo?.data?.cards[2]?.card?.card?.info;
 
-  const { itemCards: itemList1, title: title1 } =
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card ||
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card.categories;
-  const { itemCards: itemList2, title: title2 } =
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[3]?.card
-      ?.card ||
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card.categories;
-  [0];
-  const { itemCards: itemList3, title: title3 } =
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[4]?.card
-      ?.card ||
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card.categories[0];
+  const { itemCards: itemList1, title: title1 } = resInfo?.data.cards[4]
+    ?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card
+    ? resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+        ?.card
+    : resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+        ?.card.categories[0];
 
-  console.log(resInfo);
   return (
     <div className="res-menu">
       <h1>{name}</h1>
@@ -69,25 +58,8 @@ const RestaurantMenu = () => {
         {itemList1.map((item) => {
           return (
             <li key={item.card.info.id}>
-              {item.card.info.name} - Rs.{item.card.info.price / 100}
-            </li>
-          );
-        })}
-
-        <h3>{title2}</h3>
-        {itemList2.map((item) => {
-          return (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs.{item.card.info.price / 100}
-            </li>
-          );
-        })}
-
-        <h3>{title3}</h3>
-        {itemList3.map((item) => {
-          return (
-            <li key={item.card.info.id}>
-              {item.card.info.name} - Rs.{item.card.info.price / 100}
+              {item.card.info.name} - Rs.
+              {item.card.info.price / 100 || item.card.info.defaultPrice / 100}
             </li>
           );
         })}

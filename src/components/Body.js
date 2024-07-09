@@ -2,7 +2,8 @@ import RestaurantCard from "./RestaurantCard";
 import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
-
+import { Link } from "../../node_modules/react-router-dom";
+console.log(Link);
 //* the restaurant data(object), logo img url, is some hardcoded data which we copied from the swiggy's api. but as it some hard coded data that's why we should never put these kind of data inside a component file like this snd best practice is create a separate file , for these kind of hard coded data , we usually name that kind of file config file or utils(utilities ) file or constants file. so here in this project we will create a separate folder inside the src folder and it's name will utils and inside utils folder we will create a config file. and inside config file we will put all of these data , because these kind of important data in gonna be used for many components like the logo can be used in the home page , in the header also the in the footer , so to keep these kinds of important data we make a separate file . and when ever some change happens then we don't need to go everywhere and change it we just need change it on the config file and it will be reflected in everywhere. so it also helps to make the data reusable.
 //*so all the the constant dat will be inside config file like logo url. and the restaurant data will be inside a file called mockdata.js file in the same hierarchy level with config file.so let's create the mockdta file, and it also fine we would save the reslist data in the same config file..
 
@@ -178,8 +179,14 @@ const Body = () => {
       <div className="cards-container">
         {/* //* restaurant cards */}
         {/*//* Example of passing props to a functional component(instead of listOfRestaurants state variable we are using filteredRestaurants state variable to display the restaurant cards but tyo know find this paragraph above :- "a bug we introduced") */}
+        {/* the link tag added in the 7 lesson to make the restaurant card clickable, so when the user click on the one the restaurant card then the browser should show that restaurant's menu page. before doing it the mapped component was looking like <RestaurantCard key={restaurant.info.id} resData={restaurant} /> and the explanation is also present above in the notes. */}
         {filteredRestaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.info.id} resData={restaurant} />
+          <Link
+            to={`/restaurants/` + restaurant.info.id}
+            key={restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

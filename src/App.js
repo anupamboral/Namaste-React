@@ -127,6 +127,18 @@ import RestaurantMenu from "./components/RestaurantMenu";
 //*and to solve this problem we react router dom gives us another function named useParams.
 //*⁡⁣⁢⁣useParams⁡:- this hook helps us to get the parameters from the url/route. So sent the resId as a parameter when the user clicked the restaurant component , and now we are receiving the param(the dynamic part of the route/url) through this useParams hook. so when we call this hook then in return it gives us a object which contains the parameters as properties. and we can directly use destructuring to take the param(here resId) and use it.and remember we have to use the same param name which we used while passing this param through route which is resId. so let's  import this hook as named import from react router dom. then inside this RestaurantMenu component we will call this and destructure the `resId` param, and then in the api url we will use this resId to dynamically load any restaurant's menu.and also put the api url in the config file, because we should always this ind of important hard coded data in the config file.and then after importing the MENU_API_URL from the config file in restaurantMenu.js we will concat the MENU_API_URL with resId inside the fetch function, and now we can load any restaurants's menu just by changing the resId param in the url/path.
 //*and now depending on the url(resId param of the url/route/path) our resMenu will be loaded which is really amazing.
+
+//*and now let's go to our body component, so we can make our restaurant card components clickable.so in Body.js in the body components we are use map  method to render all the restaurant cards. but we want that when ever we click on one of the restaurant cards then it should redirect us to the restaurant menu page, basically load the restaurant menu page with that selected restaurant's menu. So , in javascript we would use anchor tag, but here in react we already know that we have use the link component provided by  react-router-dom. because it not reload the page instead it will just refresh the components from the memory, so basically interchange the components. and and instead of the href attribute we have to use the to attribute to provide the url.and remember this url will be dynamic because with path we have to also provide the resId ,which is dynamic. So to dao that we have to use string concatenation, and as we are doing this concatenation inside the jsx so we have use {} so we can write javascript. and the key prop we  provided as the attribute inside the <RestaurantCard /> component has to be shifted as the attribute of the link component, ⁡⁢⁣⁣the key should be present in parent jsx component which is being mapped⁡, so finally the mapped component will look like:-
+/*   {filteredRestaurants.map((restaurant) => (
+          <Link
+            to={`/restaurants/` + restaurant.info.id}
+            key={restaurant.info.id}
+          >
+            <RestaurantCard resData={restaurant} />
+          </Link>
+        ))}
+        */
+
 const AppLayout = () => {
   return (
     <div className="app">
