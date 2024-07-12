@@ -162,6 +162,7 @@ body {
 .res-card {
   border: 1px solid black;
   width: 14rem;
+  height: 21rem;
   transition: all 0.5s;
   text-align: center;
   border-radius: 1rem;
@@ -222,8 +223,17 @@ body {
   flex-direction: column;
   gap: 2rem;
 }
-
-/* Media Queries */
+/** UserClass page*/
+.user-card {
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 2px solid rgb(73, 12, 239);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: rgb(21, 85, 142);
+}
+/** Media Queries */
 
 @media (max-width: 44em) {
   :root {

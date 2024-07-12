@@ -82,7 +82,7 @@ const Body = () => {
     // console.log(`useEffect called`);
     const fetchData = async () => {
       const data = await fetch(
-        `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/api/seo/getListing?lat=22.599975775748607&lng=88.38302497384348`
+        `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627`
       );
       // console.log(data);
       const json = await data.json();
@@ -97,14 +97,14 @@ const Body = () => {
       //   }
       // ); //* when we were using fetch method to retrieve data from the api , then after getting the data we had to use .json() method to access the data. but because of the cors issue , we finally found a solution , which is use to axios package , and to use it we need install this package first :- using this command:-npm install axios, and then instead of fetch method we can use axios.get() method to retrieve data from the api without facing any cors issue. and as we are using axios , it  automatically transforms for JSON data, so we don't event need to use .json() method.
 
-      // console.log(json);
+      console.log(json);
 
       setListOfRestaurants(
-        json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
       setFilteredRestaurants(
-        json.data?.success?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       ); //*because we are using filteredRestaurants state variable to display the data in the cards container so when we get the data it is also necessary to update this so we can also use it display the data when we receive the data first time.
     };
