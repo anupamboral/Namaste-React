@@ -129,15 +129,17 @@ import RestaurantMenu from "./components/RestaurantMenu";
 //*and now depending on the url(resId param of the url/route/path) our resMenu will be loaded which is really amazing.
 
 //*and now let's go to our body component, so we can make our restaurant card components clickable.so in Body.js in the body components we are use map  method to render all the restaurant cards. but we want that when ever we click on one of the restaurant cards then it should redirect us to the restaurant menu page, basically load the restaurant menu page with that selected restaurant's menu. So , in javascript we would use anchor tag, but here in react we already know that we have use the link component provided by  react-router-dom. because it not reload the page instead it will just refresh the components from the memory, so basically interchange the components. and and instead of the href attribute we have to use the to attribute to provide the url.and remember this url will be dynamic because with path we have to also provide the resId ,which is dynamic. So to dao that we have to use string concatenation, and as we are doing this concatenation inside the jsx so we have use {} so we can write javascript. and the key prop we  provided as the attribute inside the <RestaurantCard /> component has to be shifted as the attribute of the link component, ⁡⁢⁣⁣the key should be present in parent jsx component which is being mapped⁡, so finally the mapped component will look like:-
-/*   {filteredRestaurants.map((restaurant) => (
+/*   ⁡⁢⁣⁣{filteredRestaurants.map((restaurant) => (
           <Link
             to={`/restaurants/` + restaurant.info.id}
             key={restaurant.info.id}
           >
             <RestaurantCard resData={restaurant} />
           </Link>
-        ))}
+        ))}⁡
         */
+
+//*⁡⁣⁢⁣Interesting fact about link component provided by react router dom(link component is just wrapper over anchor tag)⁡:-even we use a link component instead of anchor tags for the navigation links, but if we pen the browser and open the inspect tool and see the nav links in the html then surprisingly we will see that instead of the link tag the browser is showing that it is a anchor tag, but we used Link tag right? that is happening because behind the scenes react router dom converting the link tag into anchor tag because browser doesn't understand link component because it is not a part included in html . and also react router dom keep track of every link which is created using the link component , and because of that , it doesn't reload the page, instead just refresh the components. So the conclusion is that we use link component because behind the scenes though it will be converted into anchor tag but react router dom will keep track that it is a special link, so there is no need to reload the page instead it just need to refresh the components .So we can say that link tag is just a wrapper over anchor tag.
 
 const AppLayout = () => {
   return (
