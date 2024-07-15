@@ -5,7 +5,7 @@ const About = () => {
     <div>
       <h1>About</h1>
       <h2>This is Namaste React</h2>
-      <User name="Anupam Boral" />
+      <User name="Anupam Boral" location="kolkata" />
     </div>
   );
 };
