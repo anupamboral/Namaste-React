@@ -10,7 +10,7 @@ const RestaurantCard = (prop) => {
   const { name, cuisines, avgRating, cloudinaryImageId } = resData?.info; //* ? mark is used is called optional chaining, so if the property exist it will read property and if does not exist then it will return undefined.
   const { deliveryTime } = resData?.info.sla;
 
-  console.log(resData);
+  // console.log(resData);
   return (
     <div className="res-card" style={cardStyles}>
       <img

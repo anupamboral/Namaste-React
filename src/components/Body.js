@@ -153,6 +153,7 @@ const Body = () => {
             );
             // using the setListOfRestaurants method tyo change the state and this will triggered when the user will click on this button.
             //*updating the state
+            console.log(filteredList);
             setFilteredRestaurants(filteredList);
             // console.log(filteredList);
             // console.log(listOfRestaurants);

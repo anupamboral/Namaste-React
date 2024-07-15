@@ -29,6 +29,9 @@ body {
 
   border: 2px solid rgb(0, 0, 0);
 }
+a {
+  text-decoration: none;
+}
 .logo {
   height: 4rem;
 }
@@ -162,7 +165,7 @@ body {
 .res-card {
   border: 1px solid black;
   width: 14rem;
-  height: 21rem;
+  height: 22.5rem;
   transition: all 0.5s;
   text-align: center;
   border-radius: 1rem;
