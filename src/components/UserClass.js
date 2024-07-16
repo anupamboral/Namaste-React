@@ -58,9 +58,15 @@ constructor(props, context, updater){
         </button>
         */
 //*Note: every time we update the state variable using this.setState({}) then the whole component will be re rendered with the updated values.And it follows the same reconciliation algorithm when the state variable changes.
+//*⁡⁣⁢⁣another way of importing React.Component⁡:- while importing React here so we can use React.Component, we imported react normally but while importing we can directly do destructuring and get the Component so then the the import will look like this:-import {Component} from "react"; ,so here we destructured the Component directly and now while extending it to create the class based component we don't need to write React.Component and we can write just"component" as we already destructured it. so it will look like:- class User extends Component{}
+
+//*Life cycle of react class based component:- So let's say we are rendering a class based component inside a functional component so basically the functional component is the parent component and the class based component is a child component so now while rendering the functional component the interpreted reaches to the line where the child component exists which is a class based component then immediately an instance will be created of that class and to create that instance that class based components constructor function will be called then at second number the render method will be called and if they are componentDidMount method is present inside the class that will be called at the third number because as the name says it will be called only when the component is mounted or rendered on the ui. If both of the components so the parent component and the child component both are class based component then what will happen? So basically a class based component inside another class based component in that scenario first the parent class based component's Call constructor will be called , Then at the second the render method will be called and as we can guess that the child component must be inside This render method so when the interpreter reaches to the child component which is also a class based component then it starts loading this child component so it will again create an instance of this child class based component and to create the instance it will first call the constructor function of the child component then it will call the render method of the child component and at this point as the child component is rendered now it will call componentDidMount(){} method of this child class based component as this component is already rendered and after that the interpreter will come back to the parent class based component and now the parent classes rendering is complete and that means it will now call componentDidMount(){} of this parent class based component at this point the parent class based component is also fully rendered.
+//*when rendering class based component inside functional component --- first it will render the functional component's jsx and when it will reach to child class based component then it will create a instance of that class and the life cycle will be : 1. constructor => 2. render => 3. componentDidMount.
+//*when rendering class based component inside another class based component : 1.parent class constructor => 2. parent class render (it returns jsx which contains child class component) 3.child class constructor =>4. child class render => 5. child class componentDidMount 6.parent class componentDidMount.
 
 console.log(React.Component);
 class User extends React.Component {
+  //*life cycle of class based component :-1.constructor will be called at 1rd number,render will be called at 2nd number,componentDidMount will be called at 3rd number after the component is rendered/mounted.
   constructor(props) {
     super(props);
     //*creating state variable in class based component
@@ -70,9 +76,15 @@ class User extends React.Component {
       count3: 8760,
       horse: `sherry`, //*state variable 3
     };
-
+    console.log(`constructor called`);
     console.log(this.props); //*always use this after calling super, because super methods class parents class's constructor and inherit the properties and methods. So after inheriting them , we should only use this keyword.More detailed explanation in the above notes.
   }
+
+  //*componentDidMount will be called at 3rd number after the component is rendered/mounted.
+  componentDidMount() {
+    console.log(`component mounted`);
+  }
+  //*render will be called at 2nd number
   render() {
     console.log(this);
     const { name, location } = this.props; //*destructuring name and location from this.props to make our code cleaner.
