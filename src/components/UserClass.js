@@ -30,33 +30,77 @@ constructor(props, context, updater){
 
 //* When we render a functional component then we are basically calling that function or we can say we are calling that functional component but in case of Class based components,So when we render a class based component then we are creating an instance of that class for example we will render this user class based component inside the about component Inside the about component we are creating an instance of this user class component.
 
-//* way of creating state variables inside class based component:- So the process of creating state variables inside class based components are slightly different from the process of creating a state variable inside a functional component so when we create A state variable inside a function component then we use hooks to do that so as we already know that we use use state book to create a state variable inside a functional component and if we want to create multiple state variables then we have to create multiple constants to hold the value of that state variable so that basically means for each state variable we have to separately create a constant but on the other hand the process of creating a state variable inside a class based component is slightly different from it We already know that when we render a Class based component then an instance will be created from that class and when javascript create an instance from a class in that time it will first call the constructor function inside that class and that is why it is the best place to receive the props and to also call the Super method because this constructor function will be called at first, And this constructor function is also the best place to Create the state variable . So inside this constructor function below the super method call, First we have to create a property on this keyword and that property is state Value will be an object Which can contain multiple state variables as required so previously in case of functional components we had to create multiple variables to create multiple state variables but here in case of class based component we just need to create this one object and this one state object can contain multiple state variables in the form of properties so the property key is basically the state variable name and the properties value is the default value of the state variable. And as we created this object on this keyword so that means we can access it anywhere inside the class after the declaration of this.state object . state is a reserved keyword in react.so the state variable will look like:-
+//* way of creating state variables inside class based component:- So the process of creating state variables inside class based components are slightly different from the process of creating a state variable inside a functional component so when we create A state variable inside a function component then we use hooks to do that so as we already know that we use use state book to create a state variable inside a functional component and if we want to create multiple state variables then we have to create multiple constants to hold the value of that state variable so that basically means for each state variable we have to separately create a constant but on the other hand the process of creating a state variable inside a class based component is slightly different from it We already know that when we render a Class based component then an instance will be created from that class and when javascript create an instance from a class in that time it will first call the constructor function inside that class and that is why it is the best place to receive the props and to also call the Super method because this constructor function will be called at first, And this constructor function is also the best place to Create the state variable . So inside this constructor function below the super method call, First we have to create a property on this keyword and that property is `state`and it's Value will be an object Which can contain multiple state variables as required so previously in case of functional components we had to create multiple variables to create multiple state variables but here in case of class based component we just need to create this one object and this one state object can contain multiple state variables in the form of properties so the property key is basically the state variable name and the properties value is the default value of the state variable. And as we created this object on this keyword so that means we can access it anywhere inside the class after the declaration of this.state object . state is a reserved keyword in react.so the state variable will look like:-
 /*constructor(props) {
   super(props)
   this.state = {
-    count1=0,//*state variable 1 
+    count1=0,//*state variable 1  and here the value is default value
     count2=2,//*state variable 2 
     horse=`sherry`//*state variable 3 
   }
 }
 */
-//*updating state variable :-So previously when we updated state variables in site functional component then we used a function which usually starts with set so basically After restructuring the variable from the hook the second property destructure But in case of class based components if we want to change the value of a state variable then we can't do that by directly using the  = and assigning some value that is not allowed and it will create some inconsistency in your data so basically we can't do like:- this.state.count1=5;(new value);It is not allowed and it will not change your state variables value.
+//*updating state variable :-So previously when we updated state variables in site functional component then we used a function which usually starts with set so basically After restructuring the variable from the hook the second property destructure But in case of class based components if we want to change the value of a state variable then we can't do that by directly using the  = and assigning some value that is not allowed and it will create some inconsistency in your data so basically we can't do like:- this.state.count1=5;(new value);It is not allowed and it will not change your state variables value. instead we react gives us access to a method on this keyword name this.setState({}) , So lets's say we want to update the state on click on a button , so after creating a button , first we have attach a onClick handler on the button and then inside it as usual we have to create a callback function and now inside this callback function , we have to write code which will update our state variables , so will call the setState method on this keyword named and inside it we have to write another object and inside this object we can write the state variables names as keys and their value will be the updated value we want.And we can update multiple state variables at once if we want.So it will look like:
+/* <h3>No. of year:: {count1}</h3>
+    <h3>Total days: : {count2}</h3>
+        <button
+            onClick={() => {
+              //*Don't update the state variable directly like below
+              // this.state.count1 = count1+1; this is not allowed
+              //*To update the state variable we have use another property   available on this keyword named setState and inside it we can   update multiple state variables at the same time if we want
+              this.setState({
+                count1: count1 + 1,
+                count2: count2 + 365,
+              });
+            }}
+        >
+          Update count
+        </button>
+        */
+//*Note: every time we update the state variable using this.setState({}) then the whole component will be re rendered with the updated values.And it follows the same reconciliation algorithm when the state variable changes.
+
 console.log(React.Component);
 class User extends React.Component {
   constructor(props) {
     super(props);
+    //*creating state variable in class based component
+    this.state = {
+      count1: 1, //*state variable 1, and here the value is default value
+      count2: 365, //*state variable 2
+      count3: 8760,
+      horse: `sherry`, //*state variable 3
+    };
 
     console.log(this.props); //*always use this after calling super, because super methods class parents class's constructor and inherit the properties and methods. So after inheriting them , we should only use this keyword.More detailed explanation in the above notes.
   }
   render() {
     console.log(this);
     const { name, location } = this.props; //*destructuring name and location from this.props to make our code cleaner.
+    const { count1, count2, count3 } = this.state;
     return (
       <div className="user-card">
         <h2>{name}</h2>
         <h3>Location:- {location}</h3>
         <h3>Twitter(X):- @AnupamBoral399</h3>
         <h3>Email:- anupamboral6889@gmail.com</h3>
+        {/* Updating state variable count1 onclick of the button using this.setState*/}
+        <h3>No. of year: {count1}</h3>
+        <h3>Total days: {count2}</h3>
+        <h3>Total hours: {count3}</h3>
+        <button
+          onClick={() => {
+            //*Don't update the state variable directly like below
+            // this.state.count1 = count1+1; this is not allowed
+            //*To update the state variable we have use another property available on this keyword named setState and inside it we can update multiple state variables at the same time if we want
+            this.setState({
+              count1: count1 + 1,
+              count2: count2 + 365,
+              count3: this.state.count3 + 8760,
+            });
+          }}
+        >
+          Update count
+        </button>
       </div>
     );
   }
