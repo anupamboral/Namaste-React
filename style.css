@@ -237,6 +237,12 @@ a {
   gap: 1rem;
   color: rgb(21, 85, 142);
 }
+/** About User page*/
+.user-img {
+  height: 18rem;
+  width: 18rem;
+  border-radius: 50%;
+}
 /** Media Queries */
 
 @media (max-width: 44em) {

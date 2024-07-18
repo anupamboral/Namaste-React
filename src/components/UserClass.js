@@ -64,6 +64,10 @@ constructor(props, context, updater){
 //*when rendering class based component inside functional component --- first it will render the functional component's jsx and when it will reach to child class based component then it will create a instance of that class and the life cycle will be : 1. constructor => 2. render => 3. componentDidMount.
 //*when rendering class based component inside another class based component : 1.parent class constructor => 2. parent class render (it returns jsx which contains child class component) 3.child class constructor =>4. child class render => 5. child class componentDidMount 6.parent class componentDidMount.
 
+////
+//* Use of componentDidMount method :- We already learnt in the life cycle methods that this component did mount function gets called at last even after the component is mounted or rendered on the ui so the last step of the last phase ,it happens. And the reason behind it that it is very similar to the use effect hook we use in functional component so we already know that when the user loads the page immediately we display fake Ui or shimmer ui So the user don't  see any delay when we are loading the data and whenever the data comes we update the state variable and that triggers react reconciliation process which render the whole component. So basically we use use effect hook So we can only make the api call Once the shimmer ui is already mounted on the ui so the user don't see any kind of delay when we are loading the data from the api and after displaying the shimmer ui as the useEffect hook will be called that's why we make the api call inside this useEffect hook. And we are going to use this component did Mount Method in the same way we use useEffect hook. So basically first we render some fake data and then inside this component did Mount Method we will make the api call and fetch some data from our github profile and then we will update the state which will trigger the react reconciliation algorithm and that will re render the whole component with updated data.
+//* Till this point we were using the data we got from the props in in the user class base component, But now we are gonna fetch some data from our github profile so we can Google - github user api Then after clicking the first url in the right side we will see a lot of api url links From the table of api links we have to choose where written `Get a user` Then after clicking on that update will open and on the right side we will see the api url which is :- `  https://api.github.com/users/USERNAME` So here in this url in place of user name we have to place our name which is anupamboral in github. And after doing that If we make an api call to this url then as a result we will get an object which will contain all of the data we need from Github.
+//* To store this data first we have to create a state variable and its default value will be an object which will contain some fake data which we are going to display until we get the data from the api and then when the data arrives then we will save that inside the state variable using the method set state And as we know when state variable changes then it will trigger the reconciliation process which will update the whole component or basically render the whole component with the updated data we got from the api.So let's Create the state variable first inside the constructor function Because it is the best place to put the state variable and as we know we have to use this.state To create the state variable and its value will be an object which will contain A property for each state variable we need so let us name the property user data Its value will be our object again because it is the default value where we can have some fake data to display until our data arrives so let's create it first and then inside the component did Mount Method we will make the api call till now we have seen that to make api calls we use async await The api will return and promise and to get the data from the promise we have to use await . But as the component did mount is already a function so we don't need to create another async function inside it instead we can just put the async keyword in front of component didmount method and then inside it we can directly fetch the data using await keyword and then after getting the data we will change the state using this.setState. And then we can use that data inside our render function to display the real data coming from the api.
 console.log(React.Component);
 class User extends React.Component {
   //*life cycle of class based component :-1.constructor will be called at 1rd number,render will be called at 2nd number,componentDidMount will be called at 3rd number after the component is rendered/mounted.
@@ -71,32 +75,43 @@ class User extends React.Component {
     super(props);
     //*creating state variable in class based component
     this.state = {
-      count1: 1, //*state variable 1, and here the value is default value
-      count2: 365, //*state variable 2
-      count3: 8760,
-      horse: `sherry`, //*state variable 3
+      // count1: 1, //*state variable 1, and here the value is default value
+      // count2: 365, //*state variable 2
+      // count3: 8760,
+      userData: {
+        name: `Dummy Name`,
+        location: `unknown`,
+      },
     };
-    console.log(`constructor called`);
-    console.log(this.props); //*always use this after calling super, because super methods class parents class's constructor and inherit the properties and methods. So after inheriting them , we should only use this keyword.More detailed explanation in the above notes.
+    console.log(`${this.props.id} child constructor called`);
+    // console.log(this.props); //*always use this after calling super, because super methods class parents class's constructor and inherit the properties and methods. So after inheriting them , we should only use this keyword.More detailed explanation in the above notes.
   }
 
   //*componentDidMount will be called at 3rd number after the component is rendered/mounted.
-  componentDidMount() {
-    console.log(`component mounted`);
+  async componentDidMount() {
+    const data = await fetch(`https://api.github.com/users/anupamboral`);
+    const json = await data.json();
+    console.log(json);
+    this.setState({ userData: json }); //*updating state variable
   }
   //*render will be called at 2nd number
   render() {
-    console.log(this);
-    const { name, location } = this.props; //*destructuring name and location from this.props to make our code cleaner.
-    const { count1, count2, count3 } = this.state;
+    console.log(`${this.props.id} child render`);
+    // const { name, location } = this.props; //*destructuring name and location from this.props to make our code cleaner.
+    // const { count1, count2, count3 } = this.state;
+    const { name, location, avatar_url } = this.state.userData;
     return (
       <div className="user-card">
+        <img className="user-img" src={avatar_url}></img>
         <h2>{name}</h2>
         <h3>Location:- {location}</h3>
         <h3>Twitter(X):- @AnupamBoral399</h3>
         <h3>Email:- anupamboral6889@gmail.com</h3>
+        {/* ////////// */}
+        {/* ////////// */}
+        {/*//*Below portion we used to understand state variables usage.}
         {/* Updating state variable count1 onclick of the button using this.setState*/}
-        <h3>No. of year: {count1}</h3>
+        {/* <h3>No. of year: {count1}</h3>
         <h3>Total days: {count2}</h3>
         <h3>Total hours: {count3}</h3>
         <button
@@ -112,7 +127,7 @@ class User extends React.Component {
           }}
         >
           Update count
-        </button>
+        </button> */}
       </div>
     );
   }
