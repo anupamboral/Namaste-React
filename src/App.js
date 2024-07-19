@@ -127,6 +127,11 @@ Mounting phase finished
 - ComponentDidUpdate() called⁡
 
 */
+//*So In the whole life cycle of class based components there are three types of life cycles . first mounting life cycle happens => then 2.update life cycle happens => 3. Unmounting life cycle
+//*⁡⁣⁢⁣Unmounting life cycle of class based components⁡(third box in this image :- ` Life cycle of class-based components.png`):- unmounting means When a component gets removed from the page so as we know that mounting means displaying the component on the user interface and the opposite of that is unmounting which means removing the component from the web page and these unmounting happens when the user opens another page at that time the current component will be disappear from the page and a new component will appear so for example from the about page the user clicks on the contact page and when the contact page appears or basically mounted we showed that the previous about page gets unmounted or removed from the ui and when this component gets removed or unmounted from the user interface at that time this unmounting life cycle happens .Unmounting life cycle only have one step which is calling the componentWillUnmount() method.Before rendering the new component this method will be called.
+//*⁡⁣⁢⁣Unmounting only step => componentWillUnmount()⁡
+
+//* We may think that component did mount and use effect are same but we should never compare life cycle methods of class based components with functional components because their mechanism is completely different Though we use both of them to make api call and they get called once the component is already rendered but still we cannot say that they are same. We can only say that their work is similar but their behind the scenes mechanism is completely different so they are not same.
 
 const AppLayout = () => {
   return (

@@ -91,6 +91,9 @@ Mounting phase finished
 - ComponentDidUpdate() called⁡
 
 */
+//*So In the whole life cycle of class based components there are three types of life cycles . first mounting life cycle happens => then 2.update life cycle happens => 3. Unmounting life cycle
+//*⁡⁣⁢⁣Unmounting life cycle of class based components⁡(third box in this image :- ` Life cycle of class-based components.png`):- unmounting means When a component gets removed from the page so as we know that mounting means displaying the component on the user interface and the opposite of that is unmounting which means removing the component from the web page and these unmounting happens when the user opens another page at that time the current component will be disappear from the page and a new component will appear so for example from the about page the user clicks on the contact page and when the contact page appears or basically mounted we showed that the previous about page gets unmounted or removed from the ui and when this component gets removed or unmounted from the user interface at that time this unmounting life cycle happens .Unmounting life cycle only have one step which is calling the componentWillUnmount() method.Before rendering the new component this method will be called.
+//*⁡⁣⁢⁡⁣⁢⁣Unmounting only step => componentWillUnmount()⁡
 
 // console.log(React.Component);//*it is a class which contains many use properties and methods and we extend it to inherit those.but to inherit calling super() is important to call parent class's(here React.Component) constructor.
 class User extends React.Component {
