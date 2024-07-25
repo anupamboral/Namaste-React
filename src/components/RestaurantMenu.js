@@ -15,6 +15,96 @@ import { MENU_API_URL } from "../utils/config";
 //*and to solve this problem we react router dom gives us another function named useParams.
 //*⁡⁣⁢⁣useParams⁡:- this hook helps us to get the parameters from the url/route. So sent the resId as a parameter when the user clicked the restaurant component , and now we are receiving the param(the dynamic part of the route/url) through this useParams hook. so when we call this hook then in return it gives us a object which contains the parameters as properties. and we can directly use destructuring to take the param(here resId) and use it.and remember we have to use the same param name which we used while passing this param through route which is resId. so let's  import this hook as named import from react router dom. then inside this RestaurantMenu component we will call this and destructure the `resId` param, and then in the api url we will use this resId to dynamically load any restaurant's menu.and also put the api url in the config file, because we should always this ind of important hard coded data in the config file.and then after importing the MENU_API_URL from the config file in restaurantMenu.js we will concat the MENU_API_URL with resId inside the fetch function, and now we can load any restaurants's menu just by changing the resId param in the url/path.
 //*and now depending on the url(resId param of the url/route/path) our resMenu will be loaded which is really amazing.
+
+//! from lesson 9
+//*before building the custom hook , our restaurantCard component was this(expand it to see):-
+// const RestaurantMenu = () => {
+//   //*below state variable is named resInfo because it will contain info about a restaurant
+//   const [resInfo, setResInfo] = useState(null); //default value is null
+
+//   const { resId } = useParams();
+//   console.log(resId);
+//   //*the second argument is also mentioned which is a empty dependency array,and because of it the useEffect hook will be only called in the first render.
+//   useEffect(() => {
+//     const fetchMenu = async () => {
+//       const data = await fetch(MENU_API_URL + resId);
+//       const json = await data.json();
+//       console.log(json);
+//       setResInfo(json);
+//     };
+//     fetchMenu();
+//   }, []);
+
+//   if (resInfo === null) return <Shimmer />;
+
+//   //*Placing the destructuring code  below the if Statement(for Shimmer UI) is important because as we are gonna destructure the needed properties from the data , if we would place it above the if statement then at the first render when the resInfo value is null then our variables will try to get the data from null, and that will throw an error so when the value is null then it should render the Shimmer Ui and that's why we placed the if statement above so the after the return the below lines would not execute, but when the data will arrive after the useEffect hook call then it's value will be filled with the data so then the if statement will not execute and the return will happen at that line, and the below lines execution will continue . and here we have not used ternary operator also because of this reason because we need to do some destructing here. and  this destructuring should only happen after the data arrives, and also because we can't do this destructuring inside the fetchMenu function because as it is inside the useEffect hook, and we mention the second parameter in the UseEffect hook that's why it will execute once in the first render.
+
+//   const { avgRatingString, name, id, cuisines, costForTwoMessage } =
+//     resInfo?.data?.cards[2]?.card?.card?.info;
+
+//   const { itemCards: itemList1, title: title1 } =
+//     resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+//       ?.card;
+
+//   console.log(resInfo?.data.cards[4]?.groupedCard);
+//   if (itemList1) {
+//     return (
+//       <div className="res-menu">
+//         <h1>{name}</h1>
+//         <p>
+//           {cuisines.join(`,`)} <span>{avgRatingString}⭐</span>
+//         </p>
+//         <h3>{costForTwoMessage}</h3>
+//         <ul>
+//           <h3>{title1}</h3>
+//           {itemList1.map((item) => {
+//             return (
+//               <li key={item.card.info.id}>
+//                 {item.card.info.name} - Rs.
+//                 {item.card.info.price / 100 ||
+//                   item.card.info.defaultPrice / 100}
+//               </li>
+//             );
+//           })}
+//         </ul>
+//       </div>
+//     );
+//   } else {
+//     //*this is created because of inconsistency in swiggy's api data
+//     const { itemCards: itemList2, title: title2 } =
+//       resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+//         ?.card.categories[0];
+//     console.log(
+//       resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+//         ?.card.categories
+//     );
+//     return (
+//       <div className="res-menu">
+//         <h1>{name}</h1>
+//         <p>
+//           {cuisines.join(`,`)} <span>{avgRatingString}⭐</span>
+//         </p>
+//         <h3>{costForTwoMessage}</h3>
+//         <ul>
+//           <h3>{title2}</h3>
+//           {itemList2.map((item) => {
+//             return (
+//               <li key={item.card.info.id}>
+//                 {item.card.info.name} - Rs.
+//                 {item.card.info.price / 100 ||
+//                   item.card.info.defaultPrice / 100}
+//               </li>
+//             );
+//           })}
+//         </ul>
+//       </div>
+//     );
+//   }
+// };
+//*    So right now our restaurant menu component has multiple responsibilities which are basically fetching the data maintaining its state and displaying the jsx on the ui, But According to the one responsibility principle this restaurant menu component should have only one responsibility which is to basically display the data on the ui so to do that we can abstract or basically take out all of the other functionalities inside a custom hook so right now the other responsibilities are basically how to fetch the data and maintaining the state using the state variable these are other responsibilities the component is handling so we will try to build a hook named useRestaurantMenu(), This book will handle all of these other responsibilities so the data will be fetched and how the state will be maintained when the data comes we just need to pass the parameter resid which is basically the dynamic parameter different for every restaurant so while calling the hook we will just pass this restaurant id and in return this hook will give us the restaurant data directly so we do not need to Do all of the other things inside this restaurant menu component instead our custom hook will handle all of the other responsibilities and directly give us our data so let's build the hook.So the only responsibility of the restaurant menu component is to get the data and display it and the other responsibilities it had which was how to fetch the data is now abstracted into another custom book named Hughes useRestaurantMenu(resId).
+//*Hooks are nothing but utility functions / helper functions. and the best place to create hooks id utils folder. and we already already have this folder.
+//* Important:-Always try to create a separate file for a separate hook.
+
 const RestaurantMenu = () => {
   //*below state variable is named resInfo because it will contain info about a restaurant
   const [resInfo, setResInfo] = useState(null); //default value is null
