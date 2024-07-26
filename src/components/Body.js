@@ -3,6 +3,7 @@ import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "../../node_modules/react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 console.log(Link);
 //* the restaurant data(object), logo img url, is some hardcoded data which we copied from the swiggy's api. but as it some hard coded data that's why we should never put these kind of data inside a component file like this snd best practice is create a separate file , for these kind of hard coded data , we usually name that kind of file config file or utils(utilities ) file or constants file. so here in this project we will create a separate folder inside the src folder and it's name will utils and inside utils folder we will create a config file. and inside config file we will put all of these data , because these kind of important data in gonna be used for many components like the logo can be used in the home page , in the header also the in the footer , so to keep these kinds of important data we make a separate file . and when ever some change happens then we don't need to go everywhere and change it we just need change it on the config file and it will be reflected in everywhere. so it also helps to make the data reusable.
 //*so all the the constant dat will be inside config file like logo url. and the restaurant data will be inside a file called mockdata.js file in the same hierarchy level with config file.so let's create the mockdta file, and it also fine we would save the reslist data in the same config file..
@@ -110,9 +111,15 @@ const Body = () => {
     };
     fetchData();
   }, []);
+
   // console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
   // console.log(searchText);
   //*Conditional Rendering (for rendering shimmer Ui when browser is loading data from api but when api data has arrived then render the real component) ⁡⁣⁢⁣using ternary operator⁡
+
+  //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false)
+    return <h1>You are offline. Please check your internet connection</h1>;
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />

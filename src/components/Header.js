@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { LOGO_URL } from "../utils/config";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
+
 //* ⁡⁣⁢⁣application of state variable to toggle log in to log out and log out to log in when ever the user the user clicks on the log in btn:-⁡ so in the header component we have to first create a log in btn , and then to change the button name dynamically on user click we will use a state variable. so we are gonna the save the btnName inside a state variable and when the use will click on the btn we will use onclick event listener and inside the the callback function of the onclick listener we are gonna toggle log in and log out by changing this button's name which is saved inside the state variable.
 
 //*from 7th lesson(Finding the path)
@@ -29,7 +31,7 @@ const Header = () => {
     // console.log(`useEffect called`);
   }, [loginBtnName]); //*inside the dependency array we have only one dependency which is basically the loginBtnName state variable. which means after calling the useEffect hook first time after loading the page, this useEffect Hook will be onlu called when ever this loginBtnName state variables value changes. to know more about useEffect hook behavious please look at the notes above:-`⁡⁣⁢⁣Behavior of UseEffect() hook.⁡`
 
-  //
+  const onlineStatus = useOnlineStatus(); //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   // console.log(`header rendered`);
   return (
     <div className="header">
@@ -38,6 +40,7 @@ const Header = () => {
       </div>
       <nav className="nav-items">
         <ul>
+          <li>Online Status:{onlineStatus ? `🟢` : `🔴`}</li>
           <li>
             <Link to="/">Home</Link>
           </li>
