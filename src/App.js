@@ -11,7 +11,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 //! Lesson - 9 - Optimizing our app
 //*
 //*My notes
-//*Some principles to optimise your code which can make your app faster
+//*Some principles to optimize your code which can make your app faster
 
 //*Single responsibility principle:- it says that each of the components (either functional component or class component) should have only responsibility.example:- if we are creating a component for restaurant menu then it should have only one responsibility to show the menu only.
 
@@ -141,6 +141,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 //* It is the convention in developers world to be specific when we are writing code right it should be readable also so thats why we should try to follow .
 
 //* optimizing large scale applications:- So when we build real world applications which are having so many components for example a 1000 components that makes the file size so much heavy so when we create a large scale application for example makeMyTrip if we go to their website we will see that there are so many components and as we use a bundle like parcel it will bundle all of the modules into just one file so it will bundle all of the javascript files and Just create one javascript file, And when we are working with a large scale application when the bundler Bundle all of the files into just one file and that file contains thousands of components that makes the file size so much heavier and eventually that cause Slow down of the app because of the big file size and that is why we need to know that how we can optimize the large scale applications containing a huge amount of components.
+//*  you have to keep this in mind and when you are developing a large scale application you have to break your app down into smaller pieces , this is the possible solution,but can I break my app down into smaller pieces? can I do something that my application will not just a 1 javascript file after bundling but smaller javascript files , so there are two things right either we can bundle or we cannot, should we do bundling? yes of course if suppose we have thousands of components we don't need 1000 files loading into our web page, That's like useless ,  that will be a lot of work for browsers to do , making 1000 calls .... for 1000 files and we do not want to put like 1000 files into one file right both of these solutions are not true, so what we have to do is we will try to make smaller bundles of these files, we will make smaller ,this process is known as chunking ,also known as code splitting, also known as dynamic bundling, different words for the same thing __chunking, code splitting ,dynamic bundling ,if your interviewer ever ask you he is talking about the same thing  ,if you will go on the web there are different names for the same thing, basically what they are trying to solve by saying this that you have to chunk your application ,you have to make your application into smaller chunks, you have to do codes splitting ,you have to do bundling in a dynamic way,  `so these are the  same things right` for the same process , to breakdown your app into smaller logical chunks
+//* got it let me take example of makemytrip once again
 const AppLayout = () => {
   return (
     <div className="app">
