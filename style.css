@@ -266,7 +266,7 @@ a {
   }
 
   .cards-container {
-    flex-direction: column;
+    gap: 3em;
     align-items: center;
   }
   .nav-items ul li {
