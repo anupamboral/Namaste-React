@@ -7,6 +7,7 @@ import About from "./components/About";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import { Groceries } from "./Groceries";
 
 //! Lesson - 9 - Optimizing our app
 //*
@@ -147,6 +148,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 
 //* To understand the concept of chunking let's try to understand it using an example so we are currently trying to make a clone of swiggy and we already know that swiggy has another named instamart For delivering groceries so in our app if we try to replicate that structure this is one separate section for groceries then we can assume that that groceries section will also have so many components like our current version of this swiggy app Has nine components in the components folder and including app.js it has total 10 components so if we add a separate section for groceries then we can assume that it will have another 10 components at least like homepage for groceries contact page for groceries add to cart page for groceries and many others.And now using it we will try to make a separate bundle for groceries and a separate bundle for our main app Basically we will be making a separate Bundle containing all of the components of groceries section to basically understand the process of chunking or code splitting or dynamic bundling.
 //*Now first we will make a component for groceries inside our components folder where our other components are existing and as we know that a function component is nothing but a normal javascript function which returns some piece of Jsex now we can assume that these groceries component will contain so many child components relating to groceries like right now our body component has so many components like the restaurant card menu etc and finally we want that all of the files for groceries will come from a different bundle so as we have not applied the concept of code splitting right now so after creating the groceries folder if we go to our browser and and see the network tab then we will see that only 1 javascript is fetched as the bundler bundled all of the files into just one javascript file and inside the javascript file our groceries component will be also present but instead of that we want to make a different bundle which will contain all of the files so basically all of the components related to the groceries.
+
+//*
 const AppLayout = () => {
   return (
     <div className="app">
@@ -164,6 +167,10 @@ const appRouter = createBrowserRouter([
       {
         path: `/`,
         element: <Body />,
+      },
+      {
+        path: `/groceries`,
+        element: <Groceries />,
       },
       {
         path: `/about`,
