@@ -39,10 +39,19 @@ import Shimmer from "./components/Shimmer";
 //*now setting up tailwind css is compolete and from now we use tailwind css in our project.
 //* So tailwind css provides utility classes and these are very helpful so we do not need to go multiple times to our css file instead we can directly write some pre written class name In the html element or the react element directly . for margin of 4 px we just need to write 'm-1', it's that easy, Now we might think that we need to go multiple times to tailwindCss website to see the class names they provide and it can be very hectic to check the class names multiple times but there is an easy solution for it . So there is a extension we need to download in our vs code named 'Tailwind CSS IntelliSense' This gives us suggestion for all of the class names provided by Tailwind Css.So if we just write the css property we are finding it will automatically give us the suggestion of that and that's why it becomes very easy to use directly in the html or jsx.And after writing a utility class provided by tailwind css if we just hover our mouse over it we can see the actual css of that utility class.
 
+//* now let's say you need a value 200 px but it is available , so you can right it inside [ ] like this, m-[200px], taiwind will treat it like a hardcoded value.
+//*Advantages of tailwind css
+//*One more advantage about tailwind css is that it makes the css bundle size so much lightweight because it will only import the utility classes you have used in your code so for example if you have not used shadows for any element then it will not import the code of shadows from the server and that is why the eventual bundle size will only include the code which is required to display the ui and that's why it is a very important advantage of tailwind css.
+//*It does not limit your boundaries to make beautiful designs you can even make complex ui using it like if you are trying to give a hover effect in the normal state your colour is bg-gray-50 to write hover state you need to just write hover:bg-gray-400.
+//* It also offers you pre-styled components which looks elegant and beautiful.
+//*Disadvantages of tailwind
+//*there is initial learning curve but after some time you will get used to it.
+//* If you need to write many properties of css just for one element and you are doing it using tailwind css then eventually the element will look ugly because you are just cutting out all of the css from the css files and putting it inside the html or jsx files that is why while creating the element when you write all of the styles at once in the one hand it is an advantage but if you need to write multiple properties of styles for justice 1 element then that element will look so much ugly and that makes the code not readable and that is a disadvantage of using tailwind css.
+//*Convert all of the normal css into tailwind its tomorrows homework.
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   return (
-    <div className="app flex">
+    <div className="app ">
       <Header />
       <Outlet />
       {/* <Body /> */}
