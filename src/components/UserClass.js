@@ -122,8 +122,11 @@ class User extends React.Component {
     const { name, location, avatar_url } = this.state.userData;
 
     return (
-      <div className="user-card">
-        <img className="user-img" src={avatar_url}></img>
+      <div className="user-card mt-8 p-8 border-[2px] border-[solid] border-[rgb(73,12,239)] flex flex-col gap-4 text-[rgb(21,_85,_142)]">
+        <img
+          className="user-img h-72 w-72 rounded-[50%]"
+          src={avatar_url}
+        ></img>
         <h2>{name}</h2>
         <h3>Location:- {location}</h3>
         <h3>Twitter(X):- @AnupamBoral399</h3>

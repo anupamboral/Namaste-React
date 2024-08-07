@@ -11,14 +11,17 @@ body {
   height: 100dvh;
 } */
 
+/*in the 10 th lesson when we start using tailwind css when commented out all of below css but we kept it for reference*/
 /*for lesson 4*/
-* {
+/*we don't need to do universal reset of margin, padding and box sizing border box in tailwind css , because Tailwind already has such stylings in preflight `https://tailwindcss.com/docs/preflight` see this , this are already present , so don't need to manually*/
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
+/*
 body {
-  background: rgb(238, 174, 202);
+background: rgb(96, 144, 199)
   background: radial-gradient(
     circle,
     rgba(238, 174, 202, 1) 0%,
@@ -92,7 +95,6 @@ a {
   padding: 0.5rem;
   font-size: 1.6rem;
   border: 2px solid rgb(41, 178, 178);
-  /* max-width: 45rem; */
   background-color: #00000035;
   color: beige;
   width: 28rem;
@@ -200,7 +202,8 @@ a {
   margin: 0.5rem;
   font-size: 1rem;
 }
-/** Restaurant Menu */
+/* Restaurant Menu */
+/*
 .res-menu {
   padding-left: 2rem;
 }
@@ -219,9 +222,9 @@ a {
   margin: 1rem 0.5rem;
   font-size: 1.8rem;
 }
-
+*/
 /**Error page*/
-
+/*
 .error-page {
   display: flex;
   margin-top: 10rem;
@@ -230,7 +233,10 @@ a {
   flex-direction: column;
   gap: 2rem;
 }
+  */
+
 /** UserClass page*/
+/*
 .user-card {
   margin-top: 2rem;
   padding: 2rem;
@@ -241,14 +247,16 @@ a {
   color: rgb(21, 85, 142);
 }
 /** About User page*/
+/*
 .user-img {
   height: 18rem;
   width: 18rem;
   border-radius: 50%;
 }
+
 /** Media Queries */
 
-@media (max-width: 44em) {
+/* @media (max-width: 44em) {
   :root {
     font-size: 14px;
   }
@@ -276,4 +284,4 @@ a {
     font-size: 1rem;
     font-weight: bold;
   }
-}
+} */

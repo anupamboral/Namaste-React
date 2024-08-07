@@ -11,7 +11,7 @@ const Error = () => {
   const err = useRouteError();
   console.log(err);
   return (
-    <div className="error-page">
+    <div className="error-page flex mt-40 justify-center items-center flex-col gap-8">
       <h1>Oopsss!!!</h1>
       <h2>Something went wrong</h2>
       <h2>{`${err.status}:- ${err.statusText}`}</h2>

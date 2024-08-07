@@ -153,17 +153,19 @@ const RestaurantMenu = () => {
   //* swiggy's data has some inconsistency in property names that's why we had to create below if else statement
   if (itemList1) {
     return (
-      <div className="res-menu">
-        <h1>{name}</h1>
-        <p>
+      <div className="res-menu pl-8 bg-[radial-gradient(_circle,_rgba(238,_174,_202,_1)_0%,_rgb(96,_144,_199)_86%_)] h-[50rem]">
+        <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
+          {name}
+        </h1>
+        <p className="text-[1.2rem] mb-4">
           {cuisines.join(`,`)} <span>{avgRatingString}⭐</span>
         </p>
         <h3>{costForTwoMessage}</h3>
         <ul>
-          <h3>{title1}</h3>
+          <h3 className="mx-2 my-4 text-[1.8rem] font-semibold">{title1}</h3>
           {itemList1.map((item) => {
             return (
-              <li key={item.card.info.id}>
+              <li className="font-semibold" key={item.card.info.id}>
                 {item.card.info.name} - Rs.
                 {item.card.info.price / 100 ||
                   item.card.info.defaultPrice / 100}
@@ -183,17 +185,19 @@ const RestaurantMenu = () => {
         ?.card.categories
     );
     return (
-      <div className="res-menu">
-        <h1>{name}</h1>
-        <p>
-          {cuisines.join(`,`)} <span>{avgRatingString}⭐</span>
+      <div className="res-menu pl-8 bg-[radial-gradient(_circle,_rgba(238,_174,_202,_1)_0%,_rgb(96,_144,_199)_86%_)] h-[50rem]">
+        <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
+          {name}
+        </h1>
+        <p className="text-[1.2rem] mb-4">
+          {cuisines.join(`,`)} <span className="ml-4">{avgRatingString}⭐</span>
         </p>
         <h3>{costForTwoMessage}</h3>
         <ul>
-          <h3>{title2}</h3>
+          <h3 className="mx-2 my-4 text-[1.8rem] font-semibold">{title2}</h3>
           {itemList2.map((item) => {
             return (
-              <li key={item.card.info.id}>
+              <li className="font-semibold" key={item.card.info.id}>
                 {item.card.info.name} - Rs.
                 {item.card.info.price / 100 ||
                   item.card.info.defaultPrice / 100}

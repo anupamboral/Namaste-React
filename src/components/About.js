@@ -44,7 +44,7 @@ class About extends Component {
     // console.log(`parent render`);
 
     return (
-      <div>
+      <div className="bg-[radial-gradient(_circle,_rgba(238,_174,_202,_1)_0%,_rgb(96,_144,_199)_86%_)]">
         <h1>About</h1>
         <h2>This is Namaste React</h2>
         <User name="Anupam Boral" location="kolkata" id="001" />
