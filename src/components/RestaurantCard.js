@@ -13,7 +13,7 @@ const RestaurantCard = (prop) => {
   // console.log(resData);
   return (
     <div
-      className="res-card border-[1px] border-[solid] border-[black] w-56 h-[24rem] [transition:all_0.5s] text-center rounded-2xl bg-[rgb(41,_178,_178)] text-[rgb(26,_42,_42)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-[1.01]"
+      className="res-card border-[1px] border-[solid] border-[black] w-56 h-[24rem] [transition:all_0.5s] text-center rounded-2xl bg-[rgba(41,46,178,0.4)]  text-yellow-50 hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-[1.01]"
       style={cardStyles}
     >
       <img

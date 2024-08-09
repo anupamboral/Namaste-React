@@ -34,7 +34,7 @@ const Header = () => {
   const onlineStatus = useOnlineStatus(); //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   // console.log(`header rendered`);
   return (
-    <div className="header p-4 flex justify-between border-[2px] border-[solid] border-[rgb(0,0,0)] bg-[rgb(96,_144,_199)]">
+    <div className="header p-4 flex justify-between border-[2px] border-[solid] border-[rgb(0,0,0)] bg-[url('src/imgs/background_image.jpg')] text-yellow-50">
       <div className="logo-container">
         <Link className="no-underline" to="/">
           <img className="logo h-16" src={LOGO_URL} />
@@ -42,31 +42,31 @@ const Header = () => {
       </div>
       <nav className="nav-items">
         <ul className="flex">
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)]">
+          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)] rounded-lg">
             Online Status:{onlineStatus ? `🟢` : `🔴`}
           </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)]">
+          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)] rounded-lg">
             <Link className="nav-item no-underline" to="/groceries">
               Grocery
             </Link>
           </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)]">
+          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)] rounded-lg">
             <Link className="nav-item no-underline" to="/">
               Home
             </Link>
           </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)]">
+          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)] rounded-lg">
             <Link className="nav-item no-underline" to="/about">
               About Us
             </Link>
           </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)]">
+          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-[1px] hover:border-[solid] hover:border-[rgb(9,63,201)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:bg-[rgba(0,_30,_255,_0.244)] rounded-lg">
             <Link className="nav-item no-underline" to="/contact">
               Contact
             </Link>
           </li>
           <button
-            className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-[1px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] [transition:all_500ms] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.457)] hover:bg-[rgba(0,_30,_255,_0.457)]"
+            className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-[1px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] [transition:all_500ms] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.457)] hover:bg-[rgba(0,_30,_255,_0.457)] rounded-lg"
             onClick={() => {
               loginBtnName === "Log In"
                 ? setLoginBtnName("Log Out")

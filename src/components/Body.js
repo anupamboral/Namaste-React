@@ -98,8 +98,11 @@ const Body = () => {
       //   }
       // ); //* when we were using fetch method to retrieve data from the api , then after getting the data we had to use .json() method to access the data. but because of the cors issue , we finally found a solution , which is use to axios package , and to use it we need install this package first :- using this command:-npm install axios, and then instead of fetch method we can use axios.get() method to retrieve data from the api without facing any cors issue. and as we are using axios , it  automatically transforms for JSON data, so we don't event need to use .json() method.
 
-      console.log(json);
-
+      console.log(json.data);
+      console.log(
+        json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants
+      );
       setListOfRestaurants(
         json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
@@ -120,16 +123,16 @@ const Body = () => {
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false)
     return <h1>You are offline. Please check your internet connection</h1>;
-
+  console.log(listOfRestaurants);
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body bg-[radial-gradient(_circle,_rgba(238,_174,_202,_1)_0%,_rgb(96,_144,_199)_86%_)]">
+    <div className="body min-h-dvh bg-[url('src/imgs/background_image.jpg')] text-yellow-50">
       <div className="search-container flex p-4 flex-wrap">
         <div className="search flex gap-4 items-center mr-8 justify-center flex-wrap">
           <input
             type="text"
-            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-[beige] w-[28rem] placeholder:text-[beige]"
+            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-[beige] w-[28rem] placeholder:text-[beige] bg-transparent"
             placeholder="cafe.."
             value={searchText}
             onChange={(e) => {
@@ -153,7 +156,7 @@ const Body = () => {
         </div>
         {/*// ** below button is for testing only */}
         <button
-          className="btn-top-rated-restaurant m-[0.6rem] p-2 text-[1rem] border-[2px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] cursor-pointer [transition:all_500ms] bg-transparent text-[rgb(0,_0,_0)] hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-105 hover:bg-[rgba(0,_30,_255,_0.244)]"
+          className="btn-top-rated-restaurant m-[0.6rem] p-2 text-[1rem] border-[2px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] cursor-pointer [transition:all_500ms] bg-transparent text-yellow-50 hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-105 hover:bg-[rgba(0,_30,_255,_0.244)] "
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => 4 < res.info.avgRating
@@ -167,21 +170,6 @@ const Body = () => {
           }}
         >
           Top Rated Restaurants
-        </button>
-        <button
-          className="btn-top-rated-restaurant"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (res) => 40 > res.info.sla.deliveryTime
-            );
-            // using the setListOfRestaurants method tyo change the state and this will triggered when the user will click on this button.
-            //*updating the state
-            setFilteredRestaurants(filteredList);
-            console.log(filteredList);
-            console.log(listOfRestaurants);
-          }}
-        >
-          Quick Delivery Restaurants
         </button>
       </div>
       <div className="cards-container flex flex-wrap gap-4 p-4">

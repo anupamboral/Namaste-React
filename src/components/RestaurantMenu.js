@@ -153,7 +153,7 @@ const RestaurantMenu = () => {
   //* swiggy's data has some inconsistency in property names that's why we had to create below if else statement
   if (itemList1) {
     return (
-      <div className="res-menu pl-8 bg-[radial-gradient(_circle,_rgba(238,_174,_202,_1)_0%,_rgb(96,_144,_199)_86%_)] h-[50rem]">
+      <div className="res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  h-[50rem]">
         <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
           {name}
         </h1>
@@ -185,7 +185,7 @@ const RestaurantMenu = () => {
         ?.card.categories
     );
     return (
-      <div className="res-menu pl-8 bg-[radial-gradient(_circle,_rgba(238,_174,_202,_1)_0%,_rgb(96,_144,_199)_86%_)] h-[50rem]">
+      <div className=" res-menu pl-8bg-[url('src/imgs/background_image.jpg')] text-yellow-50  h-[50rem]">
         <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
           {name}
         </h1>
