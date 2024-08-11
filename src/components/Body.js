@@ -127,7 +127,7 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body min-h-dvh bg-[url('src/imgs/background_image.jpg')] text-yellow-50">
+    <div className="body min-h-dvh max-h-full bg-[url('src/imgs/background_image.jpg')] text-yellow-50">
       <div className="search-container flex p-4 flex-wrap">
         <div className="search flex gap-4 items-center mr-8 justify-center flex-wrap">
           <input
