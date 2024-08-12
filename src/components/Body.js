@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { resList } from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
@@ -75,7 +75,20 @@ const Body = () => {
   //* local state variable for restaurant search (to keep track what the user is inputting)
   const [searchText, setSearchText] = useState("");
 
-  //* ⁡⁣⁢⁣UseEffect(hook)⁡(import as named import from core REact file.)
+  //*from lesson 11- data is new oil(only the promoted label part)(for details see RestaurantCard.js notes)
+  //* input= normal restaurantCard
+  //* output(return)= enhanced  restaurantCard with promoted label(open/closed)
+  //* and now below where are rendering the normal restaurantCard.js there we have to write a condition to use it. the condition is :-
+  //* if restaurant.info.isOpen is true then use then use <RestaurantCardPromoted /> else use <RestaurantCard/ >
+
+  //* using ternary operator :- restaurant.info.isOpen ? <RestaurantCardPromoted resdata="restaurant"/> : <RestaurantCard/ resdata="restaurant">
+  //* and also pass the props resdata="restaurant".
+  //* but where we will receive this props?
+  //*=> withPromotedLabel() returning a functional component which is actually a function, we have receive the props in that returning function and then as inside returning function we composition the <RestaurantCard/> , so finally there we have to pass the props again. like <RestaurantCard resdata="restaurant"/>
+
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
+  //* ⁡⁣⁢⁣UseEffect(hook)⁡(import as named import from core React file.)
   //*takes two arguments, first one is a callback function and second one is a dependency array.so the first argument is a callback function , and this callback function will be called be useEffect hook when the component is rendered on the Ui and then it calls the callback function
 
   useEffect(() => {
@@ -118,7 +131,7 @@ const Body = () => {
   // console.log(`body rendered`); //*this will be printed before the above console.log() because it is inside useEffect method, but the above callback function will be called only when this whole body component rendering will be finished.
   // console.log(searchText);
   //*Conditional Rendering (for rendering shimmer Ui when browser is loading data from api but when api data has arrived then render the real component) ⁡⁣⁢⁣using ternary operator⁡
-
+  console.log(filteredRestaurants);
   //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   const onlineStatus = useOnlineStatus();
   if (onlineStatus === false)
@@ -176,13 +189,18 @@ const Body = () => {
         {/* //* restaurant cards */}
         {/*//* Example of passing props to a functional component(instead of listOfRestaurants state variable we are using filteredRestaurants state variable to display the restaurant cards but tyo know find this paragraph above :- "a bug we introduced") */}
         {/* the link tag added in the 7 lesson to make the restaurant card clickable, so when the user click on the one the restaurant card then the browser should show that restaurant's menu page. before doing it the mapped component was looking like <RestaurantCard key={restaurant.info.id} resData={restaurant} /> and the explanation is also present above in the notes. */}
+
         {filteredRestaurants.map((restaurant) => (
           <Link
             className="res-card-link no-underline "
             to={`/restaurants/` + restaurant.info.id}
             key={restaurant.info.id}
           >
-            <RestaurantCard resData={restaurant} />
+            {restaurant.info.isOpen ? (
+              <RestaurantCardPromoted resData={restaurant} />
+            ) : (
+              <RestaurantCard resData={restaurant} />
+            )}
           </Link>
         ))}
       </div>
