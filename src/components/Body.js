@@ -98,6 +98,7 @@ const Body = () => {
       const data = await fetch(
         `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627`
       );
+      //*previous api:-https://richie-cors-proxy.glitch.me/https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9715987&lng=77.5945627
       // console.log(data);
       const json = await data.json();
       // const json = await axios.get(

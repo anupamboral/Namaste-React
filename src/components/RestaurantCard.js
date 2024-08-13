@@ -89,9 +89,10 @@ const RestaurantCard = (prop) => {
 export const withPromotedLabel = (RestaurantCard) => {
   //*returns a component (functional component is just function which returns a piece of jsx)
   //*=> withPromotedLabel() returning a functional component which is actually a function, we have receive the props in that returning function and then as inside returning function we composition the <RestaurantCard/> , so finally there we have to pass the props again. like <RestaurantCard {...props}/>
+  //*returned functional component
   return (props) => {
     // console.log(prop);
-
+    //*destructuring the discounts
     const discountPercentageSubHeader =
       props.resData.info.aggregatedDiscountInfoV3.subHeader;
 
