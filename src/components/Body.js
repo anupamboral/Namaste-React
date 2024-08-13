@@ -196,7 +196,7 @@ const Body = () => {
             to={`/restaurants/` + restaurant.info.id}
             key={restaurant.info.id}
           >
-            {restaurant.info.isOpen ? (
+            {restaurant.info.aggregatedDiscountInfoV3 ? (
               <RestaurantCardPromoted resData={restaurant} />
             ) : (
               <RestaurantCard resData={restaurant} />
