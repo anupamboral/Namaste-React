@@ -66,6 +66,86 @@ import Shimmer from "./components/Shimmer";
 //* So in the swiggy website if we open any restaurant card and see its menu then we will see that at the top there is some restaurant information like the name and its location and below that there are many kind of categories like recommended ,burgers, pizzas, And many other categories and every category is an accordion so we can expand and collapse the accordion by clicking on it and when we click on any category then all of the items related to that category appear as a list and if we again click on the accordion then it will collapse so basically on toggle it will expand and collapse so let's build the restaurant menu section beautifully using tailwind css.
 //*Every accordion has two main parts first one is accordion Header and second one is accordion description the accordion header gets shown all the time and when we click on the accordion then the accordion expands and it shows the description and if we again click on the accordion then the description will collapse and the header will get displayed only.
 //* let's go to restaurant menu first and start rebuilding it.
+//*but before building the restaurant menu below if have kept the previous version of restaurant menu for future reference as we gonna delete the previous returning jsx part and rebuild it properly , the new version will contain the accordion menu . the previous version is below:-
+// const RestaurantMenu = () => {
+//   const { resId } = useParams();
+//   //* getting data from the custom hook built to fetch the data for restaurant menu
+//   const resInfo = useRestaurantMenu(resId);
+//   console.log(resInfo);
+
+//   if (resInfo === null) return <Shimmer />;
+
+//   //*Placing the destructuring code  below the if Statement(for Shimmer UI) is important because as we are gonna destructure the needed properties from the data , if we would place it above the if statement then at the first render when the resInfo value is null then our variables will try to get the data from null, and that will throw an error so when the value is null then it should render the Shimmer Ui and that's why we placed the if statement above so the after the return the below lines would not execute, but when the data will arrive after the useEffect hook call then it's value will be filled with the data so then the if statement will not execute and the return will happen at that line, and the below lines execution will continue . and here we have not used ternary operator also because of this reason because we need to do some destructing here. and  this destructuring should only happen after the data arrives, and also because we can't do this destructuring inside the fetchMenu function because as it is inside the useEffect hook, and we mention the second parameter in the UseEffect hook that's why it will execute once in the first render.
+
+//   const { avgRatingString, name, cuisines, costForTwoMessage } =
+//     resInfo?.data?.cards[2]?.card?.card?.info;
+
+//   const { itemCards: itemList1, title: title1 } =
+//     resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+//       ?.card;
+
+//   // console.log(resInfo?.data.cards[4]?.groupedCard);
+//   //* swiggy's data has some inconsistency in property names that's why we had to create below if else statement
+//   if (itemList1) {
+//     return (
+//       <div className="res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  h-[50rem] min-h-dvh max-h-full">
+//         <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
+//           {name}
+//         </h1>
+//         <p className="text-[1.2rem] mb-4">
+//           {cuisines.join(`,`)} <span>{avgRatingString}⭐</span>
+//         </p>
+//         <h3>{costForTwoMessage}</h3>
+//         <ul>
+//           <h3 className="mx-2 my-4 text-[1.8rem] font-semibold">{title1}</h3>
+//           {itemList1.map((item) => {
+//             return (
+//               <li className="font-semibold" key={item.card.info.id}>
+//                 {item.card.info.name} - Rs.
+//                 {item.card.info.price / 100 ||
+//                   item.card.info.defaultPrice / 100}
+//               </li>
+//             );
+//           })}
+//         </ul>
+//       </div>
+//     );
+//   } else {
+//     //*this is created because of inconsistency in swiggy's api data
+//     const { itemCards: itemList2, title: title2 } =
+//       resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+//         ?.card.categories[0];
+//     console.log(
+//       resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
+//         ?.card.categories
+//     );
+//     return (
+//       <div className=" res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  min-h-dvh max-h-full ">
+//         <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
+//           {name}
+//         </h1>
+//         <p className="text-[1.2rem] mb-4">
+//           {cuisines.join(`,`)} <span className="ml-4">{avgRatingString}⭐</span>
+//         </p>
+//         <h3>{costForTwoMessage}</h3>
+//         <ul>
+//           <h3 className="mx-2 my-4 text-[1.8rem] font-semibold">{title2}</h3>
+//           {itemList2.map((item) => {
+//             return (
+//               <li className="font-semibold" key={item.card.info.id}>
+//                 {item.card.info.name} - Rs.
+//                 {item.card.info.price / 100 ||
+//                   item.card.info.defaultPrice / 100}
+//               </li>
+//             );
+//           })}
+//         </ul>
+//       </div>
+//     );
+//   }
+// };
+//* now let's go to RestaurantMenu component file and build it beautifully.
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   return (

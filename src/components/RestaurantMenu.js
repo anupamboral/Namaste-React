@@ -2,6 +2,7 @@
 // import { MENU_API_URL } from "../utils/config";//*Don't need because of the custom hook we made named useRestaurantMenu() to fetch the data.
 
 import useOnlineStatus from "../utils/useOnlineStatus";
+import ItemCategory from "./ItemCategory";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
@@ -140,74 +141,51 @@ const RestaurantMenu = () => {
 
   if (resInfo === null) return <Shimmer />;
 
+  //* from the resInfo we filtered only the cards belong to itemCategory (not cards for veg or non veg )
+  const itemCategories = resInfo?.data?.cards[5]?.groupedCard
+    ? resInfo?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        (card) =>
+          card.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      )
+    : resInfo?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+        (card) =>
+          card.card.card["@type"] ===
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+      );
+  console.log(itemCategories);
+
   //*Placing the destructuring code  below the if Statement(for Shimmer UI) is important because as we are gonna destructure the needed properties from the data , if we would place it above the if statement then at the first render when the resInfo value is null then our variables will try to get the data from null, and that will throw an error so when the value is null then it should render the Shimmer Ui and that's why we placed the if statement above so the after the return the below lines would not execute, but when the data will arrive after the useEffect hook call then it's value will be filled with the data so then the if statement will not execute and the return will happen at that line, and the below lines execution will continue . and here we have not used ternary operator also because of this reason because we need to do some destructing here. and  this destructuring should only happen after the data arrives, and also because we can't do this destructuring inside the fetchMenu function because as it is inside the useEffect hook, and we mention the second parameter in the UseEffect hook that's why it will execute once in the first render.
 
-  const { avgRatingString, name, cuisines, costForTwoMessage } =
-    resInfo?.data?.cards[2]?.card?.card?.info;
-
-  const { itemCards: itemList1, title: title1 } =
-    resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card;
-
-  // console.log(resInfo?.data.cards[4]?.groupedCard);
-  //* swiggy's data has some inconsistency in property names that's why we had to create below if else statement
-  if (itemList1) {
-    return (
-      <div className="res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  h-[50rem] min-h-dvh max-h-full">
-        <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
-          {name}
-        </h1>
-        <p className="text-[1.2rem] mb-4">
-          {cuisines.join(`,`)} <span>{avgRatingString}⭐</span>
-        </p>
-        <h3>{costForTwoMessage}</h3>
-        <ul>
-          <h3 className="mx-2 my-4 text-[1.8rem] font-semibold">{title1}</h3>
-          {itemList1.map((item) => {
+  //*new version of restaurant menu with accordions(previous version of jsx is saved in the notes file for future reference if needed)
+  return (
+    <div className="restaurant-menu-container bg-[url('src/imgs/background_image.jpg')] min-h-dvh text-gray-50 text-left">
+      <div className="max-w-6xl mx-auto  ">
+        <div className="shadow-cyan-600 shadow-lg">
+          <h2 className="restaurant-name text-5xl pb-4 px-4 font-bold ">
+            {resInfo.data.cards[2].card.card.info.name}
+          </h2>
+          <p className="restaurant-rating pb-8 px-4 border-b-2 border-y-white  ">
+            {resInfo.data.cards[2].card.card.info.avgRatingString}(
+            {resInfo.data.cards[2].card.card.info.totalRatingsString}) •
+            <span className="ml-2">
+              {resInfo.data.cards[2].card.card.info.costForTwoMessage}
+            </span>
+          </p>
+        </div>
+        <div>
+          {itemCategories.map((itemCategoryData) => {
             return (
-              <li className="font-semibold" key={item.card.info.id}>
-                {item.card.info.name} - Rs.
-                {item.card.info.price / 100 ||
-                  item.card.info.defaultPrice / 100}
-              </li>
+              <ItemCategory
+                key={itemCategoryData.card.card.title}
+                data={itemCategoryData}
+              />
             );
           })}
-        </ul>
+        </div>
       </div>
-    );
-  } else {
-    //*this is created because of inconsistency in swiggy's api data
-    const { itemCards: itemList2, title: title2 } =
-      resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-        ?.card.categories[0];
-    console.log(
-      resInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-        ?.card.categories
-    );
-    return (
-      <div className=" res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  min-h-dvh max-h-full ">
-        <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
-          {name}
-        </h1>
-        <p className="text-[1.2rem] mb-4">
-          {cuisines.join(`,`)} <span className="ml-4">{avgRatingString}⭐</span>
-        </p>
-        <h3>{costForTwoMessage}</h3>
-        <ul>
-          <h3 className="mx-2 my-4 text-[1.8rem] font-semibold">{title2}</h3>
-          {itemList2.map((item) => {
-            return (
-              <li className="font-semibold" key={item.card.info.id}>
-                {item.card.info.name} - Rs.
-                {item.card.info.price / 100 ||
-                  item.card.info.defaultPrice / 100}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default RestaurantMenu;
