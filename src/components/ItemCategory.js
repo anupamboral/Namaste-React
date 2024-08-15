@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ItemList from "./ItemList";
+import MenuItem from "./MenuItem";
 const ItemCategory = ({ data }) => {
   console.log(data);
 
@@ -11,18 +11,17 @@ const ItemCategory = ({ data }) => {
   };
 
   return (
-    <div className=" ">
+    <div onClick={accordianToggle} className="text-white cursor-pointer ">
       <div className="flex justify-between p-4 text-4xl my-4 shadow-md shadow-slate-400">
-        <div className="">{data.card.card.title}</div>
-        <button onClick={accordianToggle}>🔽</button>
+        <div className="font-bold">{data.card.card.title}</div>
+        <span>🔽</span>
       </div>
       <div>
-        {showItems && (
-          <ItemList
-            key={data.card.card.title}
-            itemsData={data.card.card.itemCards}
-          />
-        )}
+        {showItems
+          ? data.card.card.itemCards.map((item) => (
+              <MenuItem key={item.card.info.id} item={item} />
+            ))
+          : ``}
       </div>
     </div>
   );

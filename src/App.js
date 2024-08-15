@@ -146,6 +146,28 @@ import Shimmer from "./components/Shimmer";
 // };
 //* now let's go to RestaurantMenu component file and build it beautifully.
 
+//* after building the header section, first we filter the data depending on itemCategory , and got a array out of it named `itemCategories ` and we will now iterate it using map method and for every category we will have a accordion , so first we have to create that `ItemCategory` file which will have the code for every category accordion . and every accordion has a accordion header and a accordion description. And this description section is collapsible so when we click on the header the accordion description will appear and then if you again click on it then it will disappear . And when the description will get opened then we will see all of the items belong to that category So for every item inside the category we will render `MenuItem` component So let's create the file menu item so we can display a menu item for each of the items of a category so we will just loop over the item card array, And then for each item we will display one menu item.
+//* now every thing is ready but how do we implement the expand and collapse feature of the accordion?
+//*=> below code and explanation
+/*  const [showItems, setShowItems] = useState(false);
+
+  const accordianToggle = () => {
+    //*implementing toogle functionality using not`!` operator
+    setShowItems(!showItems); //* if showItem's current state is false then because of not operator it will be changed to true and if it is true then it will be changed to false
+  };
+   <button onClick={accordianToggle}>🔽</button>
+
+      <div>
+        {showItems &&
+          data.card.card.itemCards.map((item) => (
+            <MenuItem key={item.card.info.id} item={item} />
+          ))}
+      </div>
+  */
+//* so on the 🔽 Button we have attached a onclick handler and inside that we have put a call back function which will be executed when the user will click on this button and inside that function where to write the logic of displaying or hiding accordian description so to save the state of Showing and hiding the items first we will create a state variable named show items and its initial value will be false because initially we want to hide the accordion description and now inside that function which will be called on users click we will change the state of that state variable using setShowItem function so here we want a toggle feature so basically if its value is true then we want to make it false and if it is false then we want to make it true and to do that we will use the not operator and inside the set show item function first we will put the not operator and then show item state variable so because of the not operator when its value is false then on click it will become true and when its value is true then on click it will become false and that's how we are gonna implement the toggle feature but it is still not complete. So now inside the where we are displaying all of the item there we will use the && operator And before the end of later we'll put our show item variable and after it we will put the description component which will contain all of the items and because of the end operator When the value of show item state variable is true then only the after portion of the and operator will be executed and that's how implementing the hiding and displaying functionality of accordion works.show the above code for example .
+
+//*⁡⁣⁢⁣React dev tools chrome extension⁡
+//*We already installed the react dev tools chrome extension in our chrome browser but what it does is basically in the developer console it adds 2 new tabs phonics 1 is react component second one is react profiler so react component tab is very important because it shows you the uil layer and the data layer side by side so you will be able to see the virtual dom of the ui layer so all of the components which are already rendered on the ui and also if you click on any of the components then you will be able to also see the data layer of the component and now the second tab which is called profiler it is basically for recording the actions and optimizing your app so if you start recording then it will start basically profiling and it will record all of the steps the user is doing so like the user clicking on a button or going to some other page and so many other steps the user can perform on your website so after you stop the recording and cheque it then you will be able to see all of the actions of the user performed and even what was the time gap of loading any component and how much time the user stayed on any page and many other things so using this profiler you can justify what are the components which are taking so much time to load when your app grows so much bigger
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   return (

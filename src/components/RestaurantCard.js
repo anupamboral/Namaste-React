@@ -14,7 +14,7 @@ const RestaurantCard = (prop) => {
   console.log(resData);
   return (
     <div
-      className="res-card border-[1px] border-[solid] border-[black] w-56 h-[24rem] [transition:all_0.5s] text-center rounded-2xl bg-[rgba(41,46,178,0.4)]  text-yellow-50 hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-[1.01] mb-5"
+      className="res-card border-[1px] border-[solid] border-[black] w-56 h-[24rem] [transition:all_0.5s] text-center rounded-2xl bg-[rgba(41,46,178,0.4)]  text-white font-bold hover:shadow-cyan-600 hover:shadow-xl  hover:scale-[1.01] mb-5"
       style={cardStyles}
     >
       <img
@@ -22,8 +22,8 @@ const RestaurantCard = (prop) => {
         alt="restaurant-logo"
         src={CDN_URL + cloudinaryImageId}
       />
-      <h3 className="res-name text-[1.6rem]  font-semibold">{name}</h3>
-      <h4 className="cuisine-details text-[1rem] font-semibold">
+      <h3 className="res-name text-[1.6rem]  font-bold">{name}</h3>
+      <h4 className="cuisine-details text-[1rem] font-bold">
         {cuisines.join(", ")}
       </h4>
       <h5 className="res-rating m-2 text-[1rem] font-semibold">
@@ -102,7 +102,7 @@ export const withPromotedLabel = (RestaurantCard) => {
     return (
       <div className="relative">
         {/* Promoted discount label */}
-        <label className="absolute top-0.5 text-yellow-50 bg-cyan-800 m-1 p-1 z-10 rounded-lg ">
+        <label className="absolute top-0.5 text-white font-semibold bg-cyan-800 m-1 p-1 z-10 rounded-lg ">
           {`${discountPercentageHeader} ${discountPercentageSubHeader}`}
         </label>
         <RestaurantCard {...props} />

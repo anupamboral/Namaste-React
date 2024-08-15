@@ -44,7 +44,7 @@ class About extends Component {
     // console.log(`parent render`);
 
     return (
-      <div className="bg-[url('src/imgs/background_image.jpg')] text-yellow-50">
+      <div className="bg-[url('src/imgs/background_image.jpg')] text-white">
         <h1>About</h1>
         <h2>This is Namaste React</h2>
         <User name="Anupam Boral" location="kolkata" id="001" />

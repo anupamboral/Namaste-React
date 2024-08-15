@@ -2,8 +2,8 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="bg-[url('src/imgs/background_image.jpg')] text-yellow-50 min-h-dvh text-4xl flex flex-col gap-4">
-      <h1>Contact us page</h1>
+    <div className="bg-[url('src/imgs/background_image.jpg')] text-white min-h-dvh text-4xl flex flex-col gap-4">
+      <h1 className="font-bold">Contact us page</h1>
       <button className="search-btn p-2 text-[1.4rem]  divide-solid   font-bold border-[2px] border-[solid] border-[rgb(9,63,201)] cursor-pointer [transition:all_500ms] bg-transparent hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-105 hover:bg-[rgba(0,_30,_255,_0.244)] min-w-20 basis-1/3">
         <a href="https://x.com/AnupamBoral399">My Twitter(X)</a>
       </button>

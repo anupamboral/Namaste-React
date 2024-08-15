@@ -159,13 +159,13 @@ const RestaurantMenu = () => {
 
   //*new version of restaurant menu with accordions(previous version of jsx is saved in the notes file for future reference if needed)
   return (
-    <div className="restaurant-menu-container bg-[url('src/imgs/background_image.jpg')] min-h-dvh text-gray-50 text-left">
-      <div className="max-w-6xl mx-auto  ">
+    <div className="restaurant-menu-container bg-[url('src/imgs/background_image.jpg')] min-h-dvh text-white text-left">
+      <div className="max-w-6xl px-4 mx-auto  ">
         <div className="shadow-cyan-600 shadow-lg">
           <h2 className="restaurant-name text-5xl pb-4 px-4 font-bold ">
             {resInfo.data.cards[2].card.card.info.name}
           </h2>
-          <p className="restaurant-rating pb-8 px-4 border-b-2 border-y-white  ">
+          <p className="restaurant-rating pb-8 px-4 border-b-2 font-bold cursor-pointer border-y-white  ">
             {resInfo.data.cards[2].card.card.info.avgRatingString}(
             {resInfo.data.cards[2].card.card.info.totalRatingsString}) •
             <span className="ml-2">

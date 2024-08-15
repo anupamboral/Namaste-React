@@ -141,12 +141,12 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body min-h-dvh max-h-full bg-[url('src/imgs/background_image.jpg')] text-yellow-50">
+    <div className="body min-h-dvh max-h-full bg-[url('src/imgs/background_image.jpg')] text-white">
       <div className="search-container flex p-4 flex-wrap">
         <div className="search flex gap-4 items-center mr-8 justify-center flex-wrap">
           <input
             type="text"
-            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-[beige] w-[28rem] placeholder:text-[beige] bg-transparent"
+            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-white w-[28rem] placeholder:text-[beige] bg-transparent"
             placeholder="cafe.."
             value={searchText}
             onChange={(e) => {
@@ -154,7 +154,7 @@ const Body = () => {
             }}
           ></input>
           <button
-            className="search-btn p-2 text-[1.4rem]  divide-solid  w-24 font-bold border-[2px] border-[solid] border-[rgb(9,63,201)] cursor-pointer [transition:all_500ms] bg-transparent hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-105 hover:bg-[rgba(0,_30,_255,_0.244)]"
+            className="search-btn p-2 text-[1.4rem]  divide-solid  w-24 font-bold border-[2px] border-[solid] border-[rgb(9,63,201)] cursor-pointer [transition:all_500ms] bg-transparent  hover:scale-105  hover:shadow-cyan-600 hover:shadow-lg "
             onClick={() => {
               const filtered = listOfRestaurants.filter((res) =>
                 res.info.name
@@ -170,7 +170,7 @@ const Body = () => {
         </div>
         {/*// ** below button is for testing only */}
         <button
-          className="btn-top-rated-restaurant m-[0.6rem] p-2 text-[1rem] border-[2px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] cursor-pointer [transition:all_500ms] bg-transparent text-yellow-50 hover:[box-shadow:10px_10px_2px_1px_rgba(0,_30,_255,_0.244)] hover:scale-105 hover:bg-[rgba(0,_30,_255,_0.244)] "
+          className="btn-top-rated-restaurant m-[0.6rem] p-2 text-[1rem] border-[2px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] cursor-pointer [transition:all_500ms] bg-transparent text-white hover:scale-105  hover:shadow-cyan-600 hover:shadow-lg  "
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => 4 < res.info.avgRating
