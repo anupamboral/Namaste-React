@@ -14,11 +14,11 @@ const RestaurantCard = (prop) => {
   console.log(resData);
   return (
     <div
-      className="res-card border-[1px] border-[solid] border-[black] w-56 h-[24rem] [transition:all_0.5s] text-center rounded-2xl bg-[rgba(41,46,178,0.4)]  text-white font-bold hover:shadow-cyan-600 hover:shadow-xl  hover:scale-[1.01] mb-5"
+      className="res-card border-[1px] border-[solid] border-[black] w-60 h-[25rem] [transition:all_0.5s] text-center rounded-2xl bg-[rgba(41,46,178,0.4)]  text-white font-bold hover:shadow-cyan-600 hover:shadow-xl  hover:scale-[1.01] mb-5 mx-auto"
       style={cardStyles}
     >
       <img
-        className="res-logo w-[13.5rem] p-2 pb-[0.1rem] h-40 rounded-2xl"
+        className="res-logo w-60 p-2 pb-[0.1rem] h-40 rounded-2xl"
         alt="restaurant-logo"
         src={CDN_URL + cloudinaryImageId}
       />

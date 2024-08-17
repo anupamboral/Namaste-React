@@ -6,6 +6,7 @@ import ItemCategory from "./ItemCategory";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import { useState } from "../../node_modules/react";
 //*⁡⁣⁢⁣Displaying restaurant menu data from Swiggy's api⁡
 //* let's go to swiggy's website and open the network tab select xhr request and then open a restaurant card, then we will see that while we click on restaurant card at that time browser makes a network call to swiggy's api to request the restaurant menu data , so do it and get the api url. now we just copied a api url for one restaurant which is :- `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.5743545&lng=88.3628734&restaurantId=385752&catalog_qa=undefined&submitAction=ENTER` and because of the cors issue we have add "https://richie-cors-proxy.glitch.me/" this url before the swiggy's url to solve the cors issue , it is actually a cors proxy we got from glitch (used in Body.js for restaurant card) and now we can go to our RestaurantMenu.js and inside the component we will write all the code to make the component dynamic. so similaly we did in the restaurantCard component, first will render the Shimmer Ui before making the network call so the user doesn't see the blank page while making the network call, and then once the component is loaded then we have to make the api call to request the data , so as we need to do it after rendering the component that's why we will use UseEffect hook,and while mentioning the arguments we will also mention the second argument as empty array, so then this useEffect can be called only once when the component renders first time, because we would not mention this second argument dependency array then this useEffect hook would be called every time the component re-renders.and we don't want because there is no need to get the data from the api every time it re-renders, we just need do it once.and then to save data we are again gonna use the useState hook , so the default value of the hook will be null first and the as we get the data from the api then we will change the state, and as we know the when ever the state variable will change the it will trigger react's reconciliation algorithm which will re-render the whole component with updated data which we got from the api.
 //*and remember whenever we will use map method to iterate items, then we have to provide the key prop, and we can use the id as the value of this key prop.
@@ -139,6 +140,9 @@ const RestaurantMenu = () => {
   const resInfo = useRestaurantMenu(resId);
   console.log(resInfo);
 
+  //*below state variable showIndex for controlling the index to display the itemCategories, because as we controlling the itemCategories from here , and depending on the index we are gonna show the category items so we need to have a state variable to control the index.
+  const [showIndex, setShowIndex] = useState(0);
+
   if (resInfo === null) return <Shimmer />;
 
   //* from the resInfo we filtered only the cards belong to itemCategory (not cards for veg or non veg )
@@ -174,11 +178,15 @@ const RestaurantMenu = () => {
           </p>
         </div>
         <div>
-          {itemCategories.map((itemCategoryData) => {
+          {itemCategories.map((itemCategoryData, index) => {
             return (
+              // *controlled component
               <ItemCategory
                 key={itemCategoryData.card.card.title}
                 data={itemCategoryData}
+                showItems={index === showIndex ? true : false}
+                setShowIndex={() => setShowIndex(index)}
+                collapseItem={() => setShowIndex(false)}
               />
             );
           })}

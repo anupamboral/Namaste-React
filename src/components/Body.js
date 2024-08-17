@@ -141,7 +141,7 @@ const Body = () => {
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
-    <div className="body min-h-dvh max-h-full bg-[url('src/imgs/background_image.jpg')] text-white">
+    <div className="body min-h-dvh max-h-full bg-[url('src/imgs/background_image.jpg')]  text-white">
       <div className="search-container flex p-4 flex-wrap">
         <div className="search flex gap-4 items-center mr-8 justify-center flex-wrap">
           <input
@@ -186,7 +186,7 @@ const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
-      <div className="cards-container flex flex-wrap gap-4 p-4">
+      <div className="cards-container flex justify-center flex-wrap gap-5 p-4">
         {/* //* restaurant cards */}
         {/*//* Example of passing props to a functional component(instead of listOfRestaurants state variable we are using filteredRestaurants state variable to display the restaurant cards but tyo know find this paragraph above :- "a bug we introduced") */}
         {/* the link tag added in the 7 lesson to make the restaurant card clickable, so when the user click on the one the restaurant card then the browser should show that restaurant's menu page. before doing it the mapped component was looking like <RestaurantCard key={restaurant.info.id} resData={restaurant} /> and the explanation is also present above in the notes. */}
