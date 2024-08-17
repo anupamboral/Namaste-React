@@ -11,8 +11,11 @@ const ItemCategory = ({ data }) => {
   };
 
   return (
-    <div onClick={accordianToggle} className="text-white cursor-pointer ">
-      <div className="flex justify-between p-4 text-4xl my-4 shadow-md shadow-slate-400">
+    <div className="text-white cursor-pointer ">
+      <div
+        onClick={accordianToggle}
+        className="flex justify-between p-4 text-4xl my-4 shadow-md shadow-slate-400"
+      >
         <div className="font-bold">{data.card.card.title}</div>
         <span>🔽</span>
       </div>
