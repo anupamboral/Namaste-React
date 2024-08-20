@@ -212,6 +212,9 @@ import Shimmer from "./components/Shimmer";
 //*But sometimes when we have so much nested data And in the in between components we does not even need that prop we are just Passing the prop to send it to the next child.For example we have the data in the restaurant menu component and we need the data in the menu item component so we do not need to use this data in the in between component item category component but as react has only one way data flow that is why to reach to menu item first we need to pass the data to the item category component then only we can pass the data from there to menu item even we do not need to use the data in the item category but we are still passing through it and for one or two level it is ok to do it but when we have so much level of nesting like 10 levels of nesting and in between components does not need the data then it does not make any sense to use prop drilling through every step of the hierarchy to get the data at the deep level of the hierarchy.
 //*To solve this problem we have something called react context.
 
+//* and many times in large scaled applications we need some global data which we access anywhere in our webapp no matter how much nested our component is. Now sometimes people think that they will keep some global data at the top level and then they will pass that data through props but it is very foolish to pass any data 10 level deeper using props if there is no need of that data in between components.
+//* so the solution of this problem is context which is like an global place where you data is kept and anybody can access it.so no need to do prop drilling. when you are using react context.
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   return (
