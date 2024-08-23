@@ -138,6 +138,7 @@ const Body = () => {
   if (onlineStatus === false)
     return <h1>You are offline. Please check your internet connection</h1>;
   console.log(listOfRestaurants);
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
