@@ -228,6 +228,9 @@ import Shimmer from "./components/Shimmer";
 //* so let's add another nav item and use loggedInItem data(coming from context) there and display it.
 //* and we can access this context data in any file in this way.
 
+//* ⁡⁣⁢⁣should we put all of the data in context?⁡
+//* no we should only put that kind of in context which can be useful in many places all over the webapp.
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   return (

@@ -45,7 +45,7 @@ import UserContext from "../utils/UserContext";
 //* and we can access this context data in any file in this way.
 const Header = () => {
   //*using context to display the logged in user data
-  const { loggedInUser } = useContext(UserContext);
+  const { loggedInUser, greetingMessage } = useContext(UserContext);
 
   //*state variable to toggle login and log out on click (using onClick event listener )
   const [loginBtnName, setLoginBtnName] = useState("Log In"); //*Default value is log in.
@@ -56,7 +56,7 @@ const Header = () => {
   const onlineStatus = useOnlineStatus(); //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   // console.log(`header rendered`);
   return (
-    <div className="header p-4 flex justify-between border-[2px] border-[solid] border-[rgb(0,0,0)] bg-[url('src/imgs/background_image.jpg')] text-white font-bold ">
+    <div className="header p-4 flex justify-between border-[2px] border-[solid] border-[rgb(0,0,0)] bg-black text-white font-bold ">
       <div className="logo-container">
         <Link className="no-underline" to="/">
           <img
@@ -102,7 +102,7 @@ const Header = () => {
           </button>
           <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:border-[solid] hover:shadow-cyan-600 hover:shadow-lg  rounded-lg">
             <Link className="nav-item no-underline" to="/">
-              {loggedInUser}
+              {`${greetingMessage} ${loggedInUser}`}
             </Link>
           </li>
         </ul>

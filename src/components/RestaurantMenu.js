@@ -163,7 +163,7 @@ const RestaurantMenu = () => {
 
   //*new version of restaurant menu with accordions(previous version of jsx is saved in the notes file for future reference if needed)
   return (
-    <div className="restaurant-menu-container bg-[url('src/imgs/background_image.jpg')] min-h-dvh text-white text-left">
+    <div className="restaurant-menu-container bg-[url('/src/imgs/background2.png')] min-h-dvh text-white text-left">
       <div className="max-w-6xl px-4 mx-auto  ">
         <div className="shadow-cyan-600 shadow-lg">
           <h2 className="restaurant-name text-5xl pb-4 px-4 font-bold ">
