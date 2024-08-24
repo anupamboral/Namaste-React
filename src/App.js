@@ -231,6 +231,22 @@ import Shimmer from "./components/Shimmer";
 //* ⁡⁣⁢⁣should we put all of the data in context?⁡
 //* no we should only put that kind of in context which can be useful in many places all over the webapp.
 
+//*accessing context inside class based component
+//* ⁡⁣⁢⁣we have talked about one way of consuming/using the context data which is by using the useContext() hook , but what if we need to use this context data inside  a class based component .As class based components does'nt have access to hooks. so how can we access the context data inside a class based component?⁡
+
+//*to understand it let's got to a class based component in our project About component , now to use the context data without using the hook, we have to do it using a property named consumer which works like component, so after importing the context file in 'About.js , now we need to go inside the render method where we are returning jsx. now to use the context we need write first the context name which we imported following with the property consumer and we have to write it like a component , now inside the somponent , we have to write a callback function , in this callback function we get access to the data , we can directly destructure it, and inside the callback function we can return any jsx using the context data like this:-
+/* <h1>About</h1>
+
+        <UserContext.Consumer>
+          {({ loggedInUser }) => {
+            return <h1>Hello {loggedInUser}</h1>;
+          }}
+        </UserContext.Consumer>
+
+        <h2>This is Namaste React</h2>
+*/
+//* now we know two ways of consuming the context data , one is using the useContext hook second is using consumer property (writing it like a component).
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   return (

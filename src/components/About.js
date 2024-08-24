@@ -1,5 +1,6 @@
 import User from "./UserClass";
 import { Component } from "react";
+import UserContext from "../utils/UserContext";
 //*from 8th lesson
 //*⁡⁣⁢⁣another way of importing React.Component⁡:- while importing React here so we can use React.Component, we imported react normally but while importing we can directly do destructuring and get the Component so then the the import will look like this:-import {Component} from "react"; ,so here we destructured the Component directly and now while extending it to create the class based component we don't need to write React.Component and we can write just"component" as we already destructured it. so it will look like:- class User extends Component{}
 
@@ -32,6 +33,23 @@ import { Component } from "react";
 
 */
 
+//* from lesson 11 data is new oil
+//*accessing context inside class based component
+//* ⁡⁣⁢⁣we have talked about one way of consuming/using the context data which is by using the useContext() hook , but what if we need to use this context data inside  a class based component .As class based components does'nt have access to hooks. so how can we access the context data inside a class based component?⁡
+
+//*to understand it let's got to a class based component in our project About component , now to use the context data without using the hook, we have to do it using a property named consumer which works like component, so after importing the context file in 'About.js , now we need to go inside the render method where we are returning jsx. now to use the context we need write first the context name which we imported following with the property consumer and we have to write it like a component , now inside the somponent , we have to write a callback function , in this callback function we get access to the data , we can directly destructure it, and inside the callback function we can return any jsx using the context data like this:-
+/* <h1>About</h1>
+
+        <UserContext.Consumer>
+          {({ loggedInUser }) => {
+            return <h1>Hello {loggedInUser}</h1>;
+          }}
+        </UserContext.Consumer>
+
+        <h2>This is Namaste React</h2>
+*/
+//* now we know two ways of consuming the context data , one is using the useContext hook second is using consumer property (writing it like a component).
+
 class About extends Component {
   constructor() {
     super();
@@ -46,6 +64,12 @@ class About extends Component {
     return (
       <div className="bg-[url('/src/imgs/background2.png')] text-white">
         <h1>About</h1>
+        {/* using context in class based component without any hook, explanation is in notes above */}
+        <UserContext.Consumer>
+          {({ loggedInUser }) => {
+            return <h1>Hello {loggedInUser}</h1>;
+          }}
+        </UserContext.Consumer>
         <h2>This is Namaste React</h2>
         <User name="Anupam Boral" location="kolkata" id="001" />
         {/* <User name="Akshay Saini" location="Bangalore" id="002" /> //*used this to underStand how life cycle of class based components work and how react optimizes it */}
