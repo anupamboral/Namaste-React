@@ -166,7 +166,7 @@ const RestaurantMenu = () => {
     <div className="restaurant-menu-container bg-[url('/src/imgs/background2.png')] min-h-dvh text-white text-left">
       <div className="max-w-6xl px-4 mx-auto  ">
         <div className="shadow-cyan-600 shadow-lg">
-          <h2 className="restaurant-name text-5xl pb-4 px-4 font-bold ">
+          <h2 className="restaurant-name text-3xl md:text-5xl pb-4 px-4 font-bold ">
             {resInfo.data.cards[2].card.card.info.name}
           </h2>
           <p className="restaurant-rating pb-8 px-4 border-b-2 font-bold cursor-pointer border-y-white  ">

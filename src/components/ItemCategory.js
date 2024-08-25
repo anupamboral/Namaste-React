@@ -23,7 +23,7 @@ const ItemCategory = ({ data, showItems, setShowIndex, collapseItem }) => {
     <div className="text-white bg-[url('/src/imgs/background2.png')]    cursor-pointer ">
       <div
         onClick={accordianToggle}
-        className="flex justify-between p-4 text-4xl my-4 shadow-md shadow-slate-400"
+        className="flex justify-between p-4 text-3xl md:text-4xl my-4 shadow-md shadow-slate-400"
       >
         <div className="font-bold">{data.card.card.title}</div>
         <span>🔽</span>

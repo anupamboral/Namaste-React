@@ -117,13 +117,18 @@ const Body = () => {
         json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants
       );
+      //* the api was returning was different data for different screen sizes (for small screen it had data in the card[2]) , that's why we used the || and operator so we get the data in any screen size.
       setListOfRestaurants(
         json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
+          ?.restaurants ||
+          json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants
       );
       setFilteredRestaurants(
         json.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants
+          ?.restaurants ||
+          json.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+            ?.restaurants
       ); //*because we are using filteredRestaurants state variable to display the data in the cards container so when we get the data it is also necessary to update this so we can also use it display the data when we receive the data first time.
     };
     fetchData();

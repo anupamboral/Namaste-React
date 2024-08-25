@@ -47,6 +47,9 @@ const Header = () => {
   //*using context to display the logged in user data
   const { loggedInUser, greetingMessage } = useContext(UserContext);
 
+  //* state variable for responsive menu
+  const [isOpen, setIsOpen] = useState(false);
+
   //*state variable to toggle login and log out on click (using onClick event listener )
   const [loginBtnName, setLoginBtnName] = useState("Log In"); //*Default value is log in.
   useEffect(() => {
@@ -55,58 +58,136 @@ const Header = () => {
 
   const onlineStatus = useOnlineStatus(); //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   // console.log(`header rendered`);
+  const navItemStyles =
+    "text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:shadow-cyan-600 hover:shadow-lg  rounded-lg  no-underline"; //* as we are gonna use this same styling for every nav link that's why we just make a string which will contain the styles and now we can use it as value of class names of every nav link.
+
+  //*To make the design responsive for smaller screens we have added a menu icon which will be visible for smaller screens and all of the navigation items will get hidden but when the user will click on the menu icon then all of the navigation links should get displayed and to keep track Of the navigation menu is open or not we have created a state variable named isOpenItIts default state will be false because by default it should be hidden but when the user will click on the menu button then on click event this state variables value will be changed and it will get true,And when it gets true then we have used an operator and as soon as it gets true on click of the menu button we display all of the menu items so the navigation items in a column format for bigger screens we were displaying it in a row format but for responsiveness Small screens we will show all of the navigation items in a column format so we have created a div which will be only displayed when the state variables value gets true which will happen on click event But inside the div if we would create the same navigation items again then it will be duplication of code which is not allowed that's why we have created this  constant named navLinks which is containing all of the navigation items so then we can use same navigation links To display for bigger screens in the row format and also in the smaller screens in the column format and that is how we are dealing with the problem of duplication of code.to know more see this video:-(https://www.youtube.com/watch?v=iq-7qRUYsTI)
+  const navLinks = (
+    <>
+      <li className={navItemStyles}>
+        Online Status:{onlineStatus ? `🟢` : `🔴`}
+      </li>
+      <li onClick={() => setIsOpen(!isOpen)}>
+        <Link className={navItemStyles} to="/groceries">
+          Grocery
+        </Link>
+      </li>
+      <li onClick={() => setIsOpen(!isOpen)}>
+        <Link className={navItemStyles} to="/">
+          Home
+        </Link>
+      </li>
+      <li onClick={() => setIsOpen(!isOpen)}>
+        <Link className={navItemStyles} to="/about">
+          About Us
+        </Link>
+      </li>
+      <li onClick={() => setIsOpen(!isOpen)}>
+        <Link className={navItemStyles} to="/contact">
+          Contact
+        </Link>
+      </li>
+      <button
+        className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-cyan-600  border-2 border-[solid]  max-w-[15rem] [transition:all_500ms] shadow-cyan-600 shadow-lg  rounded-lg"
+        onClick={() => {
+          loginBtnName === "Log In"
+            ? setLoginBtnName("Log Out")
+            : setLoginBtnName("Log In");
+        }}
+      >
+        {loginBtnName}
+      </button>
+      <li onClick={() => setIsOpen(!isOpen)}>
+        <Link className={navItemStyles} to="/">
+          {`${greetingMessage} ${loggedInUser}`}
+        </Link>
+      </li>
+    </>
+  );
   return (
-    <div className="header p-4 flex justify-between border-[2px] border-[solid] border-[rgb(0,0,0)] bg-black text-white font-bold ">
+    <div
+      onClick={() => {
+        //*The below ternary operator is used because when in the small screen the user already opened the navigation menu at that time if he clicks on the header anywhere the navigation menu should be closed and that's what is written in the below condition so if it is already open then make it false to close the navigation bar.
+        isOpen ? setIsOpen(false) : ``;
+      }}
+      className="header p-4 flex justify-between border-[2px] border-[solid] border-[rgb(0,0,0)] bg-black text-white font-bold relative "
+    >
       <div className="logo-container">
         <Link className="no-underline" to="/">
           <img
-            className="logo h-16  shadow-cyan-600 shadow-lg "
+            className="logo h-16  shadow-cyan-600 shadow-lg mt-1"
             src={LOGO_URL}
           />
         </Link>
       </div>
-      <nav className="nav-items">
-        <ul className="flex">
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:shadow-cyan-600 hover:shadow-lg  rounded-lg">
-            Online Status:{onlineStatus ? `🟢` : `🔴`}
-          </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms]  hover:shadow-cyan-600 hover:shadow-lg hover:border-cyan-600  hover:border-2  rounded-lg">
-            <Link className="nav-item no-underline" to="/groceries">
-              Grocery
-            </Link>
-          </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:shadow-cyan-600 hover:shadow-lg  rounded-lg">
-            <Link className="nav-item no-underline" to="/">
-              Home
-            </Link>
-          </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:border-[solid]  hover:shadow-cyan-600 hover:shadow-lg  rounded-lg">
-            <Link className="nav-item no-underline" to="/about">
-              About Us
-            </Link>
-          </li>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:border-[solid] hover:shadow-cyan-600 hover:shadow-lg  rounded-lg">
-            <Link className="nav-item no-underline" to="/contact">
-              Contact
-            </Link>
-          </li>
-          <button
-            className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-cyan-600  border-2 border-[solid]  max-w-[15rem] [transition:all_500ms] shadow-cyan-600 shadow-lg  rounded-lg"
-            onClick={() => {
-              loginBtnName === "Log In"
-                ? setLoginBtnName("Log Out")
-                : setLoginBtnName("Log In");
-            }}
-          >
-            {loginBtnName}
-          </button>
-          <li className=" text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:border-[solid] hover:shadow-cyan-600 hover:shadow-lg  rounded-lg">
-            <Link className="nav-item no-underline" to="/">
-              {`${greetingMessage} ${loggedInUser}`}
-            </Link>
-          </li>
-        </ul>
+      <nav className="nav-items hidden md:block">
+        <ul className="flex">{navLinks}</ul>
       </nav>
+      <div className="md:hidden w-6 text-white mr-6 z-20">
+        <button onClick={() => setIsOpen(!isOpen)} type="button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            x="5px"
+            y="0px"
+            width="100"
+            height="100"
+            viewBox="0 0 48 48"
+            className="w-12  content-center"
+          >
+            <linearGradient
+              id="9iHXMuvV7brSX7hFt~tsna_Rdp3AydLFY2A_gr1"
+              x1="12.066"
+              x2="34.891"
+              y1=".066"
+              y2="22.891"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset=".237" stopColor="#3bc9f3"></stop>
+              <stop offset=".85" stopColor="#1591d8"></stop>
+            </linearGradient>
+            <path
+              fill="url(#9iHXMuvV7brSX7hFt~tsna_Rdp3AydLFY2A_gr1)"
+              d="M43,15H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,14.1,44.1,15,43,15z"
+            ></path>
+            <linearGradient
+              id="9iHXMuvV7brSX7hFt~tsnb_Rdp3AydLFY2A_gr2"
+              x1="12.066"
+              x2="34.891"
+              y1="12.066"
+              y2="34.891"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset=".237" stopColor="#3bc9f3"></stop>
+              <stop offset=".85" stopColor="#1591d8"></stop>
+            </linearGradient>
+            <path
+              fill="url(#9iHXMuvV7brSX7hFt~tsnb_Rdp3AydLFY2A_gr2)"
+              d="M43,27H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,26.1,44.1,27,43,27z"
+            ></path>
+            <linearGradient
+              id="9iHXMuvV7brSX7hFt~tsnc_Rdp3AydLFY2A_gr3"
+              x1="12.066"
+              x2="34.891"
+              y1="24.066"
+              y2="46.891"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset=".237" stopColor="#3bc9f3"></stop>
+              <stop offset=".85" stopColor="#1591d8"></stop>
+            </linearGradient>
+            <path
+              fill="url(#9iHXMuvV7brSX7hFt~tsnc_Rdp3AydLFY2A_gr3)"
+              d="M43,39H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,38.1,44.1,39,43,39z"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      {isOpen && (
+        <div className=" flex flex-col md:hidden sm:px-6 z-20 absolute list-none gap-y-5   m-8 py-16 items-center w-72 right-6 top-16 rounded-lg bg-[url('/src/imgs/background2.png')] border-rose-300 border-2">
+          {" "}
+          {navLinks}
+        </div>
+      )}
     </div>
   );
 };
