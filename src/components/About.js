@@ -64,7 +64,7 @@ class About extends Component {
     return (
       <div className="bg-[url('/src/imgs/background2.png')] text-white">
         <h1>About</h1>
-        {/* using context in class based component without any hook, explanation is in notes above */}
+        {/* using react context in class based component without any hook, explanation is in notes above */}
         <UserContext.Consumer>
           {({ loggedInUser }) => {
             return <h1>Hello {loggedInUser}</h1>;

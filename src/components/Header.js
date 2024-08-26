@@ -67,25 +67,17 @@ const Header = () => {
       <li className={navItemStyles}>
         Online Status:{onlineStatus ? `🟢` : `🔴`}
       </li>
-      <li onClick={() => setIsOpen(!isOpen)}>
-        <Link className={navItemStyles} to="/groceries">
-          Grocery
-        </Link>
+      <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
+        <Link to="/groceries">Grocery</Link>
       </li>
-      <li onClick={() => setIsOpen(!isOpen)}>
-        <Link className={navItemStyles} to="/">
-          Home
-        </Link>
+      <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
+        <Link to="/">Home</Link>
       </li>
-      <li onClick={() => setIsOpen(!isOpen)}>
-        <Link className={navItemStyles} to="/about">
-          About Us
-        </Link>
+      <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
+        <Link to="/about">About Us</Link>
       </li>
-      <li onClick={() => setIsOpen(!isOpen)}>
-        <Link className={navItemStyles} to="/contact">
-          Contact
-        </Link>
+      <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
+        <Link to="/contact">Contact</Link>
       </li>
       <button
         className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-cyan-600  border-2 border-[solid]  max-w-[15rem] [transition:all_500ms] shadow-cyan-600 shadow-lg  rounded-lg"
@@ -97,10 +89,8 @@ const Header = () => {
       >
         {loginBtnName}
       </button>
-      <li onClick={() => setIsOpen(!isOpen)}>
-        <Link className={navItemStyles} to="/">
-          {`${greetingMessage} ${loggedInUser}`}
-        </Link>
+      <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
+        <Link to="/">{`${greetingMessage} ${loggedInUser}`}</Link>
       </li>
     </>
   );
@@ -120,9 +110,11 @@ const Header = () => {
           />
         </Link>
       </div>
-      <nav className="nav-items hidden md:block">
+      {/* //*nav for medium and bigger devices */}
+      <nav className="nav-items sticky hidden md:block">
         <ul className="flex">{navLinks}</ul>
       </nav>
+      {/* //* nav for smaller screens */}
       <div className="md:hidden w-6 text-white mr-6 z-20">
         <button onClick={() => setIsOpen(!isOpen)} type="button">
           <svg

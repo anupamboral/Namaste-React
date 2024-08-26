@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy, Suspense, Provider } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,6 +8,8 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
+
+import UserContext from "./utils/UserContext.js";
 
 //! Lesson - 11 - data is new oil
 //*
@@ -250,14 +252,84 @@ import Shimmer from "./components/Shimmer";
 //* ⁡⁣⁢⁣making the navigation bar responsive in header.js(not from this course learnt from youtube link is included below if needed)⁡
 //*To make the design responsive for smaller screens we have added a menu icon which will be visible for smaller screens and all of the navigation items will get hidden but when the user will click on the menu icon then all of the navigation links should get displayed and to keep track Of the navigation menu is open or not we have created a state variable named isOpenItIts default state will be false because by default it should be hidden but when the user will click on the menu button then on click event this state variables value will be changed and it will get true,And when it gets true then we have used an operator and as soon as it gets true on click of the menu button we display all of the menu items so the navigation items in a column format for bigger screens we were displaying it in a row format but for responsiveness Small screens we will show all of the navigation items in a column format so we have created a div which will be only displayed when the state variables value gets true which will happen on click event But inside the div if we would create the same navigation items again then it will be duplication of code which is not allowed that's why we have created this  constant named navLinks which is containing all of the navigation items so then we can use same navigation links To display for bigger screens in the row format and also in the smaller screens in the column format and that is how we are dealing with the problem of duplication of code.to know more see this video:-(https://www.youtube.com/watch?v=iq-7qRUYsTI)
 
+//* ⁡⁣⁢⁣changing the data of context from anywhere⁡
+//* till now we know we know how to create context using createContext() and how to use using useContext hook and .Consumer property (see about.js) and now we are using the context data in our about.js and also in Header.js and the property loggedInUser Has a default value which is default user but now lets say in this App.js file so in the root file We have some authentication code written and when the user sign up or sign in then we send that data to our server and in response we get some data which contains the username so as we are sending data to our server and getting some response from it so definitely we are gonna do it inside use effect hook Because it should execute after the component is rendered and we already know the reason of using use effect hook but now as when the user do sign in we send some password and his name and in response we get the user name from the server but now we want this received name should be updated in the context so we want to send this data or provide this data to our context and update the context data so basically we want to provide the data to our context named UserContext , from here App.js.but before let's create some fake data inside a useEffect hook in our AppLayout component so we can simulate that we are getting some data from the server. and now we also have to create a variable to save this data we are getting from server (simulated ) . so we are gonna name that state variable UserName. so now we are gonna get that  data in the state variable , now, we need a way to pass or provide this data to the context and also update the loggedInUser property in the context with this data , but how can we do that?
+//* - .Provider property - this property will help us to provide this data and update the loggedInUser property in the context, it's very similar to Consumer property we learnt few times ago but it's work is different, so first we do not need to import this property from react because when we created the context we already got access of this property like Consumer property. but we need to import our context file named UserContext. so let's import it. and after importing we need to use this Provide property after the context and like a component and we are gonna put our whole returning jsx (of this AppLayout component) inside this component.like this:-
+/*  return (
+    <UserContext.Provider
+      value={{ loggedInUser: userName, greetingMessage: `Hello` }}
+    >
+      <div className="app">
+        <Header />
+        <Outlet />
+        </div>
+        </UserContext.Provider>
+      );
+ */
+//* but why we are we putting the whole appLayout component inside this </UserContext.Provider> component?
+//* because  this component is providing this new data to the context and updating it's properties but it will Provide this data only for those components which are inside it and that's why we are putting the whole AppLayout component inside it. so all of the components get access to the updated context data.
+//* what if we only included only the Header component inside this     </UserContext.Provider> component?like below
+/*  return (
+   
+      <div className="app">
+//* only header is inside 
+         <UserContext.Provider
+         value={{ loggedInUser: userName, greetingMessage: `Hello` }}
+          >
+          <Header />
+         </UserContext.Provider>
+
+        <Outlet />
+        </div>
+        
+      );
+ */
+//* then only the header component could get access to to this new updated data through the context and all of the other components would get the default data we set as default. because in this scenario the new data would be only given to the Header component.
+//* so now know we can create multiple contexts , access it anywhere, control where to access updated context and where just need default data.
+
+//* Can we use two context providers at same time? and if we pass different data for both then what will happen ? and is it even possible to do? see below example:-
+/*  return (
+    <UserContext.Provider
+      value={{ loggedInUser: userName, greetingMessage: `Hello` }}
+    >
+      <div className="app">
+
+      <UserContext.Provider
+      value={{ loggedInUser: `krishna`, greetingMessage: `Hi` }}
+    >
+        <Header />
+      </UserContext.Provider>
+
+        <Outlet />
+        </div>
+        </UserContext.Provider>
+      );
+ */
+//*Yes it is very much possible to use two context providers at same time, In the above example Our whole app layout gsx is inside one context provider to add the value is userName(Anupam) of  loggedInUser But our header component is inside another contact provider where the value of loggedInUser Is Krishna so in this case only inside the header component wherever the context is used it will display Krishna as the value of loggedInUser, But accept the header component anywhere inside our app wherever we use our context the value of loggedInUser will be Anupam Boral.
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
+  //* state variable to save user's data coming from api
+  const [userName, setUserName] = useState();
+  //make an API call send userName and password while log in and in response we are getting the userName as response from server(simulating the condition with some fake data )
+  useEffect(() => {
+    //*fake data
+    const data = {
+      userName: "Anupam Boral",
+    };
+    //*updating the state
+    setUserName(data.userName);
+  }, []);
   return (
-    <div className="app">
-      <Header />
-      <Outlet />
-      {/* <Body /> */}
-    </div>
+    <UserContext.Provider
+      value={{ loggedInUser: userName, greetingMessage: `Hello` }}
+    >
+      <div className="app">
+        <Header />
+        <Outlet />
+        {/* <Body /> */}
+      </div>
+    </UserContext.Provider>
   );
 };
 const appRouter = createBrowserRouter([
