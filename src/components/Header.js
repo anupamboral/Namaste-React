@@ -175,7 +175,7 @@ const Header = () => {
         </button>
       </div>
       {isOpen && (
-        <div className=" flex flex-col md:hidden sm:px-6 z-20 absolute list-none gap-y-5   m-8 py-16 items-center w-72 right-6 top-16 rounded-lg bg-[url('/src/imgs/background2.png')] border-rose-300 border-2">
+        <div className=" flex flex-col md:hidden sm:px-6 z-20 absolute list-none gap-y-5   m-8 py-16 items-center w-72 right-6 top-16 rounded-lg bg-starry border-rose-300 border-2">
           {" "}
           {navLinks}
         </div>

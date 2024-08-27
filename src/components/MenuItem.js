@@ -3,7 +3,7 @@ const MenuItem = ({ item }) => {
   console.log(item);
   return (
     <div className="">
-      <div className="shadow-cyan-600 shadow-lg flex bg-[url('/src/imgs/background2.png')] justify-between mb-6 ">
+      <div className="shadow-cyan-600 shadow-lg flex bg-starry justify-between mb-6 ">
         <div className="w-9/12">
           <div className="text-2xl md:text-3xl m-2 font-bold ">
             {item.card.info.name}

@@ -1,4 +1,11 @@
-import React, { useEffect, useState, lazy, Suspense, Provider } from "react";
+import React, {
+  useEffect,
+  useState,
+  lazy,
+  Suspense,
+  Provider,
+  useContext,
+} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -307,6 +314,19 @@ import UserContext from "./utils/UserContext.js";
  */
 //*Yes it is very much possible to use two context providers at same time, In the above example Our whole app layout gsx is inside one context provider to add the value is userName(Anupam) of  loggedInUser But our header component is inside another contact provider where the value of loggedInUser Is Krishna so in this case only inside the header component wherever the context is used it will display Krishna as the value of loggedInUser, But accept the header component anywhere inside our app wherever we use our context the value of loggedInUser will be Anupam Boral.
 
+//*Changing context values from other component
+//* Now lets know about some of the other powers of context so right now we are changing the value of the context Using the state variable named userName,But let's say we want to have another input box inside our body component like the search box and we want that whatever we type in that input box that will update the value of the context's loggedInUser property.but loggedInUser property's value is set to userName (state variable). but if we want to change it's value from the Header.js. but then we need to access the setUserName() function in Header.js but how can we access setUserName in Header.js?
+
+//* So like we are updating the value of loggedInUser property here:- <UserContext.Provider value={{ loggedInUser: userName }}> , in the same way we can also pass this function into context, just like we are creating a new property inside the context , and the property is this setUserName() function like this:-
+//*<UserContext.Provider value={{ loggedInUser: userName,setUserName }}>
+//* so now inside our context this setUserName property will be also available. and as we can access the context any where so noe we can also access this function anywhere through the context, and to access it inside Header.js we just need to import our context file file then using useContext hook we can access the function like this:-
+// const { loggedInUser, setUserName } = useContext(UserContext);//* we need to do it inside header component.
+
+//*and now just add the input element and when onChange event happens we will receive the value from the event and the pass that inside our setUserInfo function
+//*<input value={loggedInUser} onChange={(e)=> setUserName(e.target.value)}></input>;
+//* And that's all so now whatever we will type inside the input element that will be the value of loggedInUser, So wherever this loggedInUser Property is used in whatever component everywhere the value of this property will be whatever we will type inside the input box because on change event we are updating the state variables value which is provided to the context and updating its properties value so even we used this property in any component like in the header or the about section everywhere the value will change when the user will type something in this input box and the more amazing thing is that even we are loading some component using lazy loading like we are loading the grocery component using the lazy loading right now so if we use the loggedInUser Property inside grocery component then also inside the grocery component we will see the updated value of loggedInUser property, And it is amazing because as we are using lazy loading to load the grocery component that means in the initial load we did not have the files of grocery component but in spite of that when we load the grocery component later then also we get the updated value of context. and that is power of react context.
+//*So many people in the industry talk about some data management libraries or so called state management libraries like redux But React context Does the same thing for us so it creates a global space where we can store any data we want and react context is so much powerful that you don't even need to use Redux when you are building a small or mid size application because redux will do the same thing basically creating a global space for us where we can put data but if you are building a large scale application then you might need to use a data management tool like redux, But if you are building a small or midsize application then there is no need to import a third party library like redux from npm because we get react context with react already so most of the time we do not even need to import this kind of state management libraries from npm and most of the developers don't know that they don't even need to use redux every time, it is only needed when it is necessary.
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 const AppLayout = () => {
   //* state variable to save user's data coming from api
@@ -324,7 +344,7 @@ const AppLayout = () => {
     <UserContext.Provider
       value={{ loggedInUser: userName, greetingMessage: `Hello` }}
     >
-      <div className="app">
+      <div className="app ">
         <Header />
         <Outlet />
         {/* <Body /> */}

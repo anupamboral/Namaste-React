@@ -20,7 +20,7 @@ const ItemCategory = ({ data, showItems, setShowIndex, collapseItem }) => {
   };
 
   return (
-    <div className="text-white bg-[url('/src/imgs/background2.png')]    cursor-pointer ">
+    <div className="text-white bg-starry  cursor-pointer ">
       <div
         onClick={accordianToggle}
         className="flex justify-between p-4 text-3xl md:text-4xl my-4 shadow-md shadow-slate-400"

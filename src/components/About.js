@@ -62,7 +62,7 @@ class About extends Component {
     // console.log(`parent render`);
 
     return (
-      <div className="bg-[url('/src/imgs/background2.png')] text-white">
+      <div className="bg-starry text-white">
         <h1>About</h1>
         {/* using react context in class based component without any hook, explanation is in notes above */}
         <UserContext.Consumer>
