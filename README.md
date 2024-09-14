@@ -55,3 +55,11 @@
 
 - Client side routing
 - Server side routing
+
+## Redux Toolkit
+
+- install @reduxjs/toolkit and react-redux
+- build our store
+- connect our store to app
+- dispatch(action)
+- selector

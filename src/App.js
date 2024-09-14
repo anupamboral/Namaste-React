@@ -17,7 +17,8 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
 
 import UserContext from "./utils/UserContext.js";
-
+import { Provider, Provider } from "react-redux";
+import appStore from "./utils/appStore.js";
 //! Lesson - 12 - let's build our store
 //*
 //*My notes
@@ -54,9 +55,39 @@ import UserContext from "./utils/UserContext.js";
 //* this function is basically known as a reducer  , so we have learned some Jargons first is dispatch an action there is a reducer function so now if I have to say it again I will say when you click on this add button it dispatches an action which calls a reducer function and this reducer function modifies cart , so basically if I have to repeat it once again ,  when you call when you hit the add button when you press the add button it dispatches an action which calls the reducer function which updates the slice of our Redux store ,And then our slice will be updated, the data will be updated , this item will be added to our slice , we can't directly add it, we have to go through this part we have to go through this path when we are using redux, Why we do all this ? why are we doing why are we making things complicated? it is not complicated it is it makes our life easier but how we know later , when we will write code  But for now just learn that when we click on this add button it dispatches an action which calls the reducer function that modifies the slice of our Redux store  and we have written the data inside our cart slice ,  so this was how to write data
 //*suppose I want to read data right suppose now I have added this cart item in redux store ,now I want to get this data in the nav bar like this cart🛒(1),  in the nav bar the number of items should change , suppose if we had three items before and I added 1 more item so it should change to cart🛒(4) right .how can I read data from redux store , so what we have seen how to write data using this action dispatch ,function reducer, now we will see how to read data redux store and get over here in the  cart🛒(4), how can we get data from this cart ?
 //*for that we use something known as a selector, we use something known as a selector , so what will happen is we will use a selector to read the data from our store and the selector will modify our react component on the UI,  so this is how you read data , so  suppose if you want to read the data here cart🛒(1) component  from the cart slice . In this component in this header component how will you do that? you will use a selector and this selector will basically give you data and there is one more jargon , that is ` subscribing  to the store,when we use selector` , so we say that header component is subscribed to our redux store  and `when I say subscribe the store basically it is in sync with the store right`, `if the data inside my store changes my header component will update automatically`   redux will automatically update the data inside header as soon as my store changes that is why we call this as subscribing to the store so basically our header component over here has subscribed to the store and how do you subscribe? => using a selector, so this is all about redux, if we  understand this in theory writing code is very very easy  , so when you click on this add button it dispatches an action which calls the reducer function which modifies the slice of the store which modifies the slice of the store and this slice of the store and you know this header component is subscribed to this to this store using a selector , so this is how the whole flow works this is how the whole cycle works
-//* so basically behind the scenes what is happening this is what I am trying to say when you click on this add button here the data will update but how that data will get update so when you click on this add button we will dispatch an action that will that will call the reducer function that reducer function will update the slice right and because this component is subscribed to the store right using a selector it will automatically update , all this is happening behind the scenes and we have to understand this properly
+//* so basically behind the scenes what is happening this is what I am trying to say when you click on this add button here the data will update but how that data will get update so when you click on this add button we will dispatch an action that will that will call the reducer function that reducer function will update the slice right and because this component is subscribed to the store right using a selector it will automatically update , all this is happening behind the scenes and we have to understand this properly.
+//* so the whole process in a single line line looks like :- 1.click(add btn) => 2. dispatches an event =>   3. calls reducer function => 4. make changes on the redux store slice => 5. selector(subscribed with the slice) => 6. updates the Ui.
+
+//* so now to understand everything by writing code let's write down the steps we are gonna follow:-
+/*## Redux Toolkit
+ - install @redux/toolkit and react-redux
+ - build our store 
+ - connect our store to app
+ - dispatch(action)
+ - selector*/
+
+//* so lets first install the libraries by using the command
+//* npm i @reduxjs/toolkit and npm i react-redux
+//* and these two packages are added in our package.json file as dependencies
+
+//* now let's create our store , so we will create our store in utils folder, lets name our store file appStore.js. and inside it to create a store first we need to import a function from @reduxjs/toolkit named configureStore, as we need it to create the store that why we rae importing it from the redux toolkit. and we are gonna create a constant named appstore and it's value will be this function call we just imported configureStore({}), for starting we just put an empty {} inside it. and finally we export it as default.
+
+//* now we need to provide this store to our react application. and to provide it we need to go to our root file so app.js and inside it we need to import something called Provider from react-redux . this Provider is like a component very similar to context Provider we used to provide context but here this provider is to provide the redux store. we need to provide this store to our react application so it's kind a bridge between react and redux and that's why we are importing it from react-redux.  now our whole root component will go inside this provider component. like this:-
+/*    <Provider store={appStore}>
+      <UserContext.Provider
+      value={{ loggedInUser: userName, greetingMessage: `Hello` }}
+    >
+      <div className="app ">
+        <Header />
+        <Outlet />
+       
+      </div>
+    </UserContext.Provider>
+  </Provider>*/
+//* and mention the store attribute is necessary because here we have to mention our store name so first we need to import appStore from appStore.js and then as the value of store attribute we need to mention it.like above.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
+
 const AppLayout = () => {
   //* state variable to save user's data coming from api(from lesson 11 to understand context Provider )
   const [userName, setUserName] = useState();
@@ -70,15 +101,17 @@ const AppLayout = () => {
     setUserName(data.userName);
   }, []);
   return (
-    <UserContext.Provider
-      value={{ loggedInUser: userName, greetingMessage: `Hello` }}
-    >
-      <div className="app ">
-        <Header />
-        <Outlet />
-        {/* <Body /> */}
-      </div>
-    </UserContext.Provider>
+    <Provider store={appStore}>
+      <UserContext.Provider
+        value={{ loggedInUser: userName, greetingMessage: `Hello` }}
+      >
+        <div className="app ">
+          <Header />
+          <Outlet />
+          {/* <Body /> */}
+        </div>
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
