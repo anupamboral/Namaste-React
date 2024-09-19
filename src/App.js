@@ -84,7 +84,11 @@ import appStore from "./utils/appStore.js";
       </div>
     </UserContext.Provider>
   </Provider>*/
-//* and mention the store attribute is necessary because here we have to mention our store name so first we need to import appStore from appStore.js and then as the value of store attribute we need to mention it.like above.
+//* and mention the store attribute is necessary because here we have to mention our store name so first we need to import appStore from appStore.js and then as the value of store attribute we need to mention it.
+
+//* now the next step is to creating the slices.
+
+//* to create  a cart slice , again inside the utils folder we are gonna make another file named cartSlice.js and inside it we will create the slice . so inside this file we need file first import a function from @reduxjs/toolkit named createSlice()  as it is related with creating the slice in redux  . and now we will create a constant named cartSlice , and it value will the createSlice() function call and now this function takes some configuration to  create the slice . first inside the function we have write a object because we have give the configuration as key value pairs of the object. now inside the braces first we need mention the name.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
