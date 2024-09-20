@@ -88,7 +88,26 @@ import appStore from "./utils/appStore.js";
 
 //* now the next step is to creating the slices.
 
-//* to create  a cart slice , again inside the utils folder we are gonna make another file named cartSlice.js and inside it we will create the slice . so inside this file we need file first import a function from @reduxjs/toolkit named createSlice()  as it is related with creating the slice in redux  . and now we will create a constant named cartSlice , and it value will the createSlice() function call and now this function takes some configuration to  create the slice . first inside the function we have write a object because we have give the configuration as key value pairs of the object. now inside the braces first we need mention the name.
+//* to create  a cart slice , again inside the utils folder we are gonna make another file named cartSlice.js and inside it we will create the slice . so inside this file we need to first import a function from @reduxjs/toolkit named createSlice()  as it is related with creating the slice in redux  . and now we will create a constant named cartSlice , and it value will the createSlice() function call and now this function takes some configuration to  create the slice . first inside the function we have write a object because we have to give the configuration as key value pairs of the object. now inside the braces first we need mention the name property and it's value will be `cart` as we are making this slice for a cart. the second configuration is initialState .it is a object and inside it we have to mention the initial state of our cart. let keep the initial state - items:[]; an empty array.
+//* now the next property we need to mention is `reducers` and it's again an object and inside it we need to write reducer functions corresponding to each action. so what are the actions inside a cart? we can add an item , remove an item , clear the cart etcetera.
+/* reducer:{
+addItem:(state,action)=>{
+  state.items.push(action.payload)
+  }; here addItem is an action which mapped to the reducer function  which will modifies the data inside the slice.  so we already learned it in the theory. 
+
+  removeItem(state,action)=>{
+    state.items.pop()
+    }
+
+  clearCart:(state)=>{
+    state.items.length = 0;
+    }  
+}*/
+//*  So the above is the list of reducer functions we need for our car so the first action is add item and when this action will dispatch Then the reducer function attached with it will be called and these function get access to the two parameters first one is the state so this is the same state as the initial state but to get access inside the function we need to mention it as the parameter then only we can access it inside the function and the second parameter is the action so depending on this action we will modify our slice so as we can see in the first deducer function that we received these two parameters and then inside the function we have selected the state and inside it we selected the items and as th proper property is an empty array so we use the push method to add the item inside there and then inside the push method we pass action.payload. here payload is the item which we will get from the action.
+
+//*The second reducer function is for removing an item the action name is removeItem and And it gets access to the same parameters first one is the state and second one is the action and inside the function we simply use the pop method to remove the last item but in the future we will modify it more because the pop method is not the correct one to use here because pop method is gonna just remove the last item but actually here we need to select the index of the removed item and using that index we have to remove that particular index item
+
+//*And the third reducer function is emptyCart and as the parameter we will receive the state and here we do not need the action because inside the function we are just deleting all of the items of the array that's why we don't need the action though we can still receive it using the parameter.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
