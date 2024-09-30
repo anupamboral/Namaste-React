@@ -3,6 +3,7 @@ import { LOGO_URL } from "../utils/config";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux"; //* from lesson 12 to access the redux store slice and read data
 //* ⁡⁣⁢⁣application of state variable to toggle log in to log out and log out to log in when ever the user the user clicks on the log in btn:-⁡ so in the header component we have to first create a log in btn , and then to change the button name dynamically on user click we will use a state variable. so we are gonna the save the btnName inside a state variable and when the use will click on the btn we will use onclick event listener and inside the the callback function of the onclick listener we are gonna toggle log in and log out by changing this button's name which is saved inside the state variable.
 
 //*from 7th lesson(Finding the path)
@@ -58,6 +59,14 @@ const Header = () => {
 
   const onlineStatus = useOnlineStatus(); //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   // console.log(`header rendered`);
+
+  //*//* from lesson 12 to access the redux store slice and read data
+  //*subscribing to the store slice using selector
+  const cartItems = useSelector((store) => {
+    // console.log(store);
+    return store.cart.items;
+  }); //* inside this hook we write a callback function where as the parameter we get access to the whole store , and inisde the braces we have write which part/portion of the store we want to subscribe. like here we want the cart to be subscribed with the cart slice and our cartItems constant will get access to the all items inside the cartSlice. and now we just need to use it wherever needed. so now inside our cart element of the header , we will use this cartItems ro show the number of items.
+  console.log(cartItems);
   const navItemStyles =
     "text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:shadow-cyan-600 hover:shadow-lg  rounded-lg  no-underline"; //* as we are gonna use this same styling for every nav link that's why we just make a string which will contain the styles and now we can use it as value of class names of every nav link.
 
@@ -78,6 +87,9 @@ const Header = () => {
       </li>
       <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
         <Link to="/contact">Contact</Link>
+      </li>
+      <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
+        <Link to="/contact">Cart🛒({cartItems.length})</Link>
       </li>
       <button
         className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-cyan-600  border-2 border-[solid]  max-w-[15rem] [transition:all_500ms] shadow-cyan-600 shadow-lg  rounded-lg"

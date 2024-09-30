@@ -103,12 +103,38 @@ addItem:(state,action)=>{
     state.items.length = 0;
     }  
 }*/
-//*  So the above is the list of reducer functions we need for our car so the first action is add item and when this action will dispatch Then the reducer function attached with it will be called and these function get access to the two parameters first one is the state so this is the same state as the initial state but to get access inside the function we need to mention it as the parameter then only we can access it inside the function and the second parameter is the action so depending on this action we will modify our slice so as we can see in the first deducer function that we received these two parameters and then inside the function we have selected the state and inside it we selected the items and as th proper property is an empty array so we use the push method to add the item inside there and then inside the push method we pass action.payload. here payload is the item which we will get from the action.
+//*  So the above is the list of reducer functions we need for our car so the first action is add item and when this action will dispatch Then the reducer function attached with it/mapped to it , will be called and these function get access to the two parameters first one is the state so this is the same state as the initial state but to get access inside the function we need to mention it as the parameter then only we can access it inside the function and the second parameter is the action so depending on this action we will modify our slice so as we can see in the first reducer function that we received these two parameters and then inside the function we have selected the state and inside it we selected the items and as th proper property is an empty array so we use the push method to add the item inside there and then inside the push method we pass action.payload. here payload is the item which we will get from the action.
 
 //*The second reducer function is for removing an item the action name is removeItem and And it gets access to the same parameters first one is the state and second one is the action and inside the function we simply use the pop method to remove the last item but in the future we will modify it more because the pop method is not the correct one to use here because pop method is gonna just remove the last item but actually here we need to select the index of the removed item and using that index we have to remove that particular index item
 
 //*And the third reducer function is emptyCart and as the parameter we will receive the state and here we do not need the action because inside the function we are just deleting all of the items of the array that's why we don't need the action though we can still receive it using the parameter.
 
+//* and now we will export the reducers functions and also the actions from from cartSlice (inside cartSlice.js), like below
+//*1. exporting actions
+/*export const { addItem, removeItem, clearCart } = cartSlice.actions; //* exporting actions after destructuring, and this weird syntax is given by redux, and I'm saying it weird because their is no action property inside cartSlice, instead, inside the reducer object we write all of the action names(like property names) which are pointed towards their reducer functions, but as redux given us this syntax that's why we have to follow it.
+//* 2. exporting reducer function 
+export default cartSlice.reducer; //* exporting reducers functions
+*/
+//* so let's understand what is happening behind the scenes,so while we call createSlice() method to create the slice, and assign this function call to the constant named cartSlice, that's from the function call returns an object in this cartSlice constant. and that object will look like:-
+/*
+{
+  actions: {
+    addItem, removeItem, clearItem, clearCart;
+  }
+  reducers
+}
+*/
+//* and that's why when we export the actions and reducer, we need to do the destructuring like that.
+
+//* and now we need to add this slice into our store( appStore we built for redux store) , and to add the slice to store we first exported the actions and reducer from the cartSlice. and we need import this actions and reducer into our store(appStore), and one more important thing is that, the store also has its own reducer(an object which contains all the reducers of different slices like a big reducer which contains all of the reducers of different slices.) , so now inside the appStore we need to import the reducer and as the the reducer export was a default export like this:-export default cartSlice.reducer , so we can change the name while importing it in the appStore like cartReducer. so let's import it first. then we will add the cartSlice's reducer inside the reducer object of the store. and now our store and the cart slice is connected.
+
+//* and now let's try to read the data from the store, and to read the data remember what we need to do? let's go back to the diagram of redux-data-flow.png. in the diagram we can see that the cart(in our header section of our ui) should be subscribed to the redux store cartSlice through a selector.
+//* using the selector we want to show how many items inside the cartSlice of the store.
+//* the selector we are talking about is hook inside react. and the hook's name is useSelector() hook. and remember hook is just a normal javascript function/method. and this hook helps any part of our Ui (in this case `cart`) to subscribe to the store. so let's go out header.js file because there our cart is located, and there first we are gonna import the useSelector hook from react-redux as a named import.
+//* and we need to use it like this:-
+/*
+const cartItems = useSelector((store) => { store.cart.items});//* inside this hook we write a callback function where as the parameter we get access to the whole store , and inisde the braces we have write which part/portion of the store we want to subscribe. like here we want the cart to be subscribed with the cart slice and our cartItems constant will get access to the all items inside the cartSlice. and now we just need to use it wherever needed. so now inside our cart element of the header , we will use this cartItems ro show the number of items.*/
+//* and then we can use the length property on this cartItems to show the number of items like this:-<Link to="/contact">Cart🛒({cartItems.length})</Link>.
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {
