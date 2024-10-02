@@ -55,7 +55,7 @@ const Header = () => {
   const [loginBtnName, setLoginBtnName] = useState("Log In"); //*Default value is log in.
   useEffect(() => {
     // console.log(`useEffect called`);
-  }, [loginBtnName]); //*inside the dependency array we have only one dependency which is basically the loginBtnName state variable. which means after calling the useEffect hook first time after loading the page, this useEffect Hook will be onlu called when ever this loginBtnName state variables value changes. to know more about useEffect hook behavious please look at the notes above:-`⁡⁣⁢⁣Behavior of UseEffect() hook.⁡`
+  }, [loginBtnName]); //*inside the dependency array we have only one dependency which is basically the loginBtnName state variable. which means after calling the useEffect hook first time after loading the page, this useEffect Hook will be only called when ever this loginBtnName state variables value changes. to know more about useEffect hook behavious please look at the notes above:-`⁡⁣⁢⁣Behavior of UseEffect() hook.⁡`
 
   const onlineStatus = useOnlineStatus(); //*using custom hook useOnlineStatus to show the online status of the user.to know more see useOnlineStatus.js
   // console.log(`header rendered`);
@@ -65,7 +65,7 @@ const Header = () => {
   const cartItems = useSelector((store) => {
     // console.log(store);
     return store.cart.items;
-  }); //* inside this hook we write a callback function where as the parameter we get access to the whole store , and inisde the braces we have write which part/portion of the store we want to subscribe. like here we want the cart to be subscribed with the cart slice and our cartItems constant will get access to the all items inside the cartSlice. and now we just need to use it wherever needed. so now inside our cart element of the header , we will use this cartItems ro show the number of items.
+  }); //* inside this hook we write a callback function where as the parameter we get access to the whole store , and inside the braces we have write which part/portion of the store we want to subscribe. like here we want the cart to be subscribed with the cart slice and our cartItems constant will get access to the all items inside the cartSlice. and now we just need to use it wherever needed. so now inside our cart element of the header , we will use this cartItems ro show the number of items.
   console.log(cartItems);
   const navItemStyles =
     "text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:shadow-cyan-600 hover:shadow-lg  rounded-lg  no-underline"; //* as we are gonna use this same styling for every nav link that's why we just make a string which will contain the styles and now we can use it as value of class names of every nav link.
@@ -89,7 +89,7 @@ const Header = () => {
         <Link to="/contact">Contact</Link>
       </li>
       <li className={navItemStyles} onClick={() => setIsOpen(!isOpen)}>
-        <Link to="/contact">Cart🛒({cartItems.length})</Link>
+        <Link to="/cart">Cart🛒({cartItems.length})</Link>
       </li>
       <button
         className="login-btn text-[1.6rem] m-2 p-2 list-none cursor-pointer bg-transparent border-cyan-600  border-2 border-[solid]  max-w-[15rem] [transition:all_500ms] shadow-cyan-600 shadow-lg  rounded-lg"

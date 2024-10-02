@@ -19,6 +19,7 @@ import Shimmer from "./components/Shimmer";
 import UserContext from "./utils/UserContext.js";
 import { Provider, Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
+import Cart from "./components/Cart.js";
 //! Lesson - 12 - let's build our store
 //*
 //*My notes
@@ -135,6 +136,29 @@ export default cartSlice.reducer; //* exporting reducers functions
 /*
 const cartItems = useSelector((store) => { store.cart.items});//* inside this hook we write a callback function where as the parameter we get access to the whole store , and inisde the braces we have write which part/portion of the store we want to subscribe. like here we want the cart to be subscribed with the cart slice and our cartItems constant will get access to the all items inside the cartSlice. and now we just need to use it wherever needed. so now inside our cart element of the header , we will use this cartItems ro show the number of items.*/
 //* and then we can use the length property on this cartItems to show the number of items like this:-<Link to="/contact">Cart🛒({cartItems.length})</Link>.
+
+//* till now we were adding fake items to the cart , but now it's time to add real items from restaurant menu list. and remember to mutate the state basically add some data on click of the add btn(inside every menu item), we have to dispatch an action on the btn click,that will call the call the mapped reducer function with the action, and finally the reduce function ill update the state , and as the cart is in sink with the cart slice so it will be automatically updated.
+//* now to dispatch an action on add btn click , we have to go to menuitem.js file because there our add btn exists, on click of this btn we will call a function which will dispatch an action//* now let's name that function handleAddItem(see below the function), the function will be called on add btn click, now first to dispatch a action we need another function ,we will get it from a hook named useDispatcher, so we need to import it first from react-redux, and then call it and save its returned value inside a constant, it basically returns the dispatch function, so that's why we also named the constant dispatch, and it is function which we will use to inside dispatch a action inside the handlerAddItem(), so inside the handleAddItem function first we will call this function , but we need to pass some arguments while calling this dispatch function, so first of all we need import the action we need , so this handler is for adding the item and that's why we need addItem action , and remember we already created it inside our cartSlice, so lets import it first , now inside the dispatch function call we need to call this addItem action like a function call , and inside it we have to pass an argument and this argument is basically the  menu Item,for now let's just write `pasta` as argument and test it , if the cart is updating or not.and now we go to to any restaurant's menu page and just click the add button then we will see the cart item numbers are increasing with every click and even we can see the added items in the rray if we open the console, and this is happeniung because the cart is in sink in the cart slice the cart is subscribed to the cart slice, that's why it's is automatically updating. so let's analyse what's happening behind the scenes.so when we dispatch the action like this:-  dispatch(addItem(`pasta`)); then it creates, an object like:-
+/***⁡⁣⁢⁣{
+    payload: `pasta`;
+    type: "cart/addItem";
+}⁡*/
+//* and this is the object which goes inside the reducer function as the second parameter action
+/*⁡⁣⁢⁣addItem: (state, ​‌‍‌‍𝗮͟𝗰͟𝘁͟𝗶͟𝗼͟𝗻​) => {
+      //* the below code will mutate the state
+      state.items.push(action.payload);
+    }⁡,*/
+//* this action is the object returned by the dispatch function , and this object has an payload property which contains the actual data which we want to push,that's why when we push the data we write action.payload. because payLoad property contains the actual data.
+/*
+ ⁡⁣⁢⁣ const dispatch = useDispatch(); //*Returns the dispatch function from the Redux store.
+
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };//*called on click of the add btn⁡
+*/
+//* so for testing we used just pasta but let's pass real data inside the payload like this, onClick={()=>handleAddItem(item)}, and then we get it as a parameter and inside addItem action call we pass this item.
+//* and when the user clicks on the cart, we want to show a cart page so lets build it.and also don't forget to add the path of the page in App.js in router configuration
+//* fix the cart tommorow write about it and also add the clear cart btn.
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {
@@ -192,6 +216,10 @@ const appRouter = createBrowserRouter([
       {
         path: `/restaurants/:resId`,
         element: <RestaurantMenu />,
+      },
+      {
+        path: `/cart`,
+        element: <Cart />,
       },
     ],
     errorElement: <Error />,
