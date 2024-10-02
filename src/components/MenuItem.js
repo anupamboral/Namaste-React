@@ -20,7 +20,7 @@ const MenuItem = ({ item }) => {
   //* so for testing we used just pasta but let's pass real data inside the payload like this, onClick={()=>handleAddItem(item)}, and then we get it as a parameter and inside addItem action call we pass this item.
 
   const dispatch = useDispatch(); //*Returns the dispatch function from the Redux store.
-
+  //* handler function for dispatching action to add the item in redux store cart slice on click of the add button
   const handleAddItem = (item) => {
     dispatch(addItem(item));
   };

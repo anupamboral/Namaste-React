@@ -68,7 +68,7 @@ const Header = () => {
   }); //* inside this hook we write a callback function where as the parameter we get access to the whole store , and inside the braces we have write which part/portion of the store we want to subscribe. like here we want the cart to be subscribed with the cart slice and our cartItems constant will get access to the all items inside the cartSlice. and now we just need to use it wherever needed. so now inside our cart element of the header , we will use this cartItems ro show the number of items.
   console.log(cartItems);
   const navItemStyles =
-    "text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:border-2 hover:shadow-cyan-600 hover:shadow-lg  rounded-lg  no-underline"; //* as we are gonna use this same styling for every nav link that's why we just make a string which will contain the styles and now we can use it as value of class names of every nav link.
+    "text-[1.3rem] font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600  hover:shadow-cyan-600 hover:shadow-lg  rounded-lg  no-underline"; //* as we are gonna use this same styling for every nav link that's why we just make a string which will contain the styles and now we can use it as value of class names of every nav link.
 
   //*To make the design responsive for smaller screens we have added a menu icon which will be visible for smaller screens and all of the navigation items will get hidden but when the user will click on the menu icon then all of the navigation links should get displayed and to keep track Of the navigation menu is open or not we have created a state variable named isOpenItIts default state will be false because by default it should be hidden but when the user will click on the menu button then on click event this state variables value will be changed and it will get true,And when it gets true then we have used an operator and as soon as it gets true on click of the menu button we display all of the menu items so the navigation items in a column format for bigger screens we were displaying it in a row format but for responsiveness Small screens we will show all of the navigation items in a column format so we have created a div which will be only displayed when the state variables value gets true which will happen on click event But inside the div if we would create the same navigation items again then it will be duplication of code which is not allowed that's why we have created this  constant named navLinks which is containing all of the navigation items so then we can use same navigation links To display for bigger screens in the row format and also in the smaller screens in the column format and that is how we are dealing with the problem of duplication of code.to know more see this video:-(https://www.youtube.com/watch?v=iq-7qRUYsTI)
   const navLinks = (
@@ -123,72 +123,81 @@ const Header = () => {
         </Link>
       </div>
       {/* //*nav for medium and bigger devices */}
-      <nav className="nav-items sticky hidden md:block">
+      <nav className="nav-items sticky hidden lg:block">
         <ul className="flex">{navLinks}</ul>
       </nav>
       {/* //* nav for smaller screens */}
-      <div className="md:hidden w-6 text-white mr-6 z-20">
-        <button onClick={() => setIsOpen(!isOpen)} type="button">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            x="5px"
-            y="0px"
-            width="100"
-            height="100"
-            viewBox="0 0 48 48"
-            className="w-12  content-center"
-          >
-            <linearGradient
-              id="9iHXMuvV7brSX7hFt~tsna_Rdp3AydLFY2A_gr1"
-              x1="12.066"
-              x2="34.891"
-              y1=".066"
-              y2="22.891"
-              gradientUnits="userSpaceOnUse"
+      <div className="lg:hidden w-48  text-white mr-2 z-20">
+        <div className="flex">
+          {/*  {
+          " only the cart link will be shown with the menu btn for small and medium screens that's why we added only cart link below and other nav links will be only open on click of menu btn "
+        } */}
+          <li className="text-2xl font-bold m-2 p-2 list-none max-w-[15rem] cursor-pointer [transition:all_900ms] hover:border-cyan-600   hover:shadow-cyan-600 hover:shadow-lg  rounded-lg  no-underline pt-7">
+            <Link className="w-6" to="/cart">
+              Cart🛒({cartItems.length})
+            </Link>
+          </li>
+          <button onClick={() => setIsOpen(!isOpen)} type="button">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="5px"
+              y="0px"
+              width="100"
+              height="100"
+              viewBox="0 0 48 48"
+              className="w-12  content-center"
             >
-              <stop offset=".237" stopColor="#3bc9f3"></stop>
-              <stop offset=".85" stopColor="#1591d8"></stop>
-            </linearGradient>
-            <path
-              fill="url(#9iHXMuvV7brSX7hFt~tsna_Rdp3AydLFY2A_gr1)"
-              d="M43,15H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,14.1,44.1,15,43,15z"
-            ></path>
-            <linearGradient
-              id="9iHXMuvV7brSX7hFt~tsnb_Rdp3AydLFY2A_gr2"
-              x1="12.066"
-              x2="34.891"
-              y1="12.066"
-              y2="34.891"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset=".237" stopColor="#3bc9f3"></stop>
-              <stop offset=".85" stopColor="#1591d8"></stop>
-            </linearGradient>
-            <path
-              fill="url(#9iHXMuvV7brSX7hFt~tsnb_Rdp3AydLFY2A_gr2)"
-              d="M43,27H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,26.1,44.1,27,43,27z"
-            ></path>
-            <linearGradient
-              id="9iHXMuvV7brSX7hFt~tsnc_Rdp3AydLFY2A_gr3"
-              x1="12.066"
-              x2="34.891"
-              y1="24.066"
-              y2="46.891"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop offset=".237" stopColor="#3bc9f3"></stop>
-              <stop offset=".85" stopColor="#1591d8"></stop>
-            </linearGradient>
-            <path
-              fill="url(#9iHXMuvV7brSX7hFt~tsnc_Rdp3AydLFY2A_gr3)"
-              d="M43,39H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,38.1,44.1,39,43,39z"
-            ></path>
-          </svg>
-        </button>
+              <linearGradient
+                id="9iHXMuvV7brSX7hFt~tsna_Rdp3AydLFY2A_gr1"
+                x1="12.066"
+                x2="34.891"
+                y1=".066"
+                y2="22.891"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset=".237" stopColor="#3bc9f3"></stop>
+                <stop offset=".85" stopColor="#1591d8"></stop>
+              </linearGradient>
+              <path
+                fill="url(#9iHXMuvV7brSX7hFt~tsna_Rdp3AydLFY2A_gr1)"
+                d="M43,15H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,14.1,44.1,15,43,15z"
+              ></path>
+              <linearGradient
+                id="9iHXMuvV7brSX7hFt~tsnb_Rdp3AydLFY2A_gr2"
+                x1="12.066"
+                x2="34.891"
+                y1="12.066"
+                y2="34.891"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset=".237" stopColor="#3bc9f3"></stop>
+                <stop offset=".85" stopColor="#1591d8"></stop>
+              </linearGradient>
+              <path
+                fill="url(#9iHXMuvV7brSX7hFt~tsnb_Rdp3AydLFY2A_gr2)"
+                d="M43,27H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,26.1,44.1,27,43,27z"
+              ></path>
+              <linearGradient
+                id="9iHXMuvV7brSX7hFt~tsnc_Rdp3AydLFY2A_gr3"
+                x1="12.066"
+                x2="34.891"
+                y1="24.066"
+                y2="46.891"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop offset=".237" stopColor="#3bc9f3"></stop>
+                <stop offset=".85" stopColor="#1591d8"></stop>
+              </linearGradient>
+              <path
+                fill="url(#9iHXMuvV7brSX7hFt~tsnc_Rdp3AydLFY2A_gr3)"
+                d="M43,39H5c-1.1,0-2-0.9-2-2v-2c0-1.1,0.9-2,2-2h38c1.1,0,2,0.9,2,2v2C45,38.1,44.1,39,43,39z"
+              ></path>
+            </svg>
+          </button>
+        </div>
       </div>
       {isOpen && (
-        <div className=" flex flex-col md:hidden sm:px-6 z-20 absolute list-none gap-y-5   m-8 py-16 items-center w-72 right-6 top-16 rounded-lg bg-starry border-rose-300 border-2">
-          {" "}
+        <div className=" flex flex-col lg:hidden sm:px-6 z-20 absolute list-none gap-y-5   m-8 py-16 items-center w-72 right-6 top-16 rounded-lg bg-starry border-rose-300 border-2">
           {navLinks}
         </div>
       )}

@@ -157,8 +157,14 @@ const cartItems = useSelector((store) => { store.cart.items});//* inside this ho
   };//*called on click of the add btn⁡
 */
 //* so for testing we used just pasta but let's pass real data inside the payload like this, onClick={()=>handleAddItem(item)}, and then we get it as a parameter and inside addItem action call we pass this item.
-//* and when the user clicks on the cart, we want to show a cart page so lets build it.and also don't forget to add the path of the page in App.js in router configuration
-//* fix the cart tommorow write about it and also add the clear cart btn.
+//* and when the user clicks on the cart, we want to show a cart page so lets build it.and also don't forget to add the path of the page in App.js in router configuration.
+//* now let's build our cart.js page , so first we built a normal cart page and as we need to display the added cart items, we can reuse our MenuItem component because it is a similar component as we need. so first to reed data we useSelector hook, as we want our cart component to be subscribed with the cart slice. and after the getting the data from it we saved it inside a constant named cartItems, and now this cartItems is an array of objects and each object represents a different restaurant. now we have to use this data to pass inside MenuItem component. but MenuItem takes item as prop not the whole ItemList as prop. that why we iterated the array of restaurant objects using mapmethod and each iteration we passed the item from the Itemlist.
+//* we also used ternary operator to show the cart items when it is not empty but when it is empty we will display a empty cart message
+
+//* now let's add a empty card btn, so let's first create the btn on ui, and then to make the cart empty on this btn click , we need to attach an handler function with it, and remember to mutate some data in the cart slice of redux store, first we need to dispatch an action, so first import useDispatch hook from react-redux . and now call this hook and saved the returned function into a constant named dispatch  . and now we will this dispathch function inside our handleCart function, but before that we need to import the clearCart action from cartSlice.and now inside the handler function first we need dispatch function inside itand then the clearCart action , we need to caal both like this:- dispatch(clearCart().)
+
+//*  we also created a  the handleSearch function in body.js file for adding restaurant searching feature using the keyboard enter btn because we need to use it twice , once  when the user clicks on the search btn after entering the restaurant name in the input feild and second when the user search through the clicking enter on keyboard and that handler we need to attach on the input element .and to call the handlerSearch callback function on enter key press we need attach a handler on the search input element like this:-onKeyDown={(e) => e.key === "Enter" && handleSearch()}.
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {

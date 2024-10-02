@@ -144,6 +144,15 @@ const Body = () => {
     return <h1>You are offline. Please check your internet connection</h1>;
   console.log(listOfRestaurants);
 
+  //* search handler function for handling restaurant name search
+  const handleSearch = () => {
+    const filtered = listOfRestaurants.filter((res) =>
+      res.info.name.toLowerCase().includes(searchText.toLocaleLowerCase())
+    ); //*converting both side to lowercase and using includes method important to mke this filtration case insensitive and in between searchable from restaurant names.
+    //* changing the state variable
+    setFilteredRestaurants(filtered);
+  };
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
@@ -158,17 +167,13 @@ const Body = () => {
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
+            onKeyDown={(e) => e.key === "Enter" && handleSearch()} //* refactored the handleSearch function because we need to use it twice , once here when the user clicks on the search btn after entering the restaurant name and second when the user clicks enter on keyboard and that handler we need to attach on the input element .and to call the handlerSearch callback function on enter key press we need attach a handler on the search input element like this:-onKeyDown={(e) => e.key === "Enter" && handleSearch()}.
           ></input>
           <button
             className="search-btn p-2 text-[1.4rem]  divide-solid  w-24 font-bold border-[2px] border-[solid] border-[rgb(9,63,201)] cursor-pointer [transition:all_500ms] bg-transparent  hover:scale-105  hover:shadow-cyan-600 hover:shadow-lg "
             onClick={() => {
-              const filtered = listOfRestaurants.filter((res) =>
-                res.info.name
-                  .toLowerCase()
-                  .includes(searchText.toLocaleLowerCase())
-              ); //*converting both side to lowercase and using includes method important to mke this filtration case insensitive and in between searchable from restaurant names.
-              //* changing the state variable
-              setFilteredRestaurants(filtered);
+              //* refactored the handleSearch function because we need to use it twice , once here when the user clicks on the search btn after entering the restaurant name and second when the user clicks enter on keyboard and that handler we need to attach on the input element .and to call the handlerSearch callback function on enter key press we need attach a handler on the search input element like this:-onKeyDown={(e) => e.key === "Enter" && handleSearch()}.
+              handleSearch();
             }}
           >
             Search
