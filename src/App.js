@@ -187,6 +187,55 @@ const cartItems = useSelector((store) => { store.cart.items});//* inside this ho
 //* const cartItems= store.cart.item;
 //* it will work but will very less efficient, because as our component is subscribed to the whole store, that's why even any change happens on any other slice which is not related this component, but as we subscribed to the whole store inside this component so react will every time try to update this component also and that is not needed. and eventually when we create a app the store becomes so much heavy as it contains many slices for many portions of the app. and if we subscribe to whole store inside any component , then each time anything changes inside the store even unrelated to the component still the component will be updated. and that's why not subscribing to the right portion of the store can make your app less performant.so always try to subscribe to a small portion of the store which is needed. that's why developer's named the hook useSelector(), as we should use it to get a selected portion of the store.But as we selected only a small portion of the store which is the store.cart.items,That's why this component will be only updated when this small portion gets changed and this component has nothing to do with the whole store and the other slices as we specifically mentioned the small portion we need here.
 
+//* the second big mistake developers make while writing the reducer property of the store , the spelling should be reducer not reducers. because it is one big reducer and this reducer can have multiple small reducers.like this:-
+/*const appStore = configureStore({
+  reducer: {
+    cart: cartReducer,
+  },
+});*/
+
+//* but when we create a slice, then we create their multiple reducer functions that's wht inside a slice we write the property name 'reducers' because inside it we will write multiple small reducer functions.like this:-
+/*const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    items: [], //*initial state of the cart items is empty array,because at first the cart items will be 0.
+  },
+  reducers: {
+    addItem: (state, action) => {
+      //* the below code will mutate the state
+      state.items.push(action.payload);
+    },
+
+    removeItem: (state, action) => {
+      state.items.pop();
+    },
+
+    clearCart: (state) => {
+      state.items.length = 0;
+    },
+  },
+});*/
+//* export default cartSlice.reducer;
+//* but one more interesting thing is that while exporting it from cartSlice we only write cartSlice.reducer and this because this is big reducer which contains many small reducer functions.
+
+//SoSo let's know about the previous way of using Redux which is also known as Vanilla Redux so we already know that using Vanilla Redux was a bit more complicated than the newer version of Redux Toolkit we are using right now and a major difference is that inside a slice when we are writing a reducer function like add to cart or any other inside that reducer function we are directly modifying the state so as we already know as the first parameter we receive the state and inside the reducer function we modify the state directly using action.payload but the previous version of Redux used to say that you can't modify the state directly instead you have to make a copy of the state by creating another constant and using the spread operator You spread the array inside another array and make a copy of the state array and then you modify that new copied state and then return it. like this:-
+/*
+reducers: {
+  addItem: (state, action) => {
+    //* vanilla redux(older) says => DON'T MUTATE STATE,make a copy of the state and then modify that copy then return that like below
+    //* const newState = [...state];
+    //* newState.items.push(action.payload);
+    //* return newState;
+
+    //* redux toolkit(new) says => YOU HAVE TO MUTATE existing STATE (COMPULSORY) or return a new state.
+    //* the below code will mutate the state
+    state.items.push(action.payload);
+  }
+}*/
+//*BUT THE NEW VERSION OF REDUX KNOWN AS REDUX TOOLKIT SAYS  YOU HAVE TO MUTATE existing STATE (COMPULSORY) or return a new state. AND DON'T NEED TO MAKE THE COPY OF THE STATE.EARLIER RETURNING WAS MANDATORY BUT NOW THERE IS NO NEED OF compulsory RETURNING THE STATE AS WE DIRECTLY MODIFYING IT.But an interesting thing is that even we modify the state directly here but behind the scenes redux is doing all of the things it used to do on the older version but the difference is the develop has no need to do it by themselves redux do it behind the scenes so basically creating a copy of the state and then returning it but Redux abstracted the functionality and doing it behind the scenes and Redux do it using a library called Immer.Immer  is a tiny package that allows you to work with immutable state in a more convenient way.First compare between the older state and the modified state then create a new immutable state variable with the modified data and then return the immutable new state variable to us .
+
+//*So now we can understand that we're not actually mutating the state even in the newer version, behind the scenes immer is doing the same thing like the older ver but but the functionality is abstracted so developers don't need to do it by themselves.if we do it state = [anupam]  it is just modifying the local copy inside the reducer, not the original state, but we want to change the original state, that's why we need to do like this:-state.items.push(action.payload); not this:- state= action.payload .
+//* for any testing purpose , if you want to console log you state inside the reducer function the it will work, to ake it work you have to write  properly console.log(current(state)). and remember to import this current function from redux-toolkit as a named import.
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {

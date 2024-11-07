@@ -7,6 +7,14 @@ const cartSlice = createSlice({
   },
   reducers: {
     addItem: (state, action) => {
+      //*OLDER WAY
+      //* vanilla redux(older) says => DON'T MUTATE STATE,make a copy of the state and then modify that copy then return that like below
+      //* const newState = [...state];
+      //* newState.items.push(action.payload);
+      //* return newState;
+
+      //*NEW WAY
+      //* redux toolkit(new) says => YOU HAVE TO MUTATE STATE (COMPULSORY)
       //* the below code will mutate the state
       state.items.push(action.payload);
     },
