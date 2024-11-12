@@ -63,3 +63,9 @@
 - connect our store to app
 - dispatch(action)
 - selector
+
+## Types of testing
+
+- Unit testing
+- Integrated testing
+- End to end(e2e) testing
