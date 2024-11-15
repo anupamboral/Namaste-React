@@ -69,3 +69,10 @@
 - Unit testing
 - Integrated testing
 - End to end(e2e) testing
+
+## Setting up testing
+
+- installing react testing library
+- installing jest
+- installing babel dependencies
+- configured babel

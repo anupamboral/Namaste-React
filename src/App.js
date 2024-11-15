@@ -60,9 +60,22 @@ import Cart from "./components/Cart.js";
 //* In the website of Jest Library they have mentioned that if you're going to use jest along with Babel ,then you have to instal some extra dependencies and in this project we are already using Babel as we installed it while installing parcel that's why we also need to use instal these extra dependencies so we can go to jest testing library's website and copy the command to instal these extra dependencies and just install , so the command is :-
 //* npm install --save-dev babel-jest @babel/core @babel/preset-env
 
-//* So so far we have installed react testing libraries we have installed jest we are now installing the dependencies which are required to use Babel right because we are using jest along with Babel.
+//* So far we have installed react testing libraries we have installed jest we are now installing the dependencies which are required to use Babel right because we are using jest along with Babel.
 //* you will see these three dev dependencies will be added after this:- babel-jest,babel/preset-env,babel/core .
 
+//* after installing these now in website , it is mentioned that we have to config babel. so on the root level of our project  we have to create a babel.config.js file(they say in their website -Configure Babel to target your current version of Node by creating a babel.config.js file in the root of your project:). and paste this code:-
+/*module.exports = {
+  presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+};*/
+/* so we have already done all these four steps:-
+- installing react testing library
+- installing jest
+- installing babel dependencies
+- configured babel*/
+
+//*Note:- parcel automatically has Babel inside it. right parcel uses Babel behind the scenes , so what I told you that parcel uses babel behind the scenes  and babel is a transpiler  and parcel uses babel but now when we are using jest and when we are using these dependencies manually so when we do this so `these dependencies will interfere with parcel's babel configuration,  parcel also uses Babel and now we are trying to configure Babel according to us , we are trying to configure Babel according to us so what will happen is there will be a conflict between Babel and parcel .Parcel will say that I have my own internal Babel configuration and we have also added a new babel configuration which we copied from jest's website. so this will kind of try to overwrite  the existing Babel configuration that parcel has set for us. parcel has its own configuration for babel now we are trying to add extra configuration so parcel will get confused and parcel's configuration will create conflict with this configuration `babel.config.js`.  So we will have to change parcel's behavior  to accommodate(to work together) to use babel along with jest. we will have to accommodate, we will have to make some changes in our parcel configuration.
+//* what are those changes
+//*if I will go to  parcel's website  docs now search for jest in the search box, click on this javascript right so if you will search for justice over here go here right javascript this transpilation right or you can go in a different way click on get started on this homepage just scroll down you will see javascript over here right if you will see javascript and inside javascript who go to this part go to this Bible right go to this baybill and try to read this up right now you would be thinking Akshay there is so much complicated things you are telling me it is going over the head do not worry my dear friends try to read this up from the official documentation I have read it myself that is why I am able to do this no teacher will teach you all this let me tell you my dear friends no teacher will teach you all this go nobody will tell you how to set up testing right all many teachers right I am not saying no teacher will teach you there would be teachers who would be teaching it right I am sorry for if I have like mistakenly said said something wrong right for teachers right I respect all of the teachers but I am telling you that most teachers they do not talk about all this stuff right because these are like complicated stuff but I want you all to understand that there are lots of efforts required to make testing code what did along with- check this para
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {
