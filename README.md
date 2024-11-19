@@ -77,5 +77,5 @@
 - installing babel dependencies
 - configured babel
 - configure parcel configuration file (.parcelrc) to disable default babel transpilation
-- configure jest
+- configure jest - npx jest --init
 - install jest-environment-jsdom library
