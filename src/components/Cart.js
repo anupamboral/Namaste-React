@@ -14,7 +14,7 @@ const Cart = () => {
   };
   return (
     <div className="text-center  bg-starry min-h-dvh text-white ">
-      <div class="max-w-6xl px-4 mx-auto text-left  ">
+      <div className="max-w-6xl px-4 mx-auto text-left  ">
         <p className=" text-3xl font-extrabold underline bg-starry text-center p-4  ">
           Your meal list
         </p>
