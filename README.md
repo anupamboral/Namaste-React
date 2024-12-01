@@ -81,3 +81,4 @@
 - install jest-environment-jsdom library
 - install @babel/preset-react as dev-dependency to make jsx work for our test cases.
 - add preset @babel/preset-react to the babel config file and set runtime to automatic.
+- install @testing-library/jest-dom as dev-dependency.
