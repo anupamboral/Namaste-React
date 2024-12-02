@@ -182,7 +182,21 @@ render(<Contact/>)⁡
 //*When you're writing tests, you often need to check that values meet certain conditions. expect() gives you access to a number of "matchers"(methods) that let you validate different things and the expect() method on which are using toBeInTheDocument() method to find anything inside the document. there are so many other methods we can use on expect function to find expected results using test cases.we can find all available methods available on the function here in the below link.
 //*https://jestjs.io/docs/using-matchers
 //* but to access methods related to dom state changes, jest alone is not enough, so installed another library named jest-dom few minutes ago.and this library basically extends jest methods and give us any matchers(methods) to do test related dom state changes. ⁡⁣⁢⁣`toBeInTheDocument()`⁡ method also comes from this library. so to access methods related to dom changes we have to go this jest dom libraries github page:- https://github.com/testing-library/jest-dom/
-//*
+//*to find multiple elements using role we have to use getAllByRole() method.
+//* if we do console logs inside the test cases like this:-  console.log(inputBoxes);//* it will print react elements which are basically javascript objects, so don't be surprised to see objects because every react/jsx elm is actually just an javascript object.and yes we can do console log here while writing test cases.
+//* expect(inputBoxes.length).not.toBe(3); //*here .not is like ! mark , it makes the method opposite . because of not the above assertion means the length should not be 3. as the answer is 4 so it will passed.
+//* so every time we write test case first we will 1.render then 2.query and then 3.assert .
+//*  sometimes you know what happens is a test file increases , suppose in your file there are like 20 test cases now it becomes difficult to manage such amount of test cases , so basically we can create small group of few test cases, we can create different groups of test cases
+//* So how do you group these test cases?
+//* using describe method , basically so you can assume that there are 20 test cases five test cases are testing contact page 5 test cases are testing something else, five test cases are testing groceries, so you can basically group this multiple test cases into a single block that block is known as describe. and like test() the first argument is a string where we write the description like:- test cases for contact us page. and then second argument is callback function which , inside it we can keep all of the test cases we want want in this group of test cases.like this:-
+/*describe("test cases for contact us page", () => {
+  test1
+  test2
+  test3
+})*/
+
+//* So this is the describe block this is just for grouping test cases and you can have multiple describe blocks also and you can have a describe inside a describe also suppose if you want to add these two test cases inside another describe block , you can do that.
+//* How to write test cases we have used test function but instead of test keyword we can use it keyword also and it both are basically same it is just a naming convention because many developers tried the description of the test and they start with should so then if they use `it` keyword then it will be very easy to read it will sound like `it should load some specific component` that is why developers many times use heat keyword instead of test.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
