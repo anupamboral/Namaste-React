@@ -11,6 +11,7 @@ const Contact = () => {
           className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
         />
         <input
+          data-testid="test1"
           type="email"
           placeholder="Email"
           className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"

@@ -175,6 +175,15 @@ render(<Contact/>)⁡
 //* we don't have to import a particular thing from the library but just include it like this.
 //* you will you will see an amazing thing as soon as you write any expect statement as soon as you write any assertion ,  expect is a very important thing in testing , so as soon as you write  expect(). and you hit the dot it gives you a list of a lot of important function that you can assert to .so the heading should to be in the document, we will be using this function a lot ,wherever we have to check something whether it is loaded or not, we can use this function ,  whether this heading is present in the document or not. This means that your component is loading successfully .So this is how you write testcases, now let me run this test case again,it has not been passed since a long time ,  this time it should work otherwise we will just pull our hairs ,it will work this time right and if I write npm run test it will be passed , we have two test cases and two of them are passed.
 
+//* the beauty about jest is  whenever it fails the test it also shows you what was rendered on the screen.
+//* On the screen object we can access so many methods which can help us to find any element or text from the document like using getByRole method we can find any element using its role Like heading or footer or any other element and there is a getByText() Method which helps us to find any text from the screen and we have also a method named getByTestId() method we can search any element by using the data-testid attribute we mentioned in the element, but remember you have to mention the the data-testid attribute in the element you want to test.We also getByPlaceholderText() method we can search any input element using its placeholder attribute vale. and there are other so many methods available on the screen object which we we can use to find anything from the screen. The below link has the links available on the screen object.
+//*https://testing-library.com/docs/react-testing-library/cheatsheet
+
+//*When you're writing tests, you often need to check that values meet certain conditions. expect() gives you access to a number of "matchers"(methods) that let you validate different things and the expect() method on which are using toBeInTheDocument() method to find anything inside the document. there are so many other methods we can use on expect function to find expected results using test cases.we can find all available methods available on the function here in the below link.
+//*https://jestjs.io/docs/using-matchers
+//* but to access methods related to dom state changes, jest alone is not enough, so installed another library named jest-dom few minutes ago.and this library basically extends jest methods and give us any matchers(methods) to do test related dom state changes. ⁡⁣⁢⁣`toBeInTheDocument()`⁡ method also comes from this library. so to access methods related to dom changes we have to go this jest dom libraries github page:- https://github.com/testing-library/jest-dom/
+//*
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {
