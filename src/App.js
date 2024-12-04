@@ -225,6 +225,21 @@ render(<Contact/>)⁡
 //*BrowserRouter is a parent component that stores all other route components. It uses the HTML5 history API to keep the UI in sync with the URL.
 //*RouterProvider is used with the createBrowserRouter function to create a router object. RouterProvider allows you to lazy load and convert route modules to the format expected by your data router, code-split your routes .
 //* So if we are creating the routing configuration then we can use routerProvider along with createBrowserRouter() with if the configuration is already created but we are testing some component in isolation then we can BrowserRouter component to provide the3 configuration as it  stores all other route components. It uses the HTML5 history API to keep the UI in sync with the URL.
+//* so now our test case will pass.
+//* so let's write the query to find the login btn from the screen, and the assertion.
+//* Now let's write a similar test case which will taste if the card is loaded inside the header component or not and inside this we will use regex so what is regex? regex is regular expression . so if we use getByText("") then we have to write the whole string perfectly like this getByText("Cart🛒(0)") but if we just want to mention a part of the text like only cart then we can use regex to write it like this:- getByText(/Cart/). and if we use getAllByText() for having multiple elements(we have two cart elms) then we will get an array . so the we have to take 0th index from the array while writing assertion. like this:-  expect(cart[0]).toBeInTheDocument();
+//*⁡⁣⁢⁣simulating an event in test cases⁡
+// *So now let's test the behavior of the login button so when we click on it it should change to log out and when we click again then it should come back to login so let us test this behavior using test cases,  description- should change login button to log out on click.  how will we test this:- How will you test this? let's see how to write this first of all I have rendered my header  now I have found out my login button(using query) now how will I simulate the click event? how will I basically simulate that click event ? how can I click button from code? yes we can , I can use something known as fireEvent ,there is something known as fireEvent and this fire event comes from it is imported from  testing-library-react just like we imported render, we imported screen similarly we import fireEvent.So this is for firing an event basically firing an event, now if you use a dot. operator it shows you what the event to fire.   I want to fire a click event , so I will do a fireEvent.click(logInBtn) and where should I click I want to click my login button so we passed the button inside the click function, so suppose if I do a fireEvent click I clicked my login button now it will change my login button to log out button . so now I will try to find out my logout button in the in the app.so if there is a logout button on the screen.like this:-
+/*//* query
+  const logInBtn = screen.getByRole("button", { name: "Log In" });
+
+  fireEvent.click(logInBtn); //*imported from react testing library to fire the click event on the log in btn using code
+
+  const logOutBtn = screen.getByRole("button", { name: "Log Out" });
+  //* assertion
+  expect(logOutBtn).toBeInTheDocument();*/
+
+//*let's just run this and it passed successfully so changing log in to log out is working properly.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
