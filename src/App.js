@@ -1,11 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  lazy,
-  Suspense,
-  Provider,
-  useContext,
-} from "react";
+import React, { useEffect, useState, lazy, Suspense, useContext } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -17,7 +10,7 @@ import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
 
 import UserContext from "./utils/UserContext.js";
-import { Provider, Provider } from "react-redux";
+import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
 import Cart from "./components/Cart.js";
 //! Lesson - 13 - Time for the test
@@ -196,7 +189,42 @@ render(<Contact/>)⁡
 })*/
 
 //* So this is the describe block this is just for grouping test cases and you can have multiple describe blocks also and you can have a describe inside a describe also suppose if you want to add these two test cases inside another describe block , you can do that.
-//* How to write test cases we have used test function but instead of test keyword we can use it keyword also and it both are basically same it is just a naming convention because many developers tried the description of the test and they start with should so then if they use `it` keyword then it will be very easy to read it will sound like `it should load some specific component` that is why developers many times use heat keyword instead of test.
+//* How to write test cases we have used test function but instead of test keyword we can use `it` keyword also and  both are basically same `it` is just a naming convention because many developers write the description of the test cases and they start with should so then if they use `it` keyword then it will be very easy to read it will sound like `it should load some specific component` that is why developers many times use it keyword instead of test keyword but there is no difference between them and we can use any of them.
+
+//* so we tested a component in isolation , so it was unit testing.
+
+//* So we know that from the point we have started testing to save the testing files vs code has created a coverage folder on the root level and there is no need to add this file to our git repository that's why we can just add this folder to our .gitignore file so it will not be added to Github.
+
+//* so we do not have to push this coverage folder it is just used to see the coverage, test code coverage, see in the terminal we have 100 percent test course coverage .
+
+//* header.js component testing
+//*  we are doing unit testing ,so we will just test whether we have rendered the header component in isolation and whether it loaded successfully or not. so let us try to write that test case. When this header component will load we will check whether it loaded with the login button or not, then  we can also see whether the cart has zero items or not when we load our header component. The cart should have zero items initially.
+//* let's me create one more test file and lets call this as header.test.js now I will write test cases for my header component.
+
+//* let's start writing the test case and the description of the test case - "should load header component with login button ". It should load my header component with a login button and and inside the callback function , there are three parts of the test case, 1.render things on the screen then find something or 2.query and then 3.assert something.So first of all I will render Header component using render() function, this render() will come from my react testing library and then I will render my header component this header component comes from `../header`. and then render(<Header/>)  Now one more important thing , if I save this and if I run my test it will fail and why it fails?   let us try to see why it failed in the terminal, it says that "could not find react-redux context value; please ensure the component is wrapped in a <Provider>" , so it failed because inside header component we are using useSelector() hook  and this useSelector() comes from react-redux, our application is using redux because we wrapped our whole app inside <Provider/> which gives our app access to the redux store,now we are rendering this header component in isolation, where we are rendering in js dom, so the js dom understands  jsx code, react code, javascript code but it does not understand  redux code.  it does not know what is redux, it does not know what is UseSelector() hook, basically what I am trying to say when this starts to render this header component , it understand all the react part of code but it when it comes to this line of useSelector() hook it does not understand the useSelector() hook, because this is a part of react-redux.
+//*So basically that is why  we will have to provide our redux store to our header component even if we are loading it in isolation ,we have to provide the appStore(redux store) to header component, so now we will provide the store to our header , we will provide the store to our header just like we provided our store to whole application, now I remember we provided the store to our application in our app.js using <Provider store={appStore}>, , our whole app we wrapped our whole app inside provider similarly right now I will just do the same for my header component in the test file I will add a provider and that provider will come from from a react-redux and I will wrap my component inside my provider  and this provider will take a store and the store will come from my appStore(redux store) which we created inside the utils folder, so now we have our header wrapped into provider like this:
+/* render(
+    <Provider>
+      <Header />
+    </Provider>
+  );*/
+
+//* You can slash app store so now we have our header wrapped into provider  now let us try to run our test case , let me tell you it won't work again it will not work again , it failed for another reason this time it failed for another reason now it says that now it says that the above error occurred in link component , remember we use the link component if we go to header.js, we used the link component, now this link is not part of react is this link no my dear friends, this is not react, this is not jsx, this is not javascript, what is this link ? link is coming from react router dom.
+//* Remember right this link is coming from react router dom, basically we will also have to provide the context of react router dom of our application to this header to this render, so basically somehow link should be able to access inside it,  so terminal  says that it does not understand this link component ,so for this for this we will have to provide it with a router , it is happening because it does not have a router ,now so we will provide a router to this header and what router will be provided? remember we created a browser router in app.js remember there was createBrowserRouter() we used to create the configuration and then using routerProvider we provided the ro9uting configuration to our app .
+//*remember so similarly we will use the browserRouter component after importing it from react router. and provide this with browser router so my application will understand my link component .like this:-
+/* render(
+    <BrowserRouter>
+      <Provider store={appStore}>
+        <Header />
+      </Provider>
+    </BrowserRouter>
+  );*/
+
+//* ⁡⁣⁢⁣But that time we user routerProvider to provide the routing configuration but now why we are using browserRouter to provide the configuration?⁡
+//*BrowserRouter is a wrapper around the Router component, while RouterProvider is used with the createBrowserRouter function to create a router object:
+//*BrowserRouter is a parent component that stores all other route components. It uses the HTML5 history API to keep the UI in sync with the URL.
+//*RouterProvider is used with the createBrowserRouter function to create a router object. RouterProvider allows you to lazy load and convert route modules to the format expected by your data router, code-split your routes .
+//* So if we are creating the routing configuration then we can use routerProvider along with createBrowserRouter() with if the configuration is already created but we are testing some component in isolation then we can BrowserRouter component to provide the3 configuration as it  stores all other route components. It uses the HTML5 history API to keep the UI in sync with the URL.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
@@ -207,7 +235,7 @@ const AppLayout = () => {
   useEffect(() => {
     //*fake data
     const data = {
-      userName: "Anupam Boral",
+      userName: "User",
     };
     //*updating the state
     setUserName(data.userName);

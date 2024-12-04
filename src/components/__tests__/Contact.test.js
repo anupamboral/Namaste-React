@@ -27,7 +27,7 @@ describe("test cases for contact us page", () => {
     expect(inputBoxes.length).not.toBe(3); //* .not is like ! mark , it makes the method opposite . because of not the above assertion means the length should not be 3. as the answer is 4 so it will passed.
   });
 
-  test("should render button", () => {
+  it("should render button", () => {
     render(<Contact />); //* it will render the contact component on the js dom
 
     //* accessing the button elm which is rendered on the js dom using the screen object
@@ -36,7 +36,7 @@ describe("test cases for contact us page", () => {
     expect(sendBtn).toBeInTheDocument();
   });
 
-  test("should render email input element", () => {
+  it("should render email input element", () => {
     render(<Contact />); //* it will render the contact component on the js dom
 
     //* accessing the email input elm which is rendered on the js dom using the screen object
