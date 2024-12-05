@@ -241,6 +241,9 @@ render(<Contact/>)⁡
 
 //*let's just run this and it passed successfully so changing log in to log out is working properly.
 
+//* ⁡⁣⁢⁣ ⁡⁣⁢⁣Writing test cases for our restaurant card component⁡:- so there is a unique thing about restaurant card component  that it receives props , whatever we were testing like  header component, it did not had any props , how we can pass props inside a component when  we are testing the component in isolation ?   and do a unit testing of it . so now we will write the test cases for restaurantCard component, so let us create another test file let us call it as restaurantCard.test.js, so now I will write my first test case . Test  description will be  "should render restaurant card  component with  props data"
+//* first of all I will render my restaurantCard component inside it , now it takes a props
+
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {
