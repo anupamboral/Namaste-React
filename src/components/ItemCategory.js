@@ -10,7 +10,7 @@ const ItemCategory = ({ data, showItems, setShowIndex, collapseItem }) => {
 
   // const [showItems, setShowItems] = useState(false);//*commented out when lifting the state up to the it's parent RestaurantMenu for building the feature when we click on any category then all other will collapse.see above notes about it.
 
-  const accordianToggle = () => {
+  const accordionToggle = () => {
     /* commented out when lifting the state up
     //*implementing toogle functionality using not`!` operator
     setShowItems(!showItems); //* if showItem's current state is false then because of not operator it will be changed to true and if it is true then it will be changed to false
@@ -22,7 +22,7 @@ const ItemCategory = ({ data, showItems, setShowIndex, collapseItem }) => {
   return (
     <div className="text-white bg-starry  cursor-pointer ">
       <div
-        onClick={accordianToggle}
+        onClick={accordionToggle}
         className="flex justify-between p-4 text-3xl md:text-4xl my-4 shadow-md shadow-slate-400"
       >
         <div className="font-bold">{data.card.card.title}</div>

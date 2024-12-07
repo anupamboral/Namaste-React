@@ -54,9 +54,9 @@ const RestaurantCard = (prop) => {
 
 //* using ternary operator :-   {restaurant.info.aggregatedDiscountInfoV3 ? (<RestaurantCardPromoted resData={restaurant} />) : (<RestaurantCard resData={restaurant} />)}
 
-//* and also pass the props resdata="restaurant".
+//* and also pass the props resData="restaurant".
 //* but where we will receive this props?
-//*=> withPromotedLabel() returning a functional component which is actually a function, we have receive the props in that returning function and as inside returning function we have a child component(we received as input) the <RestaurantCard/> , so finally there we have to pass the props again. like <RestaurantCard {...props}/> so we are spreading all props using spread operator , in this way we passing all of the received props inside the child component <RestaurantCard/>  at once. so the higher order component  will look like:-
+//*=> higher order function is pure function so it takes a functional component as input so as output it also has to return another functional component . a functional component is a javascript function which returns a peice of jsx. that's why inside this higher order component we have to return keyword one inside another, because it is returning a functional component that returns a peice of jsx.  that returning functional component can recive the receive the prop which we will pass into the original restaurant card component which we are using while returning the jsx. withPromotedLabel() is returning a functional component which is actually a function, we can receive the props in that returning function and as inside returning function we have a child component(we received as input) the <RestaurantCard/> , so finally there we have to pass the props again. like <RestaurantCard {...props}/> so we are spreading all props using spread operator , in this way we passing all of the received props inside the child component <RestaurantCard/>  at once. so the higher order component  will look like:-
 
 // export const withPromotedLabel = (RestaurantCard) => {
 //*returned functional component
@@ -86,7 +86,7 @@ const RestaurantCard = (prop) => {
 //* ⁡⁣⁢⁣when we are using spread operator to spread the props  inside <RestaurantCard {...prop} /> , so it is passing all received props into   <RestaurantCard {...prop} /> component. but why are we need to pass the props using spread operator here and not like what we do normally (like this resData="props")? And what is a Pure Function? why higher order components are called pure functions?⁡
 //* because Higher order components are pure functions as they receive a component but it does not modify the received component's actual features it just adds some another feature on top of it without modifying the actual component ,so it is just enhancing the component. that's why here we were passing the props using spread operator.
 
-export const withPromotedLabel = (RestaurantCard) => {
+const withPromotedLabel = (RestaurantCard) => {
   //*returns a component (functional component is just function which returns a piece of jsx)
   //*=> withPromotedLabel() returning a functional component which is actually a function, we have receive the props in that returning function and then as inside returning function we composition the <RestaurantCard/> , so finally there we have to pass the props again. like <RestaurantCard {...props}/>
   //*returned functional component
@@ -110,4 +110,5 @@ export const withPromotedLabel = (RestaurantCard) => {
     );
   };
 };
+export { withPromotedLabel };
 export default RestaurantCard;
