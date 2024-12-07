@@ -102,7 +102,10 @@ const withPromotedLabel = (RestaurantCard) => {
     return (
       <div className="relative">
         {/* Promoted discount label */}
-        <label className="absolute top-0.5 text-white font-semibold bg-cyan-800 m-1 p-1 z-10 rounded-lg ">
+        <label
+          htmlFor="discount"
+          className="absolute top-0.5 text-white font-semibold bg-cyan-800 m-1 p-1 z-10 rounded-lg "
+        >
           {`${discountPercentageHeader} ${discountPercentageSubHeader}`}
         </label>
         <RestaurantCard {...props} />

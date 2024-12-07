@@ -242,7 +242,11 @@ render(<Contact/>)⁡
 //*let's just run this and it passed successfully so changing log in to log out is working properly.
 
 //* ⁡⁣⁢⁣ ⁡⁣⁢⁣Writing test cases for our restaurant card component⁡:- so there is a unique thing about restaurant card component  that it receives props , whatever we were testing like  header component, it did not had any props , how we can pass props inside a component when  we are testing the component in isolation ?   and do a unit testing of it . so now we will write the test cases for restaurantCard component, so let us create another test file let us call it as restaurantCard.test.js, so now I will write my first test case . Test  description will be  "should render restaurant card  component with  props data"
-//* first of all I will render my restaurantCard component inside it , now it takes a props
+//* first of all I will render my restaurantCard component inside it ,but it takes resData as props,which is basically data of any restaurant. now while rendering for testing we will use mock data.
+//* To get the mock data we will copy any restaurant's data by printing it in the console , then after copying from the console , inside The components folder we will create a folder named mocks and inside it we will create a file named resCardMock.json, Then inside it we'll just paste the object we We copied from the console and we don't even need to export it manually we just need to come to our testing file and we can import it as Mock_Data . like this :-import MOCK_DATA from "../mocks/resCardMock.json";
+//* and then paste inside the resData like this :-render(<RestaurantCard resData={MOCK_DATA} />);
+//* and now using we have to query something, so we will copy the restaurant name from the mockData and using the screen.getByText() we will check if it is in the js dom or not, then we will write the assertion.now we can run the test and finally all test cases passed.
+//* and we tested restaurantCard component with PromotedLabel.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
