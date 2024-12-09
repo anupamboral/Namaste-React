@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733784290524" clover="3.2.0">
-  <project timestamp="1733784290524" name="All files">
+<coverage generated="1733784612713" clover="3.2.0">
+  <project timestamp="1733784612713" name="All files">
     <metrics statements="33" coveredstatements="22" conditionals="12" coveredconditionals="7" methods="11" coveredmethods="4" elements="56" coveredelements="33" complexity="0" loc="33" ncloc="33" packages="1" files="1" classes="1"/>
     <file name="Body.js" path="C:\Users\anupa\Desktop\web development\Namaste React\src\components\Body.js">
       <metrics statements="33" coveredstatements="22" conditionals="12" coveredconditionals="7" methods="11" coveredmethods="4"/>
