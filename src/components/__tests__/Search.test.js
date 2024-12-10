@@ -22,6 +22,8 @@ it("should return Body component with search bar", async () => {
     )
   );
 
+  const searchInput = screen.getByTestId("searchInput");
+
   const searchBtn = screen.getByRole("button", { name: "Search" });
   console.log(searchBtn);
   //*assertion

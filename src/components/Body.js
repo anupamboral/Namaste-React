@@ -162,6 +162,7 @@ const Body = () => {
         <div className="search flex gap-4 items-center mr-8 justify-center flex-wrap">
           <input
             type="text"
+            data-testid="searchInput"
             className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-white w-[28rem] placeholder:text-[beige] bg-transparent"
             placeholder="cafe.."
             value={searchText}
