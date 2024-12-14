@@ -290,7 +290,27 @@ render(<Contact/>)⁡
 //*  So we have got the search button now we have rendered our body component properly we have got our search button now lets try to write something inside search input box and then click on this search button , but how do I write something inside input ? => so writing something inside input box is an event in itself , just like we have a click event this input box it also has an onChange event , when you type something inside input box there is an on change event which is being triggered ,so we will have to trigger that on change event to update our input box , so let us try to update our input box, first of all let me get my input box element in my my test file , so let's write the query for it,  react gives us access to something known as getByTestId(), it always  and easy to use, so what you have to do is go back to actually where the input box is, actually its in my body.js , so let's find the input element so I can give it a test id, how do you give it a test id ? we gave to mention a attribute in this input element like this :- data-testid="searchInput" ,remember this testid has "i" small not I. Some people mistake it by capital I ,not let's write the query in the test file like this:-
 //*const searchInput = screen.getByTestId("searchInput");
 
-//* now I have my search input element with me ,now I want to change the value of it
+//* now I have my search input element with me ,now I want to change the value of it using code. Now now I have my search input with me now I want to I want to type something inside it, I want to change the value of it, how will I change the value of it, I will have to trigger a event using our code , we can trigger any event using a function comes from @testing-library/react and that function is  'fireEvent' and on this we can trigger change event, like this fireEvent.change() and if you want to see what all events you can change just do fireEvent. ...  and it will show you all the event that you can do apply.
+
+//*we can trigger change, click, canPlay, composition, cut, copy, drag, double click, it can even do a click, it can even do a double click on an element, so  I am interested in this change event becuase it it will simulate the onChange event which trigers normally when we type something inside the search box, When you want to change, so the first argument this takes searchInput(the element on which we want to trigger the event), I want to change my searchInput elm and then as second argument  I will pass in an object like this-
+//*fireEvent.change(searchInput, { target: { value: "burger" };   and this object is basically simulating what we do in this function:-
+/* onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+              */
+// *  what we get inside this (e)event ,the second argument object is basically simulating what we get inside this (e) , what this (e), where is this E coming from, , this (e) is given to us by browser this e.target.value is given to us by browser, here I do not have a browser here I am faking a lot of things , so I want to trigger the change event, but this time I want to set this e.target.value = "burger" , we are doing it using this code:
+// //*fireEvent.change(searchInput, { target: { value: "burger" };
+//*just like we type burger inside the search elm, similar thing will happen if I will fire this change event.Now this is like I have added burger into my input box,now I want to click this searchBtn to search for results. Now how will I click the searchBtn . to click the searchBtn we can do
+// //*fireEvent.click(searchBtn)
+// //*now once we click the  search button, what should I expect , here when I click my search button on UI, I should expect seven cards(according to UI results) to be loaded, what I want to assert? screen should load 7 cards .
+// //* how will I find my restaurant cards? How will I find how many  restaurant cards are loaded?
+//*  what at the end of the day a restrauntCard? in the html if you go to the inspect element restocard is a <div>  , this one restaurant is a div,  if you will see this is one division , if you go to, how will I find this inside my test ? for components like this, if you want to find how many restaurantCard present inside thee Ui? I can give them a test id so remember on the div element we will add a attribute data-testid and set its value to "resCard", so as the the same RestaurantCard component is used for restaurant so it means for all of the restaurant cards this test id will be present, so now we can do:-
+//*  const cardsAfterSearch = screen.getAllByTestId("resCard"); //* it will returns an array of cards;
+
+//* assertion
+//* expect(cardsAfterSearch.length).toBe(7);
+
+//* and all test cases are passed.and inside one test case we can have multiple expect assertions. lets also see if initially all 20 cards are loaded or not.
 
 const Grocery = lazy(() => import("./components/Groceries.js"));
 

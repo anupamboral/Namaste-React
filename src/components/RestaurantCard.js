@@ -16,6 +16,7 @@ const RestaurantCard = (prop) => {
     <div
       className="res-card border-[1px] border-[solid] border-[black] w-60 h-[25rem] [transition:all_0.5s] text-center rounded-2xl bg-starry  text-white font-bold hover:shadow-cyan-600 hover:shadow-xl  hover:scale-[1.01] mb-5 mx-auto"
       style={cardStyles}
+      data-testid="resCard"
     >
       <img
         className="res-logo w-60 p-2 pb-[0.1rem] h-40 rounded-2xl"
@@ -37,7 +38,7 @@ const RestaurantCard = (prop) => {
   );
 };
 
-//* from Lesson - 11 - data is new oil
+//* from Lesson - 11 - data is nn oil
 //* higher order component :- a higher order component is function which takes a component as input and returns another component as output.So it is like a enhancer/modifier function. It takes an existing component and enhances/modifies it then return it.
 //*If we go to Swiggy's website then we will see that on some restaurant cards there is a promoted level on top of the card very similar to sponsor tags or labels we see on many websites so how we can also add these kind of promoted labels on top of our restaurant cards so first of all if we cheque the data and we will see that there is a property named promoted and its value is either false or true so we can use this property from the data to show the promoted label on top of the restaurant cards. Throw inside the restaurant card js file we already have a restraint card component which returns the jsx of a restaurant card and the restaurant card component is basically a function which is returning this jsx now we will create another functional component which will take this normal restraint card component and modifies it to add the promoted level and then it will return a restaurant card with the promoted label.
 //*⁡⁣⁢⁣Creating a higher order component to add promoted(discount percentages) label tag on restaurantCards⁡(⁡⁣⁢⁣as promoted property was not available in the swiggy's new api data so we are gonna use isOpen property so if the restaurant is opened so we will display this label.⁡ ⁡)
