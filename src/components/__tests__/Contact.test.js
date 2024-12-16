@@ -3,6 +3,16 @@ import Contact from "../Contact";
 import "@testing-library/jest-dom";
 //* to group multiple test cases we can use describe method
 describe("test cases for contact us page", () => {
+  //* it will run once before running all of the test cases
+  beforeAll(() => console.log("Start running tests"));
+  //* it will run before running each of the test cases
+  beforeEach(() => console.log("one test starts"));
+
+  //* it will run once after running all of the test cases
+  afterAll(() => console.log("All tests finished"));
+  //* it will run after running each of the test cases
+  afterEach(() => console.log("one test finished"));
+
   test("should load contact us component", () => {
     render(<Contact />); //*  this method will render the contact component on to the jsdom.
     //* to access the rendered components we will use the screen object imported from react testing library

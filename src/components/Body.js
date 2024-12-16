@@ -186,7 +186,7 @@ const Body = () => {
           className="btn-top-rated-restaurant m-[0.6rem] p-2 text-[1rem] border-[2px] border-[solid] border-[rgb(9,63,201)] max-w-[15rem] cursor-pointer [transition:all_500ms] bg-transparent text-white hover:scale-105  hover:shadow-cyan-600 hover:shadow-lg  "
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (res) => 4 < res.info.avgRating
+              (res) => 4.3 < res.info.avgRating
             );
             // using the setListOfRestaurants method tyo change the state and this will triggered when the user will click on this button.
             //*updating the state

@@ -310,8 +310,28 @@ render(<Contact/>)⁡
 //* assertion
 //* expect(cardsAfterSearch.length).toBe(7);
 
-//* and all test cases are passed.and inside one test case we can have multiple expect assertions. lets also see if initially all 20 cards are loaded or not.
+//* and all test cases are passed.and inside one test case we can have multiple expect assertions. lets also see if initially all 20 cards are loaded or not, we can write below code to just it, but we need to write it before searching burger using the code.
+/*  const cardsBeforeSearch = screen.getAllByTestId("resCard");
+  expect(cardsBeforeSearch.length).toBe(20);*/
 
+//* lets now test the top rated restaurant feature.
+//*So initially there would be 20 cards, if I click on the top rated restaurant there would be less cards, how many cards ?  there should be two cards right now on the UI after filtering results, because right now only 2 cards have ratings more than 4.5.  so there should be 2 cards ,  so the description of the test case `should filter top rated restaurant top rated restaurants `.
+// //*How will I filter my top rated restaurants?
+// //* first of all I will have to render my body component , first of all lets see how many cards are there cards before filter, initially we should have 20 cards, , there should be 20 cards before filter , I want to find my top rated restaurants button,like this :-const topRatedResBtn = screen.getByRole("button", {   name: "Top Rated Restaurants",});
+//* so I have got this button now I want to click this button, how will I do:
+// *using- fireEvent.click(topRatedResBtn);
+// //*  I have clicked it and once I click this button, my number of restaurants should change to 6 resCards(according to mockData we are using not the real data from the Ui) now . So let me just find out my number of restaurants.using below code:-
+/* const cardsAfterRender = screen.getAllByTestId("resCard");
+  expect(cardsAfterRender.length).toBe(6);*/
+
+//* ⁡⁣⁢⁣beforeAll() function and beforeEach() function⁡
+//* Suppose  there is a describe Block() (used in Contact.test.js), there, we had a described block  and it has multiple tests inside it ,now suppose if you want to do something before all of tests (not before each but before all) just gives you access to an important function this function is known as beforeALL(()=>{},) this beforeAll() function, it takes a call back function, whatever you pass inside call back function, it will do that before running all of the test cases, it will run this function beforeAll(), there is another function which is known as beforeEach(()=>{}) , beforeEach function will run before running each and every  test case , react testing library gives you access to this beforeAll() and beforeEach(), if you want to do something before running all your test cases you have to use beforeAll(), if you will have to do something before each test case you will do use beforeEach(), so basically it is like before running all the test cases just call this function, suppose if you want to do some clean up suppose, if you want to log something suppose, if you want to test something, you can do something over here,  before running any test case and beforeEach() is helpful if we have to do some clean up task, Right so this is very helpful if you have to do some cleanup task,this will run before each before each test case.
+//*Now similarly we have afterAll(()=>console.log("all tests finished")); , if I write afterAll() ,it will run after it has completed running all the test cases, and similarly we have afterEach(()=>console.log("one test finished"));  this afterEach() is called after running each test case,  so these are helper functions which we have .
+
+// * now we are gonna write one more important integration test  case,we are going to test the add to cart feature, so we will test, when we click on the add btn of any menu item then it should be added to cart(1) navigation in the header. and it should also update actual cart page component where we can see actual added items.
+
+//* So I have to test this whole flow how can I write integration test for it .First let's create the testing file named cart.test.js . So to add any item to the cart,first we need to click any restaurant card, And then it will load the restaurant menu of that specific restaurantAnd then we have panels or components for all of the categories of the menu we need to click on one of the panel or category then the category opens or expands and we can see all of the menu items then we need to click on the add button and now the item will be added to the cart so to first add any item to the cart we need to render the restaurant menu component because inside it the add button exists.And remember when we click on any restaurant and the menu loads it makes a fetch api call Gets the data from 3rd party server,so we know that in this test cases environment we have to use mock data because we cannot make actual api call and also we need to create a fake fetch() function on the global object so first we will get the mock data from the ui inspect tool of the browser and then we will create a mock data file for the restaurant menu and we will name it mockResMenu.json(). then we will import it to cart testing file. and then we will create the fake fetch function on global object.
+//* now we will start to write the test case, so the description will be " should load Restaurant menu Component".and as the restaurant menu component has fetch inside it so remember we have to use act function with async await.and inside it we have to render the component.
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {

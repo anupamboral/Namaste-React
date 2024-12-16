@@ -44,3 +44,30 @@ it("should search restaurant list for burger text input", async () => {
   //* assertion
   expect(cardsAfterSearch.length).toBe(7);
 });
+
+test("should filter top rated restaurants", async () => {
+  //* rendering Body using act function because inside body we used fetch () which makes third party api call , and as test cases are tested in js dom not in real browser thats why we have made a fake fetch function above and to use that we have to use act function and async await.and to provide the router configuration we have use browserRouter component.
+  await act(async () =>
+    render(
+      <BrowserRouter>
+        <Body />
+      </BrowserRouter>
+    )
+  );
+
+  //* checking initial render of all 20 res cards
+  const cardsBeforeRender = screen.getAllByTestId("resCard");
+  expect(cardsBeforeRender.length).toBe(20);
+
+  //* selecting top rated restaurant btn and click it by triggering the click event
+  const topRatedResBtn = screen.getByRole("button", {
+    name: "Top Rated Restaurants",
+  });
+  console.log(topRatedResBtn);
+  fireEvent.click(topRatedResBtn);
+
+  const cardsAfterRender = screen.getAllByTestId("resCard");
+  console.log(cardsAfterRender);
+  //   //*assertion(should have two btns after filtration)
+  expect(cardsAfterRender.length).toBe(6);
+});
