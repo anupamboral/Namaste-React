@@ -13,6 +13,7 @@ import UserContext from "./utils/UserContext.js";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore.js";
 import Cart from "./components/Cart.js";
+import Footer from "./components/Footer.js";
 //! Lesson - 13 - Time for the test
 //*
 //*My notes
@@ -374,6 +375,7 @@ const AppLayout = () => {
           <Header />
           <Outlet />
           {/* <Body /> */}
+          <Footer />
         </div>
       </UserContext.Provider>
     </Provider>

@@ -163,7 +163,7 @@ const Body = () => {
           <input
             type="text"
             data-testid="searchInput"
-            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-white w-[28rem] placeholder:text-[beige] bg-transparent"
+            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-white max-w-md placeholder:text-[beige] bg-transparent"
             placeholder="cafe.."
             value={searchText}
             onChange={(e) => {
@@ -172,7 +172,7 @@ const Body = () => {
             onKeyDown={(e) => e.key === "Enter" && handleSearch()} //* refactored the handleSearch function because we need to use it twice , once here when the user clicks on the search btn after entering the restaurant name and second when the user clicks enter on keyboard and that handler we need to attach on the input element .and to call the handlerSearch callback function on enter key press we need attach a handler on the search input element like this:-onKeyDown={(e) => e.key === "Enter" && handleSearch()}.
           ></input>
           <button
-            className="search-btn p-2 text-[1.4rem]  divide-solid  w-24 font-bold border-[2px] border-[solid] border-[rgb(9,63,201)] cursor-pointer [transition:all_500ms] bg-transparent  hover:scale-105  hover:shadow-cyan-600 hover:shadow-lg "
+            className="search-btn p-2 text-[1.4rem]  divide-solid  max-w-24 font-bold border-[2px] border-[solid] border-[rgb(9,63,201)] cursor-pointer [transition:all_500ms] bg-transparent  hover:scale-105  hover:shadow-cyan-600 hover:shadow-lg "
             onClick={() => {
               //* refactored the handleSearch function because we need to use it twice , once here when the user clicks on the search btn after entering the restaurant name and second when the user clicks enter on keyboard and that handler we need to attach on the input element .and to call the handlerSearch callback function on enter key press we need attach a handler on the search input element like this:-onKeyDown={(e) => e.key === "Enter" && handleSearch()}.
               handleSearch();
