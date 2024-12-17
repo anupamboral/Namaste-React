@@ -163,7 +163,7 @@ const Body = () => {
           <input
             type="text"
             data-testid="searchInput"
-            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-white max-w-md placeholder:text-[beige] bg-transparent"
+            className="search-box  p-2 text-[1.6rem] border-[2px] border-[solid] border-[rgb(41,178,178)] text-white max-w-64 placeholder:text-[beige] bg-transparent"
             placeholder="cafe.."
             value={searchText}
             onChange={(e) => {
