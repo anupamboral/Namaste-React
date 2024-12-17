@@ -8,23 +8,23 @@ const Contact = () => {
         <input
           type="text"
           placeholder="Name"
-          className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          className="w-full rounded-md py-2.5 px-4 border text-black text-sm outline-[#007bff]"
         />
         <input
           data-testid="test1"
           type="email"
           placeholder="Email"
-          className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          className="w-full rounded-md py-2.5 px-4 border text-sm text-black outline-[#007bff]"
         />
         <input
           type="text"
           placeholder="Subject"
-          className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
+          className="w-full rounded-md py-2.5 px-4 border text-black text-sm outline-[#007bff]"
         />
         <textarea
           placeholder="Message"
           rows="6"
-          className="w-full rounded-md px-4 border text-sm pt-2.5 outline-[#007bff]"
+          className="w-full rounded-md px-4 border text-sm text-black pt-2.5 outline-[#007bff]"
         ></textarea>
         <button
           type="button"
