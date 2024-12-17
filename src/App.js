@@ -327,11 +327,30 @@ render(<Contact/>)⁡
 //* ⁡⁣⁢⁣beforeAll() function and beforeEach() function⁡
 //* Suppose  there is a describe Block() (used in Contact.test.js), there, we had a described block  and it has multiple tests inside it ,now suppose if you want to do something before all of tests (not before each but before all) just gives you access to an important function this function is known as beforeALL(()=>{},) this beforeAll() function, it takes a call back function, whatever you pass inside call back function, it will do that before running all of the test cases, it will run this function beforeAll(), there is another function which is known as beforeEach(()=>{}) , beforeEach function will run before running each and every  test case , react testing library gives you access to this beforeAll() and beforeEach(), if you want to do something before running all your test cases you have to use beforeAll(), if you will have to do something before each test case you will do use beforeEach(), so basically it is like before running all the test cases just call this function, suppose if you want to do some clean up suppose, if you want to log something suppose, if you want to test something, you can do something over here,  before running any test case and beforeEach() is helpful if we have to do some clean up task, Right so this is very helpful if you have to do some cleanup task,this will run before each before each test case.
 //*Now similarly we have afterAll(()=>console.log("all tests finished")); , if I write afterAll() ,it will run after it has completed running all the test cases, and similarly we have afterEach(()=>console.log("one test finished"));  this afterEach() is called after running each test case,  so these are helper functions which we have .
-
+//* ⁡⁣⁢⁣testing of add to cart feature⁡
 // * now we are gonna write one more important integration test  case,we are going to test the add to cart feature, so we will test, when we click on the add btn of any menu item then it should be added to cart(1) navigation in the header. and it should also update actual cart page component where we can see actual added items.
 
 //* So I have to test this whole flow how can I write integration test for it .First let's create the testing file named cart.test.js . So to add any item to the cart,first we need to click any restaurant card, And then it will load the restaurant menu of that specific restaurantAnd then we have panels or components for all of the categories of the menu we need to click on one of the panel or category then the category opens or expands and we can see all of the menu items then we need to click on the add button and now the item will be added to the cart so to first add any item to the cart we need to render the restaurant menu component because inside it the add button exists.And remember when we click on any restaurant and the menu loads it makes a fetch api call Gets the data from 3rd party server,so we know that in this test cases environment we have to use mock data because we cannot make actual api call and also we need to create a fake fetch() function on the global object so first we will get the mock data from the ui inspect tool of the browser and then we will create a mock data file for the restaurant menu and we will name it mockResMenu.json(). then we will import it to cart testing file. and then we will create the fake fetch function on global object.
 //* now we will start to write the test case, so the description will be " should load Restaurant menu Component".and as the restaurant menu component has fetch inside it so remember we have to use act function with async await.and inside it we have to render the component.
+
+//* ⁡⁣⁢⁣and we have chosen burger king restaurant's data for mock data, but if we test it later in the future then we should change the mock data with any current restaurant's data , then it will be easy for us to check on ui as well as in our test cases, because of of the data should match.⁡
+//* in the first test cases , as by default our first food category(accordion) is expanded ,so we will add test id - foodItem to the MenuItem component and check how many items is present in the category.so the first category is the Recommended category and we will test if it has 20 items or not, as the UI is showing it has total 20 items.so let's it using code.
+//* and as the restaurantMenu is using redux store, so we need to provide the redux store using <provider store=Appstore> <RestaurantMenu /></provider> component an d now it will pass.
+//* the second test case's description "should load restaurant menu and Header component and after adding item the the cart(0) should update to cart(1)", So while writing this test case we have to check if the header component  is updated or not and the cart should be updated to one item Cart🛒(1) that's why to see we have to also render the header component with restaurant menu component because these two components are integrated with each other that's why we are rendering these 2 components together.like this:-
+/*render(
+      <BrowserRouter>
+        <Provider store={appStore}>
+          <RestaurantMenu />
+          <Header />
+        </Provider>
+      </BrowserRouter>
+    );*/
+//* and then we tested it and it successfully  passed.(see the second test case)
+
+//* and in the third test the description is "should collapse the the first food category accordion and expand the second food category and add second item from this category", also check this test case , it is also successfully passed.check it out.
+
+//* and in the fourth test case the description is "should load the cart Page and it should have 2 items" and it is also passed.
+//* and having test coverage above 80% is fine. and can also see the total coverage in the terminal as well as on the browser we just need to click on the coverage file here . inside it we have Icov-report folder and inside it there is a index.html , we just need to right click on it and then click on "open with live server" and one the browser your detailed coverage report will appear, we can see all details there and improve our coverage.
 const Grocery = lazy(() => import("./components/Groceries.js"));
 
 const AppLayout = () => {

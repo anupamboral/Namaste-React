@@ -1,7 +1,4 @@
-import {
-  useDispatch,
-  useSelector,
-} from "../../node_modules/react-redux/dist/react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../utils/cartSlice";
 import MenuItem from "./MenuItem";
 
