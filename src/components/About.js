@@ -62,15 +62,15 @@ class About extends Component {
     // console.log(`parent render`);
 
     return (
-      <div className="bg-starry text-white">
-        <h1>About</h1>
+      <div className="bg-starry text-white ">
+        <h1 className="text-center text-2xl font-bold underline">About</h1>
         {/* using react context in class based component without any hook, explanation is in notes above */}
         <UserContext.Consumer>
           {({ loggedInUser }) => {
             return <h1>Hello {loggedInUser}</h1>;
           }}
         </UserContext.Consumer>
-        <h2>This is Namaste React</h2>
+        <h2> Namaste </h2>
         <User name="Anupam Boral" location="kolkata" id="001" />
         {/* <User name="Akshay Saini" location="Bangalore" id="002" /> //*used this to underStand how life cycle of class based components work and how react optimizes it */}
       </div>

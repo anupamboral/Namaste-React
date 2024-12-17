@@ -4,7 +4,7 @@ const Contact = () => {
   return (
     <div className="bg-black text-white min-h-dvh text-4xl flex flex-col gap-4">
       <h1 className="font-bold mx-auto underline">Contact us page</h1>
-      <form className="mx-auto space-y-4 max-w-3xl">
+      <form className="mx-auto space-y-4 max-w-3xl" netlify>
         <input
           type="text"
           placeholder="Name"
