@@ -7,5 +7,3 @@ const LOGO_URL =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjJ_YWpTWHJ4hRw9S-1hJrH-MjTJf0z808xw&s";
 export { LOGO_URL };
 export const MENU_API_URL = `https://richie-cors-proxy.glitch.me/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=22.5743545&lng=88.3628734&restaurantId=`;
-
-//* previously used background image: bg-[url('src/imgs/background_image.jpg')]

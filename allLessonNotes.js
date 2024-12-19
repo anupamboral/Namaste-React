@@ -2083,7 +2083,7 @@ Mounting phase finished
 //   //* swiggy's data has some inconsistency in property names that's why we had to create below if else statement
 //   if (itemList1) {
 //     return (
-//       <div className="res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  h-[50rem] min-h-dvh max-h-full">
+//       <div className="res-menu pl-8 bg-[url('src/imgs/background3.jpg')] text-yellow-50  h-[50rem] min-h-dvh max-h-full">
 //         <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
 //           {name}
 //         </h1>
@@ -2115,7 +2115,7 @@ Mounting phase finished
 //         ?.card.categories
 //     );
 //     return (
-//       <div className=" res-menu pl-8 bg-[url('src/imgs/background_image.jpg')] text-yellow-50  min-h-dvh max-h-full ">
+//       <div className=" res-menu pl-8 bg-[url('src/imgs/background3.jpg')] text-yellow-50  min-h-dvh max-h-full ">
 //         <h1 className="border-b-[1px_solid_black] text-4xl font-bold">
 //           {name}
 //         </h1>
