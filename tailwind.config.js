@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        starry: "url('src/imgs/background3.png')",
+        starry: "url('src/imgs/background-image.png')",
       },
     },
   },
